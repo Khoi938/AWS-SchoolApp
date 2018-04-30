@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+        <h1>User Info</h1>
+        <form action="/signup", method="post">
+        <table>
+            <tr>
+                <td><label for="username">Username:</label></td>
+                <td><input type="text" id="username" name="username" value="{{username}}" placeholder="3+ char"></td>
+                <td><label for="username"><span class="color">{{invalid}}</span></label></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password:</label></td>
+                <td><input type="password" id="stuff" name="password"></td>
+                <td><label for="username"><span class="color">{{shortPW}}</span></label></td>
+            </tr>   
+            <tr>
+                <td><label for="confirm">Confirm P/W:</label></td>
+                <td><input type="password" id="stuff" name="passwordC"></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="text" id="stuff" name="email" value="{{email}}" placeholder="Optional"></td>
+            </tr>
+        </table>
+            <label for="male">Male</label>
+            <input id="male" type="radio" name="gender"value="M">
+            <label for="female">Female</label>
+            <input id="female" type="radio" name="gender" value="F">
+            <label for="lgbt+">LGBT+</label>
+            <input id="lgbt+" type="radio" name="gender" value="Z">
+            <label for="blank">Blank</label>
+            <input id="blank" type="radio" name="gender" value="Blank" checked="checked">
+            <br>
+            <input type="submit" value="Submit">
+            
+        </form>
+{% endblock %}
