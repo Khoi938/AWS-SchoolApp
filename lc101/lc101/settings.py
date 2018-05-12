@@ -31,20 +31,20 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'homepage.apps.HomepageConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'homepage.apps.HomepageConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -83,10 +83,10 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'lc101project',
+#         'NAME': 'schoolapp',
 #         'USER': 'khoile',
-#         'PASSWORD': 'mypassword',
-#         'HOST': 'lc101.cjqesajrhzys.us-west-2.rds.amazonaws.com',
+#         'PASSWORD': '',#'mypassword',
+#         'HOST': 'lc101project.cjqesajrhzys.us-west-2.rds.amazonaws.com',
 #         'PORT': '3306',
 #     }
 # }
