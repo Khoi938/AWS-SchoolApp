@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <style>
+        .navbar{
+                    position: fixed;
+                    overflow: hidden;
+                    background-color: rgb(252, 249, 249);
+                    top:0px;
+                    left: 0px;
+                    width: 100%;
+                    color:rgb(104, 5, 2);
+                    font-size: 100%;
+                    opacity: 0.8}
+            body{background-color: rgb(147, 247, 247);
+                padding-top: 40px}
+            button{background-color: rgb(139, 253, 183)}
+            form,h1,ul{padding-left: 25px }
+            .color{color: red}
+            textarea, input {background-color: rgb(243, 245, 247)}
+            .form-group .required .control-label:after {
+            content:"*";color:red;}
+        </style>
+        <title>{{top}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+<body>
+    <header class='navbar'>
+        <span style="padding-left:30px">
+        <a href=''><button>Home Page</button></a>
+        <a href=''><button>Registered User</button></a>
+        {% comment %}<!--{% if session['username']|length > 3 %}-->
+        <!--<a href="/newpost"><button>Add Post</button></a>-->
+        <!--<a href="/logout"><button>Logout</button></a>-->
+        <!--<span style="font-size:70%">{{session['username']}}</span>-->
+        <!--{% else %}-->
+        <!--<a href='/signup'><button>Create Account</button></a>-->
+        <!--<a href='/login'><button>Login</button></a>-->
+        <!--{% endif %}-->
+        <!--<span class="color">{{authenticate}}</span>-->
+        <!--</span>-->
+        {% endcomment %}
+
+</header>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
