@@ -15,7 +15,7 @@
             body{background-color: rgb(147, 247, 247);
                 padding-top: 40px}
             button{background-color: rgb(139, 253, 183)}
-            form,h1,ul{padding-left: 25px }
+            form,h1,ul{padding-left: 30px }
             .color{color: red}
             textarea, input {background-color: rgb(243, 245, 247)}
             .form-group .required .control-label:after {
@@ -30,6 +30,10 @@
         <span style="padding-left:30px">
         <a href=''><button>Home Page</button></a>
         <a href=''><button>Registered User</button></a>
+        {% if request.session.username %}
+        <a href=''><button>Log Out</button></a>
+        {{user.first_name}}
+        {% endif %}
         {% comment %}<!--{% if session['username']|length > 3 %}-->
         <!--<a href="/newpost"><button>Add Post</button></a>-->
         <!--<a href="/logout"><button>Logout</button></a>-->

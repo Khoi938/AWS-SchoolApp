@@ -22,7 +22,7 @@
           <div class="row">
             <div class="col-lg-12">
         <h3>User Login</h3>
-        <form action="", method="post"> 
+        <form action="", method="post"> {% csrf_token %}
         <table>
             <tr>
                 <td><label for="username">Username:</label></td>
@@ -46,5 +46,13 @@
         
         <a href='/register'>Register</a>
         </div>
+        <br>
+        <div>Debug Navigation</div>
+        <a href='/login'>login</a> II
+        <a href='/student'>student</a> II
+        <a href='/teacher'>teacher</a> II
+        <a href='/student/homepage'>student homepage</a> II
+        <a href='/teacher/homepage'>teacher homepage</a> II
+        <a href='/admin'>Django Admin</a>
     </body>
 </html>

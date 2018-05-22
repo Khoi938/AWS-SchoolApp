@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from school_app.models import Profile, Student, Teacher
+# from school_app.models_views import user_views
 from django.contrib.auth import authenticate
 # from django.views.decorators.csrf import csrf_exempt
 # @csrf_exempt
@@ -13,7 +14,11 @@ def index(request):
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            return render(request,'teacher/teacher_homepage.html')
+            request.session['username'] = user.username
+            if user.profile.is_teacher == True:
+                return render(request,'teacher/teacher_homepage.html',{'user':user})
+            else:
+                return render(request,'student/student_homepage.html')
         else: return HttpResponse('<h1>Failed login</h1>')
 
         
@@ -54,4 +59,4 @@ def register(request):
             Teacher.objects.create(teacher_profile=profile,user=user)
         profile.save()
         return HttpResponse('<h1>SUcess</h1>')
-    return render(request,'homepage/register.html')
+    return render(request,'registration/register.html')

@@ -44,13 +44,16 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware', Will implement later
+    'django.middleware.csrf.CsrfViewMiddleware',# Will implement later
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'lc101.urls'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home_redirect'
+LOGOUT_REDIRECT_URL = ''
 
 TEMPLATES = [
     {
