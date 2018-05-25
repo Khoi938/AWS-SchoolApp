@@ -28,8 +28,8 @@
 <body>
     <header class='navbar'>
         <span style="padding-left:30px">
-        <a href=''><button>Home Page</button></a>
-        <a href=''><button>Registered User</button></a>
+        <a href='homepage'><button>Home Page</button></a>
+        <a href='register'><button>Registered User</button></a>
         {% if request.session.username %}
         <a href=''><button>Log Out</button></a>
         {{user.first_name}}

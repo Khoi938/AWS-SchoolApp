@@ -46,6 +46,9 @@ class Teacher(models.Model):
         
 # ---------------Classed Model----------------------
 class Algebra_101(models.Model):
+    teacher = models.OneToOneField(Teacher, on_delete = models.CASCADE)
+    weekly_agenda = models.CharField(max_length=450)
+    
     monday_date = models.CharField(max_length=300)
     tuesday_date = models.CharField(max_length=300)
     wednesday_date = models.CharField(max_length=300)
@@ -58,7 +61,14 @@ class Algebra_101(models.Model):
     thursday_plan= models.CharField(max_length=300)
     friday_plan= models.CharField(max_length=300)
     def __str__(self):
-        return 'Algebra 101'
+        return 'Algebra 101 '+str(self.teacher)
+        
+class History_101(models.Model):
+    teacher = models.OneToOneField(Teacher, on_delete = models.CASCADE)
+    weekly_agenda = models.CharField(max_length=450)
+    
+    def __str__(self):
+        return 'History 101'
 
 class Biology_101(models.Model):
     monday_date = models.CharField(max_length=300)

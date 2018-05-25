@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    </head>
+    <style type="text/css">
+        body{
+            /*background-color: rgb(147, 247, 247);*/
+            padding-top: 40px;
+            padding-left:30px;
+            font-family:sans-serif;
+            background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
+            background-size: 600% 100%;
+        }
+    </style>
+    <body>
+        <h1>Error Test Page</h1>
+        <br>
+        
+        {% if messages %}
+          <ul class="messages">
+        {% for message in messages %}
+             <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+          </ul>
+        {% endif %}
+        
+        <div>Debug Navigation</div>
+        <a href='/login'>login</a> II
+        <a href='/student'>student</a> II
+        <a href='/teacher'>teacher</a> II
+        <a href='/student/homepage'>student homepage</a> II
+        <a href='/teacher/homepage'>teacher homepage</a> II
+        <a href='/admin'>Django Admin</a>
+    </body>
+</html>
