@@ -10,8 +10,10 @@
             padding-left:30px;
             font-family:sans-serif;
             background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
-            background-size: 600% 100%;
-        }
+            background-size: 600% 100%;}
+        .alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;
+            border:1px solid transparent;border-radius:.25rem;
+            display:inline-block;}
     </style>
     <body>
         <h1>Error Test Page</h1>
@@ -20,7 +22,7 @@
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
-             <li class="{{ message.tags }}">{{ message }}</li>
+             <li><div class="alert-inherit alert-warning" role="alert">{{ message }}</div></li>
         {% endfor %}
           </ul>
         {% endif %}
@@ -29,8 +31,8 @@
         <a href='/login'>login</a> II
         <a href='/student'>student</a> II
         <a href='/teacher'>teacher</a> II
-        <a href='/student/homepage'>student homepage</a> II
-        <a href='/teacher/homepage'>teacher homepage</a> II
+        <a href='/student/home'>student homepage</a> II
+        <a href='/teacher/home'>teacher homepage</a> II
         <a href='/admin'>Django Admin</a>
     </body>
 </html>

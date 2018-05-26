@@ -4,9 +4,7 @@ from django.contrib.auth.models import User
 from school_app.models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate
-# from django.views.decorators.csrf import csrf_exempt
-# @csrf_exempt
-
+# / mean base no / mean add to current page Django render start from templates no slash
 
 def index(request):
     if request.method == 'POST':
@@ -16,9 +14,10 @@ def index(request):
         if user is not None:
             request.session['username'] = user.username
             if user.profile.is_teacher == True:
-                return render(request,'teacher/teacher_homepage.html',{'user':user})
+                return redirect('/teacher/home',{'user':user})
+                # return render(request,'teacher/teacher_homepage.html',{'user':user})
             else:
-                return render(request,'student/student_homepage.html')
+                return redirect('/student/home',{'user':user})
         else: 
             messages.warning(request, 'Failed Login')
             return render(request,'homepage/error.html')

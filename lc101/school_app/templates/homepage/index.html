@@ -11,7 +11,14 @@
             font-family:sans-serif;
             background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
             background-size: 600% 100%;
-        }
+            }
+        .form-control-inherit{
+            display:block;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;background-color:#fff;
+            background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;
+            transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+        .alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;
+            border:1px solid transparent;border-radius:.25rem;
+            display:inline-block;}
     </style>
     <body>
         <h1 class='text-center'>Welcome to LC High Shool.</h1>
@@ -24,7 +31,7 @@
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
-             <li><div class="alert alert-success" role="alert">{{ message }}</div></li>
+             <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
         {% endfor %}
           </ul>
         {% endif %}
@@ -59,8 +66,8 @@
         <a href='/login'>login</a> II
         <a href='/student'>student</a> II
         <a href='/teacher'>teacher</a> II
-        <a href='/student/homepage'>student homepage</a> II
-        <a href='/teacher/homepage'>teacher homepage</a> II
+        <a href='/student/home'>student homepage</a> II
+        <a href='/teacher/home'>teacher homepage</a> II
         <a href='/teacher/add_class'>teacher Add Class</a> II
         <a href='/admin'>Django Admin</a>
     </body>
