@@ -44,7 +44,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',# Will implement later
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -52,7 +52,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'lc101.urls'
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home_redirect'
+LOGIN_REDIRECT_URL = 'home_redirect' #rout then redirect according to user priveledge
 LOGOUT_REDIRECT_URL = ''
 
 TEMPLATES = [
@@ -86,10 +86,10 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'schoolapp',
+#         'NAME': 'lc101',
 #         'USER': 'khoile',
-#         'PASSWORD': '',#'this is not real',
-#         'HOST': 'lc101project.cjqesajrhzys.us-west-2.rds.amazonaws.com',
+#         'PASSWORD': 'this is not real',
+#         'HOST': 'khoi-db.cjqesajrhzys.us-west-2.rds.amazonaws.com',
 #         'PORT': '3306',
 #     }
 # }
