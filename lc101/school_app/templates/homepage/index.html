@@ -2,22 +2,13 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
     </head>
     <style type="text/css">
-        body{
-            /*background-color: rgb(147, 247, 247);*/
-            padding-top: 40px;
-            padding-left:30px;
-            font-family:sans-serif;
-            background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
-            background-size: 600% 100%;
-            }
-        .alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;
-            border:1px solid transparent;border-radius:.25rem;
-            display:inline-block;}
     </style>
-    <body>
-        <h1 class='text-center'>Welcome to LC High Shool.</h1>
+    <body class='body-index text-dark'>
+        <h1 class='text-center '>Welcome to LC High Shool.</h1>
         <br><br>
         <div class="container">
          <div class="panel panel-login">
@@ -60,6 +51,7 @@
         <a href='/register'>Register</a>
         </div>
         <br>
+        <div class ='ml-1'>
         <div>Debug Navigation</div>
         <a href='/login'>login</a> II
         <a href='/student'>student</a> II
@@ -68,5 +60,6 @@
         <a href='/teacher/home'>teacher homepage</a> II
         <a href='/teacher/add_class'>teacher Add Class</a> II
         <a href='/admin'>Django Admin</a>
+        </div>
     </body>
 </html>

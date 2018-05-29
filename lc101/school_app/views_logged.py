@@ -22,8 +22,8 @@ def home_redirect(request):
 
 @login_required
 def teacher(request):
-    
-    return render(request,'teacher/teacher_homepage.html')
+    user = User.objects.filter(id=request.session['id'])
+    return render(request,'teacher/teacher_homepage.html',{'user':user})
     
 @login_required
 def add_class(request):

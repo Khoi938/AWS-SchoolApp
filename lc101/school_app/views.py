@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from school_app.models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate
+from django.template import Context, Template
 # / mean base no / mean add to current page Django render start from templates no slash
 
 def index(request):
@@ -12,9 +13,11 @@ def index(request):
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            request.session['username'] = user.username
+            request.session['username'] = username
+            request.session['is_teacher'] = user.profile.is_teacher
+            request.session['id'] = user.id
             if user.profile.is_teacher == True:
-                return redirect('/teacher/home',{'user':user})
+                return redirect('/teacher/home')
                 # return render(request,'teacher/teacher_homepage.html',{'user':user})
             else:
                 return redirect('/student/home',{'user':user})
