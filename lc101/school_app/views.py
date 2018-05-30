@@ -3,9 +3,13 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from school_app.models import *
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.template import Context, Template
 # / mean base no / mean add to current page Django render start from templates no slash
+from django.contrib.auth import logout
+
+def logout_view(request):
+    logout(request)
 
 def index(request):
     if request.method == 'POST':
@@ -13,6 +17,7 @@ def index(request):
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
+            login(request, user)
             request.session['username'] = username
             request.session['is_teacher'] = user.profile.is_teacher
             request.session['id'] = user.id
@@ -23,7 +28,7 @@ def index(request):
                 return redirect('/student/home',{'user':user})
         else: 
             messages.warning(request, 'Failed Login')
-            return render(request,'homepage/error.html')
+            return HttpResponse('<h1>Failed Login </h1>')
 
     return render(request,'homepage/index.html')
 # render(request, template_name, context=None, content_type=None, status=None, using=None)
