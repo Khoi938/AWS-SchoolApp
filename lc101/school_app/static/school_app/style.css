@@ -16,7 +16,30 @@
   background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
   background-size: 600% 100%;
             }
-.body-teacher{background: linear-gradient(to bottom, #9ee8fa 61%,#d6f9ff 100%); }
+.body-teacher{
+  /*color:#666666;*/
+  font-family:sans-serif;
+  /*font-weight:400;*/
+  /*width: 100%;*/
+  background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
+  background-size: 600% 100%;
+}
+.content{
+  padding-top: 40px;
+  padding-left:50px;
+}
+    
+/*.navbar{*/
+/*       position: fixed;*/
+/*       overflow: hidden;*/
+/*       background-color: rgb(252, 249, 249);*/
+/*       top:0px;*/
+/*       left: 0px;*/
+/*       width: 100%;*/
+/*       color:rgb(104, 5, 2);*/
+/*       font-size: 100%;*/
+/*       opacity: 0.8}*/
+                    
 .alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;
             border:1px solid transparent;border-radius:.25rem;
             display:inline-block;}

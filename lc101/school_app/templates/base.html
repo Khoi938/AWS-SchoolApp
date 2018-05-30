@@ -9,26 +9,19 @@
 {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon" />
         <style>
-        .navbar{
-                    position: fixed;
-                    overflow: hidden;
-                    background-color: rgb(252, 249, 249);
-                    top:0px;
-                    left: 0px;
-                    width: 100%;
-                    color:rgb(104, 5, 2);
-                    font-size: 100%;
-                    opacity: 0.8}
-            body{padding-top: 40px}
+            body{padding-top:0px}
             
             button{background-color: rgb(139, 253, 183)}
             
             form,h1,ul{padding-left: 30px }
+            
             .color{color: red}
+            
             textarea, input {background-color: rgb(243, 245, 247)}
-            .form-group .required .control-label:after {
-            content:"*";color:red;}
+            /*.form-group .required .control-label:after {*/
+            /*content:"*";color:red;}*/
             .form-control-inherit{display:block;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
         </style>
         <title>{{top}}</title>
@@ -39,12 +32,29 @@
 <body class='body-teacher'> 
 {% else %}
 <body>
-{% endif %}
-    <header class='navbar'>
-        <span style="padding-left:30px">
-        <a href='/homepage'><button>Home Page</button></a>
-        <a href='/register'><button>Registered User</button></a>
-        {% if request.session.username %}
+{% endif %}<header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse show" id="navbarColor02" style="">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+           {% if request.session.username %}
         <a href=''><button>Log Out</button></a>
         {{ request.session.username }} Fisrt Name 
         {% for i in user %}
@@ -52,8 +62,13 @@
         {% endfor %}
         {{ u.id }} {{ u.last_name }}
         {% endif %}
-
-</header>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+    </header>
 
     {% block content %}
     {% endblock %}
