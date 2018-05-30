@@ -1,0 +1,22 @@
+.body-index {
+  padding-top: 60px;
+  padding-left:30px;
+  color:#666666;
+  font-family:sans-serif;
+  font-weight:400;
+  /*width: 100%;*/
+  background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
+  background-size: 600% 100%;
+} 
+.body-registration{
+            /*background-color: rgb(147, 247, 247);*/
+  padding-top: 40px;
+  padding-left:30px;
+  font-family:sans-serif;
+  background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
+  background-size: 600% 100%;
+            }
+.body-teacher{background: linear-gradient(to bottom, #9ee8fa 61%,#d6f9ff 100%); }
+.alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;
+            border:1px solid transparent;border-radius:.25rem;
+            display:inline-block;}

@@ -6,7 +6,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">-->
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>-->
-
+{% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <style>
         .navbar{
@@ -19,9 +20,10 @@
                     color:rgb(104, 5, 2);
                     font-size: 100%;
                     opacity: 0.8}
-            body{background-color: rgb(147, 247, 247);
-                padding-top: 40px}
+            body{padding-top: 40px}
+            
             button{background-color: rgb(139, 253, 183)}
+            
             form,h1,ul{padding-left: 30px }
             .color{color: red}
             textarea, input {background-color: rgb(243, 245, 247)}
@@ -33,26 +35,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
+{% if request.session.is_teacher %}
+<body class='body-teacher'> 
+{% else %}
 <body>
+{% endif %}
     <header class='navbar'>
         <span style="padding-left:30px">
-        <a href='homepage'><button>Home Page</button></a>
-        <a href='register'><button>Registered User</button></a>
+        <a href='/homepage'><button>Home Page</button></a>
+        <a href='/register'><button>Registered User</button></a>
         {% if request.session.username %}
         <a href=''><button>Log Out</button></a>
-        {{user.first_name}}
+        {{ request.session.username }} Fisrt Name 
+        {% for i in user %}
+        {{ i.id }}
+        {% endfor %}
+        {{ u.id }} {{ u.last_name }}
         {% endif %}
-        {% comment %}<!--{% if session['username']|length > 3 %}-->
-        <!--<a href="/newpost"><button>Add Post</button></a>-->
-        <!--<a href="/logout"><button>Logout</button></a>-->
-        <!--<span style="font-size:70%">{{session['username']}}</span>-->
-        <!--{% else %}-->
-        <!--<a href='/signup'><button>Create Account</button></a>-->
-        <!--<a href='/login'><button>Login</button></a>-->
-        <!--{% endif %}-->
-        <!--<span class="color">{{authenticate}}</span>-->
-        <!--</span>-->
-        {% endcomment %}
 
 </header>
 

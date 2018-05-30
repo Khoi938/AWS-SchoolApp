@@ -14,6 +14,6 @@ urlpatterns=[
     path('student',views_logged.student,name='student'),
     path('student/home',views_logged.student,name='student_home'),
     
-    path('split',views_logged.home_redirect, name = 'home_redirect'),
+    path('home_redirect',views_logged.home_redirect, name = 'home_redirect'),
     path('login',auth_login_test.login, name='login'),
     path('logout',auth_login_test.logout, name='logout')]
