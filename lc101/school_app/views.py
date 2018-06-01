@@ -1,21 +1,21 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+
 from school_app.models import *
+from school_app.views_functions import *
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.template import Context, Template
-# / mean base no / mean add to current page Django render start from templates no slash
-from django.contrib.auth import logout
+# '/' mean base no '/' mean add to current path, Django render function implicit 'templates/' no slash
 
-def logout_view(request):
-    logout(request)
 
+# -------Homepage with Login---------
 def index(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=username, password=password)# Called User.Objects and Check db
         if user is not None:
             login(request, user)
             request.session['username'] = username
@@ -35,7 +35,7 @@ def index(request):
 # Combines a given template with a given context dictionary and returns an 
 # HttpResponse object with that rendered text.
 
-
+# -------- Register And Logout-------
 def register(request):
     if request.method== 'POST':
         username = request.POST['username']

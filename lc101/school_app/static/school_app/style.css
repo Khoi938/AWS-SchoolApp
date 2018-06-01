@@ -21,13 +21,21 @@
   font-family:sans-serif;
   /*font-weight:400;*/
   /*width: 100%;*/
-  background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  /*background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);*/
   background-size: 600% 100%;
 }
 .content{
   padding-top: 35px;
   padding-left:50px;
 }
+
+/* ----- Modified Bootstrap Tag ------*/
+.form-control-inherit{display:block;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;
+  background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
+
+.alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;border-radius:.25rem;
+  display:inline-block;}
     
 /*.navbar{*/
 /*       position: fixed;*/
@@ -40,6 +48,3 @@
 /*       font-size: 100%;*/
 /*       opacity: 0.8}*/
                     
-.alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;
-            border:1px solid transparent;border-radius:.25rem;
-            display:inline-block;}

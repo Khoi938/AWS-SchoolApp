@@ -20,6 +20,13 @@
               <form action="" method="post" style="display: block;">
                 {% csrf_token %}
                 <h1 class='text-dark'style="color:black;" >Please Sign In</h1>
+                {% if messages %}
+                  <ul class="messages">
+                {% for message in messages %}
+                    <li><div class="alert-inherit alert-warning" role="alert">{{ messages }}</div></li>
+                {% endfor %}
+                  </ul>
+                {% endif %}
                   <div class="form-group">
                     <input type="text" name="username" id="username"  class="form-control" placeholder="Username" required>
                   </div>
