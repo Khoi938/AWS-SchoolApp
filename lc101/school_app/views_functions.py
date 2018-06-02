@@ -9,15 +9,16 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from school_app.models import *
 # ----- Custom Functions goes Here -----
 
-# Redirecting user that login with message
-def login_check(request):
-    if not request.user.is_authenticated:# alt user= User.Objects.filter(username=request.)
-        messages.success(request, 'Registration is Sucessful. Please login.')
-        return redirect('homepage')
+# Check to see if user is login add message
+def is_login(request):
+    if not request.user.is_authenticated:
         messages.warning(request, "Please login or Create an Account.")
-        return redirect('login')
+        return False
+    return True
+    
 # Check to see if a User is a Teacher
 def is_teacher(request): 
     if request.user.profile.is_teacher == False:
         messages.warning(request, "You don't have Instructor's Privilege!")
         return render(request,'homepage/error.html')
+    return

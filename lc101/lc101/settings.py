@@ -53,7 +53,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'lc101.urls'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home_redirect' #rout then redirect according to user priveledge
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+SESSION_COOKIE_SECURE = not DEBUG
+MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 # LOGOUT_REDIRECT_URL = ''
 
 TEMPLATES = [
