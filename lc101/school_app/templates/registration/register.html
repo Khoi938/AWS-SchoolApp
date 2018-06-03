@@ -4,11 +4,18 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style type="text/css">
     </style>
 </head>
 <body class='body-registration'>
+  <script>
+        $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
 <div class="container">
    <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -23,33 +30,34 @@
                 <h1 class='text-dark'style="color:black;" >Account Registration</h1>
                   
                   <div class="form-group">
-                    <label class="control-label" for="username" >Username:</label>
+                    <label class="control-label" for="username" >Username:<span style="color:red">*</span></label>
                     <input type="text" id="username" name="username" class="form-control" placeholder="" required>
                   </div>
                   <div class="form-group">
-                    <label class="control-label" for="first_name" >First Name:</label>
+                    <label class="control-label" for="first_name" >First Name:<span style="color:red">*</span></label>
                     <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Gloria" required>
                   
-                    <label class="control-label" for="last_name" >Last Name:</label>
+                    <label class="control-label" for="last_name" >Last Name:<span style="color:red">*</span></label>
                     <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Doe" required>
                   </div>
                   <div class="form-group">
-                    <label class="control-label" for="school_id" >School ID:</label>
-                    <input type="text" id="school_id" name="school_id" class="form-control" placeholder='8 Digit, Even numbered = Teacher'>
+                    <label class="control-label" for="school_id" >School ID:<span style="color:red">*</span></label>
+                    <input data-toggle="popover" title="" data-content="Enter numbers only" type="text" id="school_id" name="school_id" class="form-control" placeholder='8 Digit, Even numbered = Teacher' required>
                     
                     <label class="control-label" for="email" >Email Address:</label>
                     <input type="text" id="stuff" name="email" class="form-control"  placeholder="Gloria_Doe@gmail.com Optional">
                   </div>
                   <div class="form-group">
-                    <label class="control-label" for="password" >Password:</label>
+                    <label class="control-label" for="password" >Password:<span style="color:red">*</span></label>
                     <input type="password" id="password" name="password" class="form-control" placeholder="" required>
                   
                     <label class="control-label" for="password" >Confirm Password:</label>
-                    <input type="password" id="password" name="password_confirm" class="form-control" placeholder="" required>
+                    <input type="password" id="password" name="password_confirm" class="form-control" placeholder="" data-toggle="popover" title="" data-content="Re-enter password" required>
                   </div>
 
                   <div class="col-xs-6 form-group">     
-                    <input class="btn btn-lg btn-primary btn-block text-center" type="submit" id="login" value="Submit »">
+                    <!--<input class="btn btn-lg btn-primary btn-block text-center" type="submit" id="login" value="Submit »">-->
+                    <button class="btn btn-lg btn-primary btn-block text-center"><i class="fa fa-paper-plane"></i> Submit »</button>
                     </div>
                 
           </div>
@@ -57,5 +65,6 @@
       </div>
   </div>
 </div>
+
 </body>
 </html>

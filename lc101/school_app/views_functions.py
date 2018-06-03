@@ -12,7 +12,7 @@ from school_app.models import *
 # Check to see if user is login add message
 def is_login(request):
     if not request.user.is_authenticated:
-        messages.warning(request, "Please login or Create an Account.")
+        messages.warning(request, "Please Login or Create an Account.")
         return False
     return True
     
@@ -20,5 +20,5 @@ def is_login(request):
 def is_teacher(request): 
     if request.user.profile.is_teacher == False:
         messages.warning(request, "You don't have Instructor's Privilege!")
-        return render(request,'homepage/error.html')
-    return
+        return False
+    return True

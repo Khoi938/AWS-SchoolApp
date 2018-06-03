@@ -6,12 +6,25 @@
     <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
     <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
-    <style type="text/css"></style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+     body, html{height:100%;
+         
+     }
+        .image{
+    background-image: url("https://static1.squarespace.com/static/52f11228e4b0a96c7b51a92d/t/55e705bee4b03fc234f02b5e/1441203647587/?format=2500w");
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size:  auto 100%;
+}
+    </style>
     </head>
     <body class='body-index text-dark'>
-        <h1 class='text-center '>Welcome to LC High Shool.</h1>
+        <h1 class='text-center '>Welcome to Launch C. High Shool.</h1>
+        
+            <div class='image'>
         <br><br>
-        <div class="container">
+        <div class="container ">
          <div class="panel panel-login">
         <div class="panel-body">
           <div class="row justify-content-md-center">
@@ -40,7 +53,9 @@
         </table>
         
         <div class="col-xs-6 form-group">     
-            <input class="btn btn-md btn-success" type="submit" id="login" value="Login »">
+            <!--<input class="btn btn-md btn-success" type="submit" id="login" value="Login »">-->
+            <button class="btn btn-md btn-success" id="login"><i class="fa fa-lock"></i> Login »
+</button>
         </div>
         
         </form>
@@ -51,9 +66,10 @@
         
         <a href='/register'>Register</a>
         </div>
+        </div>
         <br>
         <div class ='ml-1'>
-        <div>Debug Navigation</div>
+        <div>Debug Navigation <i class="fa fa-bug"></i></div>
         <a href='/login'>login</a> II
         <a href='/student'>student</a> II
         <a href='/teacher'>teacher</a> II

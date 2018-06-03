@@ -32,7 +32,7 @@ def index(request):
 # Combines a given template with a given context dictionary and returns an 
 # HttpResponse object with that rendered text.
 
-# -------- Register and Login, Logout is in views_logged.py-------
+# -------- Register, Login and Logout -------
 def register(request):
     if request.method== 'POST':
         username = request.POST['username']
@@ -41,7 +41,7 @@ def register(request):
             return render(request,'registration/register.html')
         
         school_id = request.POST['school_id']
-        if school_id.isdigit() == False: # Check to see if str can be integer
+        if school_id.isdigit() == False: # Check to see if str can be digit
             messages.warning(request, 'School id is an 8 digit number.')
             return render(request,'registration/register.html')
             
@@ -50,7 +50,7 @@ def register(request):
             return render(request,'registration/register.html')
             
         if Profile.objects.filter(school_id=school_id):
-            messages.warning(request, 'School id is Already in use.')
+            messages.warning(request, 'School id is Already in use')
             return render(request,'registration/register.html')
             
         first_name = request.POST['first_name']
@@ -80,7 +80,7 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=username, password=password)# Called User.Objects and Check db
         if user is not None:
             auth_login(request, user)
             if user.profile.is_teacher == True:
@@ -98,7 +98,8 @@ def login(request):
     
     return render(request,'registration/login.html')
     
-
+def logout(request):
+    return render(request,'registration/login.html')
     
 
     
