@@ -46,22 +46,29 @@ class Teacher(models.Model):
         
 # ---------------Classed Model----------------------
 class Algebra_101(models.Model):
-    teacher = models.OneToOneField(Teacher, on_delete = models.CASCADE)
-    weekly_agenda = models.CharField(max_length=450)
+    teacher = models.ForeignKey(Teacher, on_delete = models.CASCADE)
+    name = models.CharField(max_length=100,default='')
+    description = models.CharField(max_length=450,default='')
     
-    monday_date = models.CharField(max_length=300)
-    tuesday_date = models.CharField(max_length=300)
-    wednesday_date = models.CharField(max_length=300)
-    thursday_date = models.CharField(max_length=300)
-    friday_date= models.CharField(max_length=300)
+    weekly_agenda = models.CharField(max_length=450,default='')
+    last_modifield = models.DateTimeField(auto_now_add=True, blank=True)
+   
+    monday_date = models.DateField(blank=True, null=True)
+    # tuesday_date = models.DateField(blank=True)
+    # wednesday_date = models.DateField(blank=True)
+    # thursday_date = models.DateField(blank=True)
+    # friday_date= models.DateField(blank=True)
     
-    monday_plan = models.CharField(max_length=300)
-    tuesday_plan= models.CharField(max_length=300)
-    wednesday_Plan= models.CharField(max_length=300)
-    thursday_plan= models.CharField(max_length=300)
-    friday_plan= models.CharField(max_length=300)
+    monday_plan = models.CharField(max_length=300,default='a')
+    tuesday_plan= models.CharField(max_length=300,default='s')
+    wednesday_Plan= models.CharField(max_length=300,default='d')
+    thursday_plan= models.CharField(max_length=300,default='f')
+    friday_plan= models.CharField(max_length=300,default='g')
+    
+    weekend_plan = models.CharField(max_length=300,default='h')
+    
     def __str__(self):
-        return 'Algebra 101 '+str(self.teacher)
+        return 'Algebra 101 '+str(self.teacher)+' '+self.description
         
 class History_101(models.Model):
     teacher = models.OneToOneField(Teacher, on_delete = models.CASCADE)
@@ -84,6 +91,29 @@ class Biology_101(models.Model):
     friday_plan= models.CharField(max_length=300)
     def __str__(self):
         return 'Algebra 101'
+        
+
+class Custom_Class(models.Model):
+    teacher = models.OneToOneField(Teacher, on_delete = models.CASCADE)
+    name = models.CharField(max_length=100,default='')
+    description = models.CharField(max_length=450,default='')
+    
+    weekly_agenda = models.CharField(max_length=450,default='')
+    last_modifield = models.DateTimeField(auto_now_add=True, blank=True)
+   
+    monday_date = models.DateField(default=None)
+    tuesday_date = models.DateField(default=None)
+    wednesday_date = models.DateField(default=None)
+    thursday_date = models.DateField(default=None)
+    friday_date= models.DateField(default=None)
+    
+    monday_plan = models.CharField(max_length=300,default='a')
+    tuesday_plan= models.CharField(max_length=300,default='s')
+    wednesday_Plan= models.CharField(max_length=300,default='d')
+    thursday_plan= models.CharField(max_length=300,default='f')
+    friday_plan= models.CharField(max_length=300,default='g')
+    
+    weekend_plan = models.CharField(max_length=300,default='h')
     
 
     

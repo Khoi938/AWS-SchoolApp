@@ -22,3 +22,4 @@ def is_teacher(request):
         messages.warning(request, "You don't have Instructor's Privilege!")
         return False
     return True
+    

@@ -33,7 +33,7 @@
 /* ----- Modified Bootstrap Tag ------*/
 .form-control-inherit{display:block;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;
   background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}
-
+/*Removed Width 100%*/
 .alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;border-radius:.25rem;
   display:inline-block;}
     

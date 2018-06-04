@@ -9,6 +9,7 @@
 {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon" />
         <style>
             body{padding-top:0px}
@@ -29,7 +30,6 @@
     </head>
 {% if request.user.profile.is_teacher %}
   <body class='body-teacher'>
-  <h1>It work</h1> 
 {% else %}
   <body>
 {% endif %}<header>
@@ -47,24 +47,20 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Features</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
       </ul>
-        {% if request.user.username %}
-          <a href="{% url 'logout' %}"><button>Log Out</button></a>
+      {% if request.user.username %}
           Username: {{ request.user.username }} 
-        {% endif %}
+      {% endif %}
         {% if request.user.profile.is_teacher %}
-          Educator: {{request.user.first_name}}
+          Educator: {{request.user.first_name}} 
         {% endif %}
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <!--<form class="form-inline">-->
+      <!--  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> <i class="fas fa-user-cog"></i> My Account</button>
+      <!--</form>-->
     </div>
   </nav>
     </header>

@@ -7,15 +7,15 @@
           <div class="row">
             <div class="col-lg-12">
         <h3>Course Selection Form.</h3>
-        
-    <form action="teacher/add_class", method="post", id='course_select'> {% csrf_token %}
+        <br>
+    <form action="/teacher/add_class", method="post", id='course_select'> {% csrf_token %}
         <label for="course">Pick Course:</label>
         <select class="selectpicker" data-style="btn-info" name='course'>
             <optgroup label="Mathematic">
-            <option value='Algebra_1100'>Algebra 1</option>
+            <option value='m-al-101'>Algebra 1100</option>
             </optgroup>
             <optgroup label="Life Sciences">
-            <option value='biology_1100'>Biology 1</option>
+            <option value='ls-bio-101'>Biology 1100</option>
             </optgroup>
         </select>
 

@@ -24,6 +24,13 @@ def add_class(request):
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
+        elif request.method == 'POST':
+            course = request.POST['course']
+            description = request.POST['description']
+            teacher = request.user.teacher
+            if course == 'm-al-101':
+                Algebra_101.objects.create(teacher=teacher, description=description)
+            return render(request,'teacher/add_class.html')
         else:
             return render(request,'teacher/add_class.html')
 

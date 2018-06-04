@@ -4,6 +4,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <style type="text/css">
     </style>
 </head>
@@ -38,11 +39,12 @@
                   <!--  <label for="checkbox1">Remember Me</label>   -->
                   <!--</div>-->
                   <div class="col-xs-6 form-group">     
-                    <input class="btn btn-lg btn-success btn-block text-center" type="submit" id="login" value="Login »">
-                    </div>
-                    <div class="col-xs-6 form-group ">     
-                    <a href='register' class="btn btn-lg btn-primary btn-block text-center">Create Account »</a>
-                    </div>
+                  <!--<input class="btn btn-md btn-success" type="submit" id="login" value="Login »">-->
+                    <button class="btn btn-lg btn-success btn-block text-center"id="login"><i class="fa fa-lock"></i> Login »</button>
+                  </div>
+                  <div class="col-xs-6 form-group ">     
+                    <a href='register' class="btn btn-lg btn-primary btn-block text-center"><i class="fa fa-user"></i> Create Account</a>
+                  </div>
                 
           </div>
         </div>
