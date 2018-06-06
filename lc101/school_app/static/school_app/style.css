@@ -29,6 +29,11 @@
   padding-top: 35px;
   padding-left:50px;
 }
+.table-nonfluid {
+   width: auto !important;
+}
+.black-font{color:black;}
+.red-font{color:red;}
 
 /* ----- Modified Bootstrap Tag ------*/
 .form-control-inherit{display:block;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;

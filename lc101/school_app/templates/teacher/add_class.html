@@ -8,14 +8,21 @@
             <div class="col-lg-12">
         <h3>Course Selection Form.</h3>
         <br>
+        {% if messages %}
+          <ul class="messages">
+        {% for message in messages %}
+             <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
+        {% endfor %}
+          </ul> 
+        {% endif %}
     <form action="/teacher/add_class", method="post", id='course_select'> {% csrf_token %}
         <label for="course">Pick Course:</label>
-        <select class="selectpicker" data-style="btn-info" name='course'>
+        <select class="selectpicker" data-style="btn-info" name='subject_name'>
             <optgroup label="Mathematic">
-            <option value='m-al-101'>Algebra 1100</option>
+            <option value='Algebra 1101'>Algebra 1100</option>
             </optgroup>
             <optgroup label="Life Sciences">
-            <option value='ls-bio-101'>Biology 1100</option>
+            <option value='Biology 1100'>Biology 1100</option>
             </optgroup>
         </select>
 

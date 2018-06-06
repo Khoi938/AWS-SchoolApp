@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import * #Profile, Student, Teacher, Algebra_101,Biology_101
+from .models import * #Profile, Student, Teacher, Subject
 # Register your models here.
 
 admin.site.register(Profile)
 admin.site.register(Student)
 admin.site.register(Teacher)
-admin.site.register(Algebra_101)
-admin.site.register(Biology_101)
-admin.site.register(History_101)
+admin.site.register(Subject)
+

@@ -216,4 +216,9 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+
+              {% with number=0 %}
+              {% endwith %}
+              {{ number|add:'1' }}
 {% endblock %}

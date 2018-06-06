@@ -16,7 +16,8 @@ def teacher(request):
         return redirect('/login')
     if is_teacher(request) == False:
         return redirect('/')
-    return render(request,'teacher/teacher_homepage.html')
+    subjects=Subject.objects.filter(teacher=request.user.teacher)
+    return render(request,'teacher/teacher_homepage.html',{'subjects':subjects})
     
 
 def add_class(request):
@@ -25,15 +26,28 @@ def add_class(request):
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
         elif request.method == 'POST':
-            course = request.POST['course']
+            subject_name = request.POST['subject_name']
             description = request.POST['description']
             teacher = request.user.teacher
-            if course == 'm-al-101':
-                Algebra_101.objects.create(teacher=teacher, description=description)
+            added_class = Subject.objects.create(teacher=teacher,subject_name=subject_name, description=description)
+            messages.success(request, 'Subject: '+added_class.subject_name+' Instructor: '+ 
+            request.user.get_full_name()+ ' has been created.' )
             return render(request,'teacher/add_class.html')
         else:
             return render(request,'teacher/add_class.html')
+            
 
+def edit_class(request,class_id):
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        elif request.method == 'POST':
+            x=3
+        else:
+            edit_class=Subject.objects.filter(id=int(class_id))
+            return render(request,'teacher/edit_class.html',{'edit_class':edit_class})
+            
 @login_required
 def student(request):
     

@@ -11,6 +11,7 @@ urlpatterns=[
     path('teacher',views_logged.teacher, name='teacher'),
     path('teacher/home',views_logged.teacher, name='teacher_home'),
     path('teacher/add_class',views_logged.add_class, name='add_class'),
+    path('teacher/edit_class/<int:class_id>/', views_logged.edit_class, name='edit_class'),
     path('student',views_logged.student,name='student'),
     path('student/home',views_logged.student,name='student_home'),
     
