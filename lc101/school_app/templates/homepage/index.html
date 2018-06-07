@@ -5,7 +5,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
     <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="{% static 'school_app/style.css' %}" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <style type="text/css">
      body, html{height:100%;
@@ -16,19 +16,12 @@
     background-position: top right;
     background-repeat: no-repeat;
     background-size:  auto 100%;
+    border: 5px solid #344a5f;
 }
     </style>
     </head>
     <body class='body-index text-dark'>
-        <h1 class='text-center '>Welcome to Launch C. High Shool.</h1>
-        
-            <div class='image'>
-        <br><br>
-        <div class="container ">
-         <div class="panel panel-login">
-        <div class="panel-body">
-          <div class="row justify-content-md-center">
-            <div class="col-lg-12">
+        <h1 class='text-center text-dark'style="font-size:50px">Welcome to Launch C. High Shool</h1><br>
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
@@ -36,49 +29,65 @@
         {% endfor %}
           </ul> 
         {% endif %}
+        <div class='image rounded'><br><br>
+        <div class="container">
         {% if user.is_authenticated %}
-            <h5>You are currently logged in as {{user.username}}</h5>
-            <a href="/logout" class="btn btn-info btn-sm"><i class="fas fa-sign-out-alt"></i> Log out </a> 
+            <h4>You are currently logged in as {{user.username}}</h4>
+            <a href="/logout" class="btn btn-info btn-md"><i class="fas fa-sign-out-alt"></i> Log out </a> 
             </br></br></br></br></br>
         {% else %}
+        <div class="panel panel-login">
+        <div class="panel-body">
+          <div class="row justify-content-md-center">
+            <div class="col-lg-12">
         <h3>User Login</h3>
-        <form action="/homepage", method="post"> {% csrf_token %}
+        <form action="/homepage" method="post"> {% csrf_token %}
         <table>
             <tr>
                 <td><label for="username">Username:</label></td>
                 <td><input type="text" id="username" name="username" class='form-control' placeholder='Username' required ></td>
-                <td><label for="username"><span class="color"></span></label></td>
             </tr>
             <tr>
                 <td><label for="password">Password:</label></td>
-                <td><input type="text" id="password" name="password" class='form-control' placeholder='Password' required ></td>
-                <td><label for="username"><span class="color"></span></label></td>
+                <td><input type="password" id="password" name="password" class='form-control' placeholder='Password' required ></td>
             </tr>   
         </table>
-        <div class="col-xs-6 form-group">     
-            <!--<input class="btn btn-md btn-success" type="submit" id="login" value="Login »">-->
+        <div class="col-xs-6 form-group">   
             <button class="btn btn-md btn-success" id="login"><i class="fa fa-lock"></i> Login »</button>
         </div>
         </form>
-        </div></div></div></div>
+        </div></div></div></div></span>
         </br>
         </br>
         <div>New Student and Educator register here.</div>
         <a href='/register'>Register</a>
         
     {% endif %}   
-        </div></div>
-        <br>
+    </div></div>
+        <br><br>
         <div class ='ml-1'>
         <div>Debug Navigation <i class="fa fa-bug"></i></div>
         <a href='/login'>login</a> II
         <a href='/student'>student</a> II
-        <a href='/teacher'>teacher</a> II <br>
-        <a href='/student/home'>student homepage</a> II
-        <a href='/teacher/home'>teacher homepage</a> II</br>
+        <a href='/teacher'>teacher</a> II 
+        <a href='/student'>student homepage</a> II<br>
+        <a href='/teacher'>teacher homepage</a> II
         <a href='/teacher/add_class'>teacher Add Class</a> II
-        <a href='/admin'>Django Admin</a>II
+        <a href='/admin'>Django Admin</a> II
         </div>
+         <span style='font-size:80px;'>
+            <img src='https://d1.awsstatic.com/webteam/homepage/editorials/Site-Merch_Lightsail_Editorial.f3b6112b81a2512198937a63bc1d23381df43bcb.png' width="120" height="70">
+            <i class="devicon-amazonwebservices-plain-wordmark text-danger"></i>
+            <!--<img src="https://d1.awsstatic.com/LightsailAssets/icon_home_robot.7c86e1fe91a13b9e4ed0e836f5a42b232ff8a874.gif" alt="HTML5 Icon" width="45" height="45">-->
+            <i class="devicon-python-plain-wordmark "style='color:#05314f'></i>
+            <i class="devicon-django-line-wordmark colored"></i>
+            <i class="devicon-mysql-plain-wordmark colored"></i>
+            <i class="devicon-linux-plain colored"></i>
+            <i class="devicon-bootstrap-plain-wordmark colored"></i>
+            <a href='https://github.com/Khoi938/AWS-SchoolApp'>
+                <i class="devicon-github-plain-wordmark colored"></i>
+            </a>
+        </span>
         </br>
     </body>
 </html>

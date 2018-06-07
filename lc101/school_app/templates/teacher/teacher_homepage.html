@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class='content'>
-        <h1 style='padding-left: 10px'>Teacher Console</h1>
+        <h2 style='padding-left: 10px'>Teacher Console</h2>
         <br>
+        {% if messages %}
+          <ul class="messages">
+        {% for message in messages %}
+             <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
+        {% endfor %}
+          </ul> 
+        {% endif %}
         <ul>
             <li>View Class</li>
             <li><a href='/teacher/add_class'>Add Class</a></li>
@@ -25,7 +32,9 @@
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ subject.subject_name }}</td>
               <td>{{ subject.description }}</td>
-              <th><a href='{% url "edit_class" class_id=subject.id %}'<i class="fas fa-edit"></i></th>
+              <th style="width: 15%">
+                <a href='{% url "edit_class" class_id=subject.id %}'<i class="fas fa-edit"></i>
+              </th>
             </tr>
         {% endfor %}
             </tbody>

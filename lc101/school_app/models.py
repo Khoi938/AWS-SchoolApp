@@ -50,31 +50,37 @@ class Subject(models.Model):
     subject_name = models.CharField(max_length=150,default='')
     description = models.CharField(max_length=450,default='')
     
-    weekly_agenda = models.CharField(max_length=450,default='')
+    weekly_agenda = models.CharField(max_length=450,default='Agenda Goes Here')
     last_modifield = models.DateTimeField(auto_now_add=True, blank=True)
    
     monday_date = models.DateField(blank=True, null=True)
-    # tuesday_date = models.DateField(blank=True)
-    # wednesday_date = models.DateField(blank=True)
-    # thursday_date = models.DateField(blank=True)
-    # friday_date= models.DateField(blank=True)
+    tuesday_date = models.DateField(blank=True, null=True)
+    wednesday_date = models.DateField(blank=True, null=True)
+    thursday_date = models.DateField(blank=True, null=True)
+    friday_date= models.DateField(blank=True, null=True)
     
     monday_plan = models.CharField(max_length=400,default='a')
     tuesday_plan= models.CharField(max_length=400,default='s')
-    wednesday_Plan= models.CharField(max_length=400,default='d')
+    wednesday_plan= models.CharField(max_length=400,default='d')
     thursday_plan= models.CharField(max_length=400,default='f')
     friday_plan= models.CharField(max_length=400,default='g')
     
     weekend_plan = models.CharField(max_length=300,default='h')
     
     def __str__(self):
-        return self.name +' '+ str(self.teacher)+' '+self.description
+        return self.subject_name +' '+ str(self.teacher)+' '+self.description
         
 
-# class Custom_Class(models.Model):
-#     teacher = models.OneToOneField(Teacher, on_delete = models.CASCADE)
-#     name = models.CharField(max_length=100,default='')
-#     description = models.CharField(max_length=450,default='')
+        
+class Classroom(models.Model):
+    teacher = models.OneToOneField(Teacher, on_delete = models.CASCADE)
+    subject = models.OneToOneField(Teacher, on_delete = models.CASCADE)
+
+@receiver(post_save, sender=Subject)
+def create_classroom_object(sender, instance, created, **kwargs):
+    if created:
+        classroom = Classroom().objects.create(teacher=instance.teacher,subject=instance)
+        classroom.save()
     
 #     weekly_agenda = models.CharField(max_length=450,default='')
 #     last_modifield = models.DateTimeField(auto_now_add=True, blank=True)
