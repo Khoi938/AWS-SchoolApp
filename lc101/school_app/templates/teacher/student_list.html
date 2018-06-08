@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='content'>
+        <h2 style='padding-left: 10px'>Student Roster </h2>
+        <br>
+        {% if messages %}
+          <ul class="messages">
+        {% for message in messages %}
+             <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
+        {% endfor %}
+          </ul> 
+        {% endif %}
+        
+        {% if students %}
+          <h4>Currently Enrolled in L.C. High:</h4>
+          <table class="table table-hover table-bordered pad-right-table">
+            <thead class='table-primary'>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Student ID</th>
+              <th scope="col">Class Edit</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for student in students|dictsort:"user.last_name" %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ student.user.last_name }}</td>
+              <td>{{ student.user.first_name }}</td>
+              <td>{{ student.user.profile.school_id }}</td>
+              <th style="width: 15%">
+                <a href='{% url "student_views" student_id=student.user.id %}'><i class="fas fa-users-cog"></i></a>
+              </th>
+            </tr>
+        {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+        <h4><div class="alert-inherit alert-warning" role="alert"><i class="fas fa-exclamation"></i> No Student is Currently enrolled in Launch Code HS.</div></h4>
+        {% endif %}
+</div>
+{% endblock %}

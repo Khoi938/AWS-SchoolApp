@@ -16,19 +16,41 @@
           </ul> 
         {% endif %}
     <form action="/teacher/add_class", method="post", id='course_select'> {% csrf_token %}
-        <label for="course">Pick Course:</label>
-        <select class="selectpicker" data-style="btn-info" name='subject_name'>
+        <label for="course" >Pick Course:</label>
+        <div class="input-group-prepend">
+    <label class="input-group-text" for="course">Pick Course:</label>
+  </div>
+        <select class="form-control width-2"  name='subject_name' id='course'>
             <optgroup label="Mathematic">
-            <option value='Algebra 1101'>Algebra 1100</option>
+            <option value='Algebra 100'>Algebra 100</option>
+            <option value='Algebra 200'>Algebra 200</option>
+            <option value='Algebra 300'>Algebra 300</option>
             </optgroup>
             <optgroup label="Life Sciences">
             <option value='Biology 1100'>Biology 1100</option>
             </optgroup>
         </select>
-
-        <div class="form-group">
-        <label for="description">Course Description:</label>
-        <textarea class="form-control-inherit" name='description' id="" rows="4" cols='40' placeholder="e.g. Mrs Gloria Beginner's Algebra Class A"></textarea>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text btn btn-primary" for="inputGroupSelect01">Pick Course:</label>
+          </div>
+        <select class="form-control width-2"  name='subject_name' id='course'>
+            <optgroup label="Mathematic">
+            <option value='Algebra 100'>Algebra 100</option>
+            <option value='Algebra 200'>Algebra 200</option>
+            <option value='Algebra 300'>Algebra 300</option>
+            </optgroup>
+            <optgroup label="Life Sciences">
+            <option value='Biology 1100'>Biology 1100</option>
+            </optgroup>
+        </select>
+        </div>
+                <!--warper remove width 100%-->
+        <div class="input-group-prepend">
+          <label class="input-group-text" for='description' >Course Description:</label>
+        </div>
+          <label for="description">Course Description:</label>
+          <textarea class="form-control width-4" name='description' id="" rows="4" cols='40' placeholder="e.g. Summer 2018 Biology 1100 Class A"></textarea>
         </div>
         <div class="col-xs-6 form-group">     
             <input class="btn btn-md btn-success" type="submit" id="login" value="Add Class">

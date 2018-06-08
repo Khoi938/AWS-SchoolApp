@@ -4,36 +4,39 @@
   color:#666666;
   font-family:sans-serif;
   font-weight:400;
-  /*width: 100%;*/
   background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
-  background-size: 600% 100%;
-} 
+  background-size: 600% 100%;}
+  
 .body-registration{
-            /*background-color: rgb(147, 247, 247);*/
   padding-top: 40px;
   padding-left:30px;
   font-family:sans-serif;
   background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);
-  background-size: 600% 100%;
-            }
+  background-size: 600% 100%;}
+  
 .body-teacher{
-  /*color:#666666;*/
   font-family:sans-serif;
-  /*font-weight:400;*/
-  /*width: 100%;*/
   background: linear-gradient(to right, #e0eafc, #cfdef3);
-  /*background: linear-gradient(to right, #22d686, #24d3d3, #22d686, #24d3d3);*/
-  background-size: 600% 100%;
-}
+  background-size: 600% 100%;}
+  
 .content{
   padding-top: 35px;
-  padding-left:50px;
-}
-.table-nonfluid {
-   width: auto !important;
-}
+  padding-left:50px;}
+  
+.table-nonfluid {width: auto !important;}
+
 .black-font{color:black;}
 .red-font{color:red;}
+
+.width-1{width: 100px;}
+.width-2{width: 200px;}
+.width-3{width: 300px;}
+.width-4{width: 400px;}
+.width-5{width: 500px;}
+.width-6{width: 600px;}
+.width-7{width: 700px;}
+.width-8{width: 800px;}
+
 
 /* ----- Modified Bootstrap Tag ------*/
 .form-control-inherit{display:block;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;
@@ -41,15 +44,4 @@
 /*Removed Width 100%*/
 .alert-inherit{position:relative;padding:.75rem 1.25rem;margin-bottom:1rem;border:1px solid transparent;border-radius:.25rem;
   display:inline-block;}
-    
-/*.navbar{*/
-/*       position: fixed;*/
-/*       overflow: hidden;*/
-/*       background-color: rgb(252, 249, 249);*/
-/*       top:0px;*/
-/*       left: 0px;*/
-/*       width: 100%;*/
-/*       color:rgb(104, 5, 2);*/
-/*       font-size: 100%;*/
-/*       opacity: 0.8}*/
-                    
+  

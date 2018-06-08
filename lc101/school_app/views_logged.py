@@ -28,15 +28,17 @@ def add_class(request):
         elif request.method == 'POST':
             subject_name = request.POST['subject_name']
             description = request.POST['description']
-            teacher = request.user.teacher
+            
+            teacher_id = request.user.teacher.id
+            teacher = Teacher.objects.filter(id=teacher_id).first()
+            
             added_class = Subject.objects.create(teacher=teacher,subject_name=subject_name, description=description)
             messages.success(request, 'Subject: '+added_class.subject_name+' Instructor: '+ 
             request.user.get_full_name()+ ' has been created.' )
+            
             return render(request,'teacher/add_class.html')
         else:
             return render(request,'teacher/add_class.html')
-            
-
             
 
 def edit_class(request,class_id=None):
@@ -57,6 +59,42 @@ def edit_class(request,class_id=None):
         else:
             edit_class=Subject.objects.filter(id=class_id)
             return render(request,'teacher/edit_class.html',{'edit_class':edit_class})
+
+def student_list(request):
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        else:
+            students=Student.objects.all()
+            return render(request,'teacher/student_list.html',{'students':students})
+
+def student_views(request,student_id=None):
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        if request.method == 'POST':
+            classroom_id = request.POST['classroom_id']
+            student_id = request.POST['student_id']
+            classroom = Classroom.objects.filter(id=classroom_id).first()
+            user = User.objects.filter(id=student_id).first()
+            student = Student.objects.filter(user=user).first()
+            classroom.student.add(student)
+            return redirect('/teacher/student_list')
+        if student_id != None:
+            user = User.objects.filter(id=student_id).first() #refactor later to reduce db query
+            student = Student.objects.filter(user=user).first()
+            classroom = Classroom.objects.filter(student=student)
+            student = Student.objects.filter(user=user)
+            all_classroom = Classroom.objects.all()
+            return render(request,'teacher/student_class_edit.html',
+            {'classroom':classroom,'students':student,'all_classroom':all_classroom})
+        else:
+            students=Student.objects.all()
+            return render(request,'teacher/student_list.html',{'students':students})
+          
+
             
 @login_required
 def student(request):

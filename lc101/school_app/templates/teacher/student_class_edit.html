@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='content'>
+        <h2 style='padding-left: 10px'>Student Views </h2>
+        <br>
+        {% if messages %}
+          <ul class="messages">
+        {% for message in messages %}
+             <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
+        {% endfor %}
+          </ul> 
+        {% endif %}
+        
+        {% if students %}
+        {% for student in students %}
+          <h3>{{student.user.get_full_name}} is currently taking:</h3>
+          <table class="table table-hover table-bordered pad-right-table">
+            <thead class='table-primary'>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Teacher</th>
+              <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for class in classroom %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ class.subject.subject_name }}</td>
+              <td>{{ class.teacher }}</td>
+              <td>{{ class.subject.description }}</td>
+            </tr>
+        {% endfor %}
+        {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+        <div class="container">
+         <div class="panel panel-login">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+        
+        {% for student in students %}
+        <h3>Course Selection Form.</h3>
+        <br>
+        <form action="/teacher/student_views" method="post" id='course_select'> {% csrf_token %}
+            <input name="student_id" type="hidden" value="{{student.user.id}}">
+        <label for="course">Pick Course:</label>
+        <select class="selectpicker" data-style="btn-info" name='classroom_id'>
+        {% for classroom in all_classroom %}
+            <option value='{{classroom.id}}'>{{classroom.subject}}</option>
+        {% endfor %}
+        </select>
+        <div class="col-xs-6 form-group">     
+            <input class="btn btn-md btn-success" type="submit" id="login" value="Add Class">
+        </div>
+        </form>
+        {% endfor %}
+</div>
+{% endblock %}

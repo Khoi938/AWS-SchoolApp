@@ -13,7 +13,7 @@
         <ul>
             <li>View Class</li>
             <li><a href='/teacher/add_class'>Add Class</a></li>
-            <li>View Student</li>
+            <li><a href='/teacher/student_list'>Student List</a></li>
         </ul>
         {% if subjects %}
           <h4>Current Class:</h4>
@@ -33,7 +33,7 @@
               <td>{{ subject.subject_name }}</td>
               <td>{{ subject.description }}</td>
               <th style="width: 15%">
-                <a href='{% url "edit_class" class_id=subject.id %}'<i class="fas fa-edit"></i>
+                <a href='{% url "edit_class" class_id=subject.id %}'><i class="fas fa-edit"></i></a>
               </th>
             </tr>
         {% endfor %}
