@@ -16,45 +16,59 @@
           </ul> 
         {% endif %}
     <form action="/teacher/add_class", method="post", id='course_select'> {% csrf_token %}
-        <label for="course" >Pick Course:</label>
-        <div class="input-group-prepend">
-    <label class="input-group-text" for="course">Pick Course:</label>
-  </div>
-        <select class="form-control width-2"  name='subject_name' id='course'>
-            <optgroup label="Mathematic">
-            <option value='Algebra 100'>Algebra 100</option>
-            <option value='Algebra 200'>Algebra 200</option>
-            <option value='Algebra 300'>Algebra 300</option>
-            </optgroup>
-            <optgroup label="Life Sciences">
-            <option value='Biology 1100'>Biology 1100</option>
-            </optgroup>
-        </select>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3" style='width:350px' >
           <div class="input-group-prepend">
-            <label class="input-group-text btn btn-primary" for="inputGroupSelect01">Pick Course:</label>
+            <label class="btn btn-info" >Course</label>
           </div>
-        <select class="form-control width-2"  name='subject_name' id='course'>
+        <select class="form-control" name='department_subject' id='course' required>
             <optgroup label="Mathematic">
-            <option value='Algebra 100'>Algebra 100</option>
-            <option value='Algebra 200'>Algebra 200</option>
-            <option value='Algebra 300'>Algebra 300</option>
+            <option value='Math|Algebra 100'>Algebra 100</option>
+            <option value='Math|Algebra 200'>Algebra 200</option>
+            <option value='Math|Trigonometry'>Trigonometry</option>
+            <option value='Math|Calculus'>Calculus</option>
             </optgroup>
             <optgroup label="Life Sciences">
-            <option value='Biology 1100'>Biology 1100</option>
+            <option value='Science|Biology 200'>Biology 100</option>
+            <option value='Science|Biology 200'>Biology 200</option>
+            <option value='Science|Chemistry'>Chemistry</option>
+            <option value='Science|Genetics'>Genetics</option>
             </optgroup>
         </select>
         </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="semester" id="" value="Spring" Checked>
+          <label class="form-check-label" for="">Spring</label>
+          </div>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="semester" id="" value="Summer">
+          <label class="form-check-label" for="">Summer</label>
+          </div>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="semester" id="" value="Fall">
+          <label class="form-check-label" for="">Fall</label>
+        </div>
+        <div class="input-group mb-3" style='width:350px' >
+          <div class="input-group-prepend">
+            <button class="btn btn-info" >Year &nbsp&nbsp&nbsp</button>
+          </div>
+            <input type="text" class="form-control" name='year'id="" maxlength="4" placeholder="e.g. 2020" required>
+        </div>
+
                 <!--warper remove width 100%-->
         <div class="input-group-prepend">
-          <label class="input-group-text" for='description' >Course Description:</label>
+          <label class="btn btn-info" for='description' >Course Description</label>
         </div>
-          <label for="description">Course Description:</label>
-          <textarea class="form-control width-4" name='description' id="" rows="4" cols='40' placeholder="e.g. Summer 2018 Biology 1100 Class A"></textarea>
-        </div>
+          <textarea class="form-control" style='width:350px' name='description' id="" rows="4" cols='40' placeholder="e.g. Summer 2018 Biology 1100 Class A" required></textarea>
         <div class="col-xs-6 form-group">     
             <input class="btn btn-md btn-success" type="submit" id="login" value="Add Class">
         </div>
+        </div>
+        
+        <div class="form-row width-8">
+    
+       
+    </div>
+    </div>
     </form>
 
 {% endblock %}

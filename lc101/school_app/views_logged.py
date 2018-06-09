@@ -26,14 +26,38 @@ def add_class(request):
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
         elif request.method == 'POST':
-            subject_name = request.POST['subject_name']
-            description = request.POST['description']
+    
+            if request.POST['year'].isnumeric(): # Check year for integer
+                year = request.POST['year']
+            else:
+                return redirect('/teacher/add_class')
+                
+            department_subject = request.POST['department_subject']
+            split_dict = department_subject.split('|')
+            department_name = split_dict[0]  # Break Department away from Subject 
+            subject_name = split_dict[1]
             
+            if Department.objects.filter(name=department_name).first() == None:
+                department = Department.objects.create(name=department_name)
+            else:     # If Department not found, Create one
+                department = Department.objects.filter(name=department_name).first
+            
+            semester = request.POST['semester']
+            subject_description = request.POST['description']
+            
+    
             teacher_id = request.user.teacher.id
             teacher = Teacher.objects.filter(id=teacher_id).first()
             
-            added_class = Subject.objects.create(teacher=teacher,subject_name=subject_name, description=description)
-            messages.success(request, 'Subject: '+added_class.subject_name+' Instructor: '+ 
+            new_subject = Subject.objects.create(teacher=teacher,name=subject_name, description=subject_description)
+            
+            department.subject.add(new_subject)
+            classroom = Classroom.objects.filter(subject=new_subject).first()
+            classroom.semester = semester
+            classroom.year = year
+            classroom.save()
+            
+            messages.success(request, new_subject.subject_name+' Department: '+ department.name+' Instructor: '+ 
             request.user.get_full_name()+ ' has been created.' )
             
             return render(request,'teacher/add_class.html')
