@@ -36,27 +36,30 @@ def index(request):
 def register(request):
     if request.method== 'POST':
         username = request.POST['username']
-        if User.objects.filter(username=username):
-            messages.warning(request, 'Username has already been taken.')
-            return render(request,'registration/register.html')
-        
-        school_id = request.POST['school_id']
-        if school_id.isdigit() == False: # Check to see if str can be integer
-            messages.warning(request, 'School id is an 8 digit number.')
-            return render(request,'registration/register.html')
-            
-        if len(school_id) < 8 or len(school_id) > 8:
-            messages.warning(request, 'School id is an 8 digit number.')
-            return render(request,'registration/register.html')
-            
-        if Profile.objects.filter(school_id=school_id):
-            messages.warning(request, 'School id is Already in use.')
-            return render(request,'registration/register.html')
-            
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         password = request.POST['password']
         email = request.POST['email']
+        school_id = request.POST['school_id']
+        
+        input_dict = {'username':username, 'first_name':first_name, 'last_name':last_name, 
+        'email':email,'school_id':school_id}
+        
+        if User.objects.filter(username=username):
+            messages.warning(request, 'Username has already been taken.')
+            return render(request,'registration/register.html',{'input_dict':input_dict})
+        
+        if school_id.isdigit() == False: # Check to see if str can be integer
+            messages.warning(request, 'School id is an 8 digit number.')
+            return render(request,'registration/register.html',{'input_dict':input_dict})
+            
+        if len(school_id) < 8 or len(school_id) > 8:
+            messages.warning(request, 'School id is an 8 digit number.')
+            return render(request,'registration/register.html',{'input_dict':input_dict})
+            
+        if Profile.objects.filter(school_id=school_id):
+            messages.warning(request, 'School id is Already in use.')
+            return render(request,'registration/register.html',{'input_dict':input_dict})
         
         user = User.objects.create_user(username=username,password=password,last_name=last_name
         ,first_name=first_name,email=email)# At this point receiver in models.py is called
@@ -66,11 +69,10 @@ def register(request):
         
         if int(school_id)%2 != 0:
             profile.is_student = True
-            Student.objects.create(student_profile=profile,user=user)
+            Student.objects.create(profile=profile,user=user)
         if int(school_id)%2 == 0:
-            profile.is_student = True
             profile.is_teacher = True
-            Teacher.objects.create(teacher_profile=profile,user=user)
+            Teacher.objects.create(profile=profile,user=user)
         profile.save()
         messages.success(request, 'Registration is Sucessful. Please login.')
         return redirect('homepage')

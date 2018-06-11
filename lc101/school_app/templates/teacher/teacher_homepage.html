@@ -15,7 +15,7 @@
             <li><a href='/teacher/add_class'>Add Class</a></li>
             <li><a href='/teacher/student_list'>Student List</a></li>
         </ul>
-        {% if subjects %}
+        {% if request.user.teacher.teaches_set.count > 0 %}
           <h4>Current Class:</h4>
           <table class="table table-hover table-bordered pad-right-table">
             <thead class='table-primary'>

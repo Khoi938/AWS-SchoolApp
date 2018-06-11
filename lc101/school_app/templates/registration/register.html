@@ -25,27 +25,34 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-lg-12">
+              {% if messages %}
+                <ul class="messages">
+              {% for message in messages %}
+                   <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
+              {% endfor %}
+                </ul> 
+              {% endif %}
               <form action="/register" method="post" style="display: block;">
                 {% csrf_token %}
                 <h1 class='text-dark'style="color:black;" >Account Registration</h1>
                   
                   <div class="form-group">
                     <label class="control-label" for="username" >Username:<span style="color:red">*</span></label>
-                    <input type="text" id="username" name="username" class="form-control" placeholder="" required>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="" value='{{input_dict.username}}'required>
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="first_name" >First Name:<span style="color:red">*</span></label>
-                    <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Gloria" required>
+                    <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Gloria" value='{{input_dict.first_name}}'required>
                   
                     <label class="control-label" for="last_name" >Last Name:<span style="color:red">*</span></label>
-                    <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Doe" required>
+                    <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Doe" value='{{input_dict.last_name}}'required>
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="school_id" >School ID:<span style="color:red">*</span></label>
                     <input data-toggle="popover" title="" data-content="Enter numbers only" type="text" id="school_id" name="school_id" class="form-control" placeholder='8 Digit, Even numbered = Teacher' required>
                     
                     <label class="control-label" for="email" >Email Address:</label>
-                    <input type="text" id="stuff" name="email" class="form-control"  placeholder="Gloria_Doe@gmail.com Optional">
+                    <input type="text" id="stuff" name="email" class="form-control"  placeholder="Gloria_Doe@gmail.com Optional"value='{{input_dict.email}}'>
                   </div>
                   <div class="form-group">
                     <label class="control-label" for="password" >Password:<span style="color:red">*</span></label>

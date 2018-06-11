@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <br>
+<script>
+        $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
 <div class="container">
          <div class="panel panel-login">
         <div class="panel-body">
@@ -51,14 +56,14 @@
           <div class="input-group-prepend">
             <button class="btn btn-info" >Year &nbsp&nbsp&nbsp</button>
           </div>
-            <input type="text" class="form-control" name='year'id="" maxlength="4" placeholder="e.g. 2020" required>
+            <input type="text" class="form-control" name='year'id="" maxlength="4" placeholder="e.g. 2020" data-toggle="popover" title="" data-content="4 digit Year" required>
         </div>
 
                 <!--warper remove width 100%-->
         <div class="input-group-prepend">
           <label class="btn btn-info" for='description' >Course Description</label>
         </div>
-          <textarea class="form-control" style='width:350px' name='description' id="" rows="4" cols='40' placeholder="e.g. Summer 2018 Biology 1100 Class A" required></textarea>
+          <textarea class="form-control" style='width:350px' name='description' id="" rows="4" cols='40' placeholder="e.g. Summer 2018 Biology 1100 Mrs Gloria" required></textarea>
         <div class="col-xs-6 form-group">     
             <input class="btn btn-md btn-success" type="submit" id="login" value="Add Class">
         </div>

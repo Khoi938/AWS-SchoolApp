@@ -16,8 +16,8 @@ def teacher(request):
         return redirect('/login')
     if is_teacher(request) == False:
         return redirect('/')
-    subjects=Subject.objects.filter(teacher=request.user.teacher)
-    return render(request,'teacher/teacher_homepage.html',{'subjects':subjects})
+    # subjects=Subject.objects.filter(teacher=request.user.teacher)
+    return render(request,'teacher/teacher_homepage.html')#,{'subjects':subjects})
     
 
 def add_class(request):
@@ -31,36 +31,38 @@ def add_class(request):
                 year = request.POST['year']
             else:
                 return redirect('/teacher/add_class')
-                
+            
+            semester = request.POST['semester']
+            subject_description = request.POST['description']
             department_subject = request.POST['department_subject']
+            
             split_dict = department_subject.split('|')
             department_name = split_dict[0]  # Break Department away from Subject 
             subject_name = split_dict[1]
             
-            if Department.objects.filter(name=department_name).first() == None:
+            if Department.objects.filter(name=department_name).first() == None: # If Department not found, Create one
                 department = Department.objects.create(name=department_name)
-            else:     # If Department not found, Create one
-                department = Department.objects.filter(name=department_name).first
             
-            semester = request.POST['semester']
-            subject_description = request.POST['description']
+            new_subject = Subject.objects.create(name=subject_name, description=subject_description, teacher_name=request.user.get_full_name(),
+            semester=semester, year=year)# Rout to receiver to create Classroom mode
+            department = Department.objects.get(pk=1)
+            department.subject.add(new_subject)
             
-    
             teacher_id = request.user.teacher.id
             teacher = Teacher.objects.filter(id=teacher_id).first()
+            teacher.teaches.add(new_subject)
             
-            new_subject = Subject.objects.create(teacher=teacher,name=subject_name, description=subject_description)
-            
-            department.subject.add(new_subject)
-            classroom = Classroom.objects.filter(subject=new_subject).first()
+            classroom = Classroom.objects.filter(subject_name=subject_name).first()
+            classroom.teacher_name = teacher.user.get_full_name()
             classroom.semester = semester
             classroom.year = year
             classroom.save()
+            new_subject.classroom.add(classroom)
             
-            messages.success(request, new_subject.subject_name+' Department: '+ department.name+' Instructor: '+ 
+            messages.success(request, new_subject.name+' Department: '+ department.name+' Instructor: '+ 
             request.user.get_full_name()+ ' has been created.' )
-            
-            return render(request,'teacher/add_class.html')
+            return redirect('/')
+            # return render(request,'teacher/add_class.html')
         else:
             return render(request,'teacher/add_class.html')
             
