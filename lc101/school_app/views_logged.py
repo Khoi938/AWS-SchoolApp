@@ -20,7 +20,7 @@ def teacher(request):
     return render(request,'teacher/teacher_homepage.html')#,{'subjects':subjects})
     
 
-def add_class(request):
+def add_course(request):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
@@ -34,32 +34,26 @@ def add_class(request):
             
             semester = request.POST['semester']
             subject_description = request.POST['description']
-            department_subject = request.POST['department_subject']
+            department_course = request.POST['department_course']
             
-            split_dict = department_subject.split('|')
+            split_dict = department_course.split('|')
             department_name = split_dict[0]  # Break Department away from Subject 
-            subject_name = split_dict[1]
+            course_title = split_dict[1]
             
             if Department.objects.filter(name=department_name).first() == None: # If Department not found, Create one
                 department = Department.objects.create(name=department_name)
+            department = Department.objects.filter(name=department_name).first()
             
-            new_subject = Subject.objects.create(name=subject_name, description=subject_description, teacher_name=request.user.get_full_name(),
-            semester=semester, year=year)# Rout to receiver to create Classroom mode
-            department = Department.objects.get(pk=1)
-            department.subject.add(new_subject)
+            new_course = Subject.objects.create(course_title=course_title, description=subject_description, 
+            teacher_name=request.user.get_full_name(),teacher=request.user.teacher,
+            semester=semester, year=year, department=department)# Rout to receiver to create Classroom mode
             
-            teacher_id = request.user.teacher.id
-            teacher = Teacher.objects.filter(id=teacher_id).first()
-            teacher.teaches.add(new_subject)
-            
-            classroom = Classroom.objects.filter(subject_name=subject_name).first()
-            classroom.teacher_name = teacher.user.get_full_name()
+            classroom = Classroom.objects.filter(subject=new_course).first()
             classroom.semester = semester
             classroom.year = year
             classroom.save()
-            new_subject.classroom.add(classroom)
             
-            messages.success(request, new_subject.name+' Department: '+ department.name+' Instructor: '+ 
+            messages.success(request, new_course.course_title+', Department: '+ department.name+', Instructor: '+ 
             request.user.get_full_name()+ ' has been created.' )
             return redirect('/')
             # return render(request,'teacher/add_class.html')
@@ -67,7 +61,7 @@ def add_class(request):
             return render(request,'teacher/add_class.html')
             
 
-def edit_class(request,class_id=None):
+def edit_course(request,class_id=None):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
