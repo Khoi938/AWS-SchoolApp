@@ -47,7 +47,7 @@ class Subject(models.Model): #Reverse Look up Subject.objects.filter(teacher_sub
     year = models.CharField(max_length=4,default='')
     teacher_name = models.CharField(max_length=50,default='')
     description = models.CharField(max_length=450,default='')
-    
+    #Alert If  related name is use in ForeignKey, _set cannot be use! 
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='course_by_teacher')
     department = models.ForeignKey('Department',blank=True, null=True, on_delete = models.SET_NULL, related_name='belong_in_department')
     
@@ -81,6 +81,7 @@ class Classroom(models.Model):
     teacher_name = models.CharField(max_length=50,default='')
     time = models.CharField(max_length=10,blank=True, null=True,default='')
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='classroom_by_teacher')
+    name = models.CharField(max_length=100,default='9 AM')
     # Use for statement to get value
     # subject = models.ManyToManyField(Subject, blank=True)
     subject = models.ForeignKey(Subject,blank=True, null=True, on_delete = models.SET_NULL, related_name='subject_in_classroom')

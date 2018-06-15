@@ -15,8 +15,8 @@
             <li><a href='/teacher/add_class'>Add Class</a></li>
             <li><a href='/teacher/student_list'>Student List</a></li>
         </ul>
-        {% if request.user.teacher.subject_set.count > 0 %}
-          <h4>Current Class:</h4>
+        {% if request.user.teacher.course_by_teacher.all.count > 0 %}
+          <h4>Course registered to you:</h4>
           <table class="table table-hover table-bordered pad-right-table">
             <thead class='table-primary'>
             <tr>
@@ -24,18 +24,22 @@
               <th scope="col">Course Number</th>
               <th scope="col">Course Title</th>
               <th scope="col">Description</th>
+              <th scope="col">Current Class</th>
               <th scope="col">Lesson Plan</th>
             </tr>
             </thead>
             <tbody>
-        {% for subject in request.user.teacher.subject_set|dictsort:"course_title" %}
+        {% for course in request.user.teacher.course_by_teacher.all|dictsort:"course_title" %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
-              <td>{{ subject.course_number }}</td>
-              <td>{{ subject.course_title }}</td>
-              <td>{{ subject.description }}</td>
+              <td>{{ course.course_number }}</td>
+              <td>{{ course.course_title }}</td>
+              <td>{{ course.description }}</td>
               <th style="width: 15%">
-                <a href='{% url "edit_class" class_id=subject.id %}'><i class="fas fa-edit"></i></a>
+                <a href='{% url "edit_course" course_id=course.id %}'><i class="fas fa-th-list"></i></a></a>
+              </th>
+              <th style="width: 15%">
+                <a href='{% url "edit_course" course_id=course.id %}'><i class="fas fa-edit"></i></a>
               </th>
             </tr>
         {% endfor %}

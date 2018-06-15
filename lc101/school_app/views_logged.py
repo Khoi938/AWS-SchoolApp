@@ -16,10 +16,11 @@ def teacher(request):
         return redirect('/login')
     if is_teacher(request) == False:
         return redirect('/')
-    # subjects=Subject.objects.filter(teacher=request.user.teacher)
-    return render(request,'teacher/teacher_homepage.html')#,{'subjects':subjects})
+    return render(request,'teacher/teacher_homepage.html')
+    # teacher = Teacher.objects.get(user=request.user)
+    # subject = teacher.course_by_teacher.all()
+    # return render(request,'teacher/teacher_homepage.html',{'teacher':teacher,'subject':subject})
     
-
 def add_course(request):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
@@ -53,15 +54,15 @@ def add_course(request):
             classroom.year = year
             classroom.save()
             
-            messages.success(request, new_course.course_title+', Department: '+ department.name+', Instructor: '+ 
+            messages.success(request, 'Course: '+ new_course.course_title+', Department: '+ department.name+', Instructor: '+ 
             request.user.get_full_name()+ ' has been created.' )
-            return redirect('/')
+            return redirect('/teacher/add_class')
             # return render(request,'teacher/add_class.html')
         else:
             return render(request,'teacher/add_class.html')
             
 
-def edit_course(request,class_id=None):
+def edit_course(request,course_id=None):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
@@ -69,17 +70,23 @@ def edit_course(request,class_id=None):
         if request.method == 'POST':# and class_id==None:
             monday_date = request.POST['monday_date']
             monday_plan = request.POST['monday_plan']
-            subject_id = request.POST['subject_id']
-            subject = Subject.objects.filter(id=subject_id).first()
-            subject.monday_date = monday_date
-            subject.monday_plan = monday_plan
-            subject.save()
-            messages.success(request, subject.subject_name + ' have been updated.')
+            course_id = request.POST['course_id']
+            course = Subject.objects.filter(id=course_id).first()
+            course.monday_date = monday_date
+            course.monday_plan = monday_plan
+            course.save()
+            messages.success(request, course.course_title + ' have been updated.')
             return redirect('/teacher')
         else:
             edit_class=Subject.objects.filter(id=class_id)
             return render(request,'teacher/edit_class.html',{'edit_class':edit_class})
 
+def classroom(request,class_id=None):
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+    
 def student_list(request):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
