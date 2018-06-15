@@ -25,7 +25,7 @@ def create_profile_object(sender, instance, created, **kwargs):
 class Student(models.Model):
     profile = models.OneToOneField(Profile, null=True, on_delete = models.SET_NULL)
     user = models.OneToOneField(User, null=True, on_delete = models.SET_NULL)
-    # subject_taking = models.ForeignKey('Subject',blank=True, null=True, on_delete = models.SET_NULL, related_name='enrolled_subject')
+    # Course_taking = models.ForeignKey('Course',blank=True, null=True, on_delete = models.SET_NULL, related_name='enrolled_Course')
     # classroom_taking = models.ManyToManyField('Classroom',blank=True)
     def __str__(self):
         return 'Student: ' + str(self.user.get_full_name()) #change to string
@@ -36,8 +36,8 @@ class Teacher(models.Model):
     def __str__(self):
         return 'Teacher: ' + str(self.user.get_full_name()) #change to string
         
-# --------------- Subject, Classroom, Department's Model----------------------
-class Subject(models.Model): #Reverse Look up Subject.objects.filter(teacher_subject_name = 'subject.name')
+# --------------- Course, Classroom, Department's Model----------------------
+class Course(models.Model): 
     course_number = models.CharField(max_length=20,default='12345678')
     abbreviated_title = models.CharField(max_length=150,default='')
     course_title = models.CharField(max_length=250,default='') #,unique=True)
@@ -52,7 +52,7 @@ class Subject(models.Model): #Reverse Look up Subject.objects.filter(teacher_sub
     department = models.ForeignKey('Department',blank=True, null=True, on_delete = models.SET_NULL, related_name='belong_in_department')
     
     #classroom = models.ForeignKey('Classroom', blank=True,null=True, on_delete = models.SET_NULL)
-# A Subject is bound to the teacher and create a classom upon creation. More room can be added later
+# A Course is bound to the teacher and create a classom upon creation. More room can be added later
 
     weekly_agenda = models.CharField(max_length=450,default='Agenda Goes Here')
     last_modifield = models.DateTimeField(auto_now_add=True, blank=True)
@@ -83,27 +83,27 @@ class Classroom(models.Model):
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='classroom_by_teacher')
     name = models.CharField(max_length=100,default='9 AM')
     # Use for statement to get value
-    # subject = models.ManyToManyField(Subject, blank=True)
-    subject = models.ForeignKey(Subject,blank=True, null=True, on_delete = models.SET_NULL, related_name='subject_in_classroom')
+    # Course = models.ManyToManyField(Course, blank=True)
+    course = models.ForeignKey(Course,blank=True, null=True, on_delete = models.SET_NULL, related_name='course_in_classroom')
     student = models.ManyToManyField(Student, blank=True)
     def __str__(self):
-        return 'Subject: ' + self.course_title +' Room #: '+self.room_number
-@receiver(post_save, sender=Subject)
+        return 'Course: ' + self.course_title +' Room #: '+self.room_number
+@receiver(post_save, sender=Course)
 def create_classroom_object(sender, instance, created, **kwargs):
     if created:
         classroom = Classroom.objects.create(course_title=instance.course_title, teacher_name=instance.teacher_name,
-        subject=instance,teacher=instance.teacher)
+        course=instance,teacher=instance.teacher)
 # To Find the Classroom:
 # teacher = Teacher.objects.filter(user=request.user)
-# subject = Subject.objects.filter(teacher_set=teacher, name ='subject_name')
-# classroom = Classroom.objects.filter(teacher=teacher).filter(subject=subject)
+# Course = Course.objects.filter(teacher_set=teacher, name ='Course_name')
+# classroom = Classroom.objects.filter(teacher=teacher).filter(Course=Course)
 
         
 class Department(models.Model):
     description = models.CharField(max_length=450,default='Department Description')
     name = models.CharField(max_length=75,default='', unique=True)
     
-    # subject = models.ManyToManyField('subject',blank=True)
+    # Course = models.ManyToManyField('Course',blank=True)
     teacher = models.ManyToManyField(Teacher,blank=True)
     student = models.ManyToManyField(Student,blank=True)
     

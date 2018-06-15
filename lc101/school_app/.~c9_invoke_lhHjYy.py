@@ -18,8 +18,8 @@ def teacher(request):
         return redirect('/')
     return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
-    # Course = teacher.course_by_teacher.all()
-    # return render(request,'teacher/teacher_homepage.html',{'teacher':teacher,'Course':Course})
+    # subject = teacher.course_by_teacher.all()
+    # return render(request,'teacher/teacher_homepage.html',{'teacher':teacher,'subject':subject})
     
 def add_course(request):
     if is_login(request) == True:
@@ -31,35 +31,35 @@ def add_course(request):
             if request.POST['year'].isnumeric(): # Check year for integer
                 year = request.POST['year']
             else:
-                return redirect('/teacher/add_course')
+                return redirect('/teacher/add_class')
             
             semester = request.POST['semester']
             subject_description = request.POST['description']
             department_course = request.POST['department_course']
             
             split_dict = department_course.split('|')
-            department_name = split_dict[0]  # Break Department away from Course 
+            department_name = split_dict[0]  # Break Department away from Subject 
             course_title = split_dict[1]
             
             if Department.objects.filter(name=department_name).first() == None: # If Department not found, Create one
                 department = Department.objects.create(name=department_name)
             department = Department.objects.filter(name=department_name).first()
             
-            new_course = Course.objects.create(course_title=course_title, description=subject_description, 
+            new_course = Subject.objects.create(course_title=course_title, description=subject_description, 
             teacher_name=request.user.get_full_name(),teacher=request.user.teacher,
             semester=semester, year=year, department=department)# Rout to receiver to create Classroom mode
             
-            classroom = Classroom.objects.filter(course=new_course).first()
+            classroom = Classroom.objects.filter(subject=new_course).first()
             classroom.semester = semester
             classroom.year = year
             classroom.save()
             
             messages.success(request, 'Course: '+ new_course.course_title+', Department: '+ department.name+', Instructor: '+ 
             request.user.get_full_name()+ ' has been created.' )
-            return redirect('/teacher/add_course')
-            # return render(request,'teacher/add_course.html')
+            return redirect('/teacher/add_class')
+            # return render(request,'teacher/add_class.html')
         else:
-            return render(request,'teacher/add_course.html')
+            return render(request,'teacher/add_class.html')
             
 
 def edit_course(request,course_id=None):
@@ -71,25 +71,22 @@ def edit_course(request,course_id=None):
             monday_date = request.POST['monday_date']
             monday_plan = request.POST['monday_plan']
             course_id = request.POST['course_id']
-            course = Course.objects.filter(id=course_id).first()
+            course = Subject.objects.filter(id=course_id).first()
             course.monday_date = monday_date
             course.monday_plan = monday_plan
             course.save()
             messages.success(request, course.course_title + ' have been updated.')
             return redirect('/teacher')
         else:
-            edit_course=Course.objects.filter(id=class_id)
-            return render(request,'teacher/edit_course.html',{'edit_course':edit_course})
+            edit_class=Subject.objects.filter(id=class_id)
+            return render(request,'teacher/edit_class.html',{'edit_class':edit_class})
 
-def classroom(request,course_id=None):
+def classroom(request,class_id=None):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
-        course = Course.objects.filter(id=course_id).first()
-        classes = Classroom.objects.filter(course=course)
-        return render(request,'teacher/classroom/classroom_list_by_course.html',
-        {'classes':classes,'course':course})
+        return render(request,'teacher/student_views/student_class.html')
         
 def student_list(request):
     if is_login(request) == True:

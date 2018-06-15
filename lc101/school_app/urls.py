@@ -11,13 +11,14 @@ urlpatterns=[
     #when user visit this address, call this function
     path('teacher',views_logged.teacher, name='teacher'),
     path('teacher/home',views_logged.teacher, name='teacher_home'),
-    path('teacher/add_class',views_logged.add_course, name='add_course'),
+    path('teacher/add_course',views_logged.add_course, name='add_course'),
     
     path('teacher/edit_course', views_logged.edit_course, name='edit_course'),
-    path('teacher/edit_course/<int:class_id>/', views_logged.edit_course, name='edit_course'),
+    path('teacher/edit_course/<int:course_id>/', views_logged.edit_course, name='edit_course'),
     
     path('teacher/classroom', views_logged.classroom, name='classroom_list'),
-    
+    path('teacher/classroom/<int:course_id>', views_logged.classroom, name='classroom_list'),
+   
     path('teacher/student_list', views_logged.student_list, name='student_list'),
     path('teacher/student_views', views_logged.student_views, name='student_views'),
     path('teacher/student_views/<int:student_id>/', views_logged.student_views, name='student_views'),
