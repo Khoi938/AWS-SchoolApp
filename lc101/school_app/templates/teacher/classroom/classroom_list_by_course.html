@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-kkkk
 <div class='content'>
-        <h2 style='padding-left: 10px'>Course: {{course.course_title}}</h2>
-        <h2 style='padding-left: 10px'>Id: {{course.course_number}}</h2>
+        <div style="width: 280px">
+        <h4 style='padding-left: 5px'>{{course.course_title}}1234</h4>
+        <hr class='hr-line'/>
+        <h4 style='padding-left: 5px'>Id: {{course.course_number}}</h4>
+        <hr class='hr-line'/>
+        <br>
+        <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm" role="button">Add Classroom</a>
+        </div>
         <br>
         {% if messages %}
           <ul class="messages">
@@ -14,15 +19,17 @@ kkkk
         {% endif %}
         
         {% if classes %}
-          <h3>Classes {{request.user.get_full_name}} is currently asigned:</h3>
+          <h6>Classroom assigned:</h6>
           <table class="table table-hover table-bordered pad-right-table">
             <thead class='table-primary'>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Course Title</th>
-              <th scope="col">Room Number</th>
+              <th scope="col">Room #</th>
               <th scope="col">Time</th>
               <th scope="col">Description</th>
+              <th scope="col">Student Enrolled</th>
+              <th scope="col">Edit Info</th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +40,12 @@ kkkk
               <td>{{ class.room_number }}</td>
               <td>{{ class.time }}</td>
               <td>{{ class.description }}</td>
+              <td>
+                <a href='{% url "edit_course" course_id=course.id %}'><i class="fas fa-users"></i></a>
+              </td>
+              <td>
+                <a href='{% url "edit_course" course_id=course.id %}'><i class="fas fa-edit"></i></a>
+              </td>
             </tr>
         {% endfor %}
             </tbody>

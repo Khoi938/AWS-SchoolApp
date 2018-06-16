@@ -91,6 +91,16 @@ def classroom(request,course_id=None):
         return render(request,'teacher/classroom/classroom_list_by_course.html',
         {'classes':classes,'course':course})
         
+def add_classroom(request,course_id=None):
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        course = Course.objects.filter(id=course_id).first()
+        return render(request,'teacher/classroom/add_classroom.html',
+        {'course':course})
+    
+        
 def student_list(request):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
