@@ -2,14 +2,15 @@
 {% block content %}
 <div class='content'>
         <div style="width: 280px">
-        <h4 style='padding-left: 5px'>{{course.course_title}}1234</h4>
+        <h4 style='padding-left: 1px'>{{course.course_title}}</h4>
         <hr class='hr-line'/>
-        <h4 style='padding-left: 5px'>Id: {{course.course_number}}</h4>
+        <h4 style='padding-left: 1px'>Id: {{course.course_number}}</h4>
         <hr class='hr-line'/>
         <br>
-        <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm" role="button">Add Classroom</a>
+        <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm" role="button">Add New Classroom</a>
+        <hr/>
         </div>
-        <br>
+        
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
@@ -19,13 +20,13 @@
         {% endif %}
         
         {% if classes %}
-          <h6>Classroom assigned:</h6>
+          <h5>Classroom assigned:</h5>
           <table class="table table-hover table-bordered pad-right-table">
             <thead class='table-primary'>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Course Title</th>
-              <th scope="col">Room #</th>
+              <th scope="col">Course Title/Alias</th>
+              <th scope="col">Room Number</th>
               <th scope="col">Time</th>
               <th scope="col">Description</th>
               <th scope="col">Student Enrolled</th>

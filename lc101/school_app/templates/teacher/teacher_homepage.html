@@ -2,7 +2,7 @@
 {% block content %}
 <div class='content'>
         <h2 style='padding-left: 10px'>Teacher Console</h2>
-        <br>
+        <hr style="text-align:left;margin-left:0;width:315px;height:0px;padding: 0px"/>
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
@@ -11,8 +11,8 @@
           </ul> 
         {% endif %}
         <ul>
-            <li>View Class</li>
-            <li><a href='/teacher/add_course'>Add Class</a></li>
+            <li>View All Class</li>
+            <li><a href='/teacher/add_course'>Add Course</a></li>
             <li><a href='/teacher/student_list'>Student List</a></li>
         </ul>
         {% if request.user.teacher.course_by_teacher.all.count > 0 %}
@@ -24,7 +24,7 @@
               <th scope="col">Course Number</th>
               <th scope="col">Course Title</th>
               <th scope="col">Description</th>
-              <th scope="col">Current Class</th>
+              <th scope="col">View Classes</th>
               <th scope="col">Lesson Plan</th>
             </tr>
             </thead>

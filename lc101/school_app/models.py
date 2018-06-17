@@ -76,14 +76,14 @@ class Course(models.Model):
 
         
 class Classroom(models.Model):
-    room_number = models.CharField(max_length=10,default='24')
     course_title = models.CharField(max_length=50,default='')
     teacher_name = models.CharField(max_length=50,default='')
-    time = models.CharField(max_length=10,blank=True, null=True,default='')
-    teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='classroom_by_teacher')
-    name = models.CharField(max_length=100,default='9 AM')
+    room_number = models.CharField(max_length=10,default='TBA')
+    time = models.CharField(max_length=10,blank=True, null=True,default='TBA')
+    description = models.CharField(max_length=300,default='TBA')
     # Use for statement to get value
     # Course = models.ManyToManyField(Course, blank=True)
+    teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='classroom_by_teacher')
     course = models.ForeignKey(Course,blank=True, null=True, on_delete = models.SET_NULL, related_name='course_in_classroom')
     student = models.ManyToManyField(Student, blank=True)
     def __str__(self):

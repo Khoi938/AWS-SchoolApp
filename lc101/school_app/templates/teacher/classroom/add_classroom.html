@@ -11,9 +11,12 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-lg-12">
-        <div style="width: 280px">
-        <h4 style='padding-left: 5px'>{{course.course_title}}1234</h4>
+        <h3 style='padding-left: 5px'></h3>
+        <div style="width: 350px">
+        <h4 style='padding-left: 5px'>Create additional class below:</h4>
         <hr class='hr-line'/>
+        <h5 style='padding-left: 5px'>Course: {{course.course_title}}</h5>
+        <hr class='hr-line'/> <br>
         </div>
         {% if messages %}
           <ul class="messages">
@@ -22,15 +25,15 @@
         {% endfor %}
           </ul> 
         {% endif %}
-    <form action="/teacher/classroom/add_class", method="post", id=''> {% csrf_token %}
+    <form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
+      <input type="hidden" name="course_id" value='{{course.id}}'/>
         <div class="input-group mb-3" style='width:400px' >
-          
         <div>
         <div class="input-group-prepend">
-          <label class="btn btn-info" for='description' >Course Title/Alias</label>
+          <label class="btn btn-info" for='' >Course Title/Alias</label>
         </div>
-          <textarea class="form-control" style='width:350px' name='description' id="" rows="1" cols='40' placeholder="e.g. Biology Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
-        
+          <textarea class="form-control" style='width:365px' name='course_title' id="" rows="1" cols='40' placeholder="ex. {{course.course_title}} Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
+          
           <button class="btn btn-info" >Time Slot &nbsp&nbsp&nbsp</button></div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="time" id="" value="Spring" Checked>
@@ -61,23 +64,19 @@
             <input class="form-check-input" type="radio" name="time" id="" value="3:00 PM">
             <label class="form-check-label" for="">3:00 PM</label>
           </div>
-    
-        <div class="input-group mb-3" style='width:350px' >
+        <hr/>
+        <div class="input-group mb-3" style='width:365px' >
           <div class="input-group-prepend">
             <button class="btn btn-info" >Room Number &nbsp&nbsp</button>
           </div>
-            <input type="text" class="form-control" name='year'id="" maxlength="4" placeholder="e.g. 2020" data-toggle="popover" title="" data-content="4 digit Year" required>
-        
+            <input type="text" class="form-control" name='room_number'id="" maxlength="10" placeholder="Room #" data-toggle="popover" title="" data-content='Where you do your lecture' required>
         </div>
-        
-                <!--warper remove width 100%-->
-        
+        <div>
           <label class="btn btn-info" for='description' >Course Description</label>
-        
-          <textarea class="form-control" style='width:350px' name='description' id="" rows="4" cols='40' placeholder="e.g. Summer 2018 Biology 1100 Mrs Gloria" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
-           <br>
-            <input class="btn btn-md btn-success" type="submit" id="login" value="Add Class">
-    </div>
+          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="e.g. Summer 2018 Biology 1100 Mrs Gloria" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
+          <button style='width:150px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-chalkboard-teacher"></i> Add Class</button>
+        </div>
+        </div>
     </form>
 
 {% endblock %}

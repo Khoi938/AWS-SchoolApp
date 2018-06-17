@@ -20,7 +20,8 @@ def teacher(request):
     # teacher = Teacher.objects.get(user=request.user)
     # Course = teacher.course_by_teacher.all()
     # return render(request,'teacher/teacher_homepage.html',{'teacher':teacher,'Course':Course})
-    
+
+# ------ Add Course, Edit Course ---------- 
 def add_course(request):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
@@ -55,7 +56,7 @@ def add_course(request):
             classroom.save()
             
             messages.success(request, 'Course: '+ new_course.course_title+', Department: '+ department.name+', Instructor: '+ 
-            request.user.get_full_name()+ ' has been created.' )
+            request.user.get_full_name()+ ' succesfully created.' )
             return redirect('/teacher/add_course')
             # return render(request,'teacher/add_course.html')
         else:
@@ -80,7 +81,8 @@ def edit_course(request,course_id=None):
         else:
             edit_course=Course.objects.filter(id=class_id)
             return render(request,'teacher/edit_course.html',{'edit_course':edit_course})
-
+            
+# ------ Classroom Views, Add Classroom, Edit Classroom-----
 def classroom(request,course_id=None):
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
@@ -96,6 +98,18 @@ def add_classroom(request,course_id=None):
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
+        if request.method == 'POST':
+            course_id = request.POST['course_id']
+            course_title = request.POST['course_title']
+            time = request.POST['time']
+            room_number = request.POST['room_number']
+            description = request.POST['description']
+            
+            course = Course.objects.filter(id=course_id).first()
+            classroom = Classroom.objects.create(course_title=course_title, teacher_name=request.user.get_full_name,
+            room_number=room_number, time=time, teacher=request.user.teacher, course=course)
+            messages.success(request, 'New Class have been succesfully added to "'+course.course_title+'".' )
+            return redirect('/teacher/classroom/'+course_id)
         course = Course.objects.filter(id=course_id).first()
         return render(request,'teacher/classroom/add_classroom.html',
         {'course':course})
@@ -136,7 +150,7 @@ def student_views(request,student_id=None):
             return render(request,'teacher/student_list.html',{'students':students})
           
 
-            
+#------ Not in Use ------    
 @login_required
 def student(request):
     
