@@ -33,7 +33,7 @@
             </tr>
             </thead>
             <tbody>
-        {% for course in request.user.teacher.course_by_teacher.all|dictsort:'course_title' %}
+        {% for course in request.user.teacher.course_by_teacher.all|dictsort:'year' %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ course.course_number }}</td>

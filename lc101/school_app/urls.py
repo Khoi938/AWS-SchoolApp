@@ -10,6 +10,7 @@ urlpatterns=[
     
     #when user visit this address, call this function
     path('teacher',views_logged.teacher, name='teacher'),
+    path('teacher/<int:sort>/',views_logged.teacher, name='teacher_sort'),
     path('teacher/home',views_logged.teacher, name='teacher_home'),
     path('teacher/add_course',views_logged.add_course, name='add_course'),
     

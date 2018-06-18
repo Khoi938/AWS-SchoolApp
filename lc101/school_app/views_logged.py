@@ -6,16 +6,18 @@ from django.contrib.auth import authenticate, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from school_app.models import *
-from school_app.views_functions import is_teacher, is_login
+from school_app.views_functions import is_teacher, is_login, sort_order
 
         
 #------ Teacher's Controller Logic-------
 
-def teacher(request):
+def teacher(request,sort=None):
     if is_login(request) == False: # Check for login/ add message 'please login'
         return redirect('/login')
     if is_teacher(request) == False:
         return redirect('/')
+    if sort ==1:
+        return render(request,'teacher/sort.html')
     return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
     # Course = teacher.course_by_teacher.all()
