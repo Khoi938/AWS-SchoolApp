@@ -37,7 +37,10 @@
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ course.course_number }}</td>
-              <td>{{ course.course_title }}</td>
+              <td>{{ course.course_title }} jj
+          {% if course.course_in_classroom.all == 0 %}
+                Boom
+          {% endif %}</td>
               <td>{{ course.semester }}, {{ course.year }}</td>
               <th style="width: 15%">
                 <a href='{% url "classroom_list" course_id=course.id %}'><i class="fas fa-th-list"></i></a></a>

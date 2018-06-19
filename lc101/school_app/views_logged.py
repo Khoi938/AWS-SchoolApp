@@ -116,6 +116,19 @@ def add_classroom(request,course_id=None):
         return render(request,'teacher/classroom/add_classroom.html',
         {'course':course})
     
+def delete_classroom(request,classroom_id=None):
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        detached_classroom = Classroom.objects.filter(id=classroom_id).first()
+        course_id = detached_classroom.course.id
+        detached_classroom.course = None
+        detached_classroom.teacher = None
+        detached_classroom.save()
+        messages.success(request, detached_classroom.course_title+" @"+detached_classroom.time+' sucessfully removed.')
+        return redirect('/teacher/classroom/'+str(course_id))
+        
         
 def student_list(request):
     if is_login(request) == True:

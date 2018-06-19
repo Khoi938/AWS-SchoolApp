@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+        $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
 <div class='content'>
         <div style="width: 280px">
+        <h4 style='padding-left: 1px'>{{ course.semester }}, {{ course.year }}</h4>
+        <hr class='hr-line'/>
         <h4 style='padding-left: 1px'>{{course.course_title}}</h4>
         <hr class='hr-line'/>
         <h4 style='padding-left: 1px'>Id: {{course.course_number}}</h4>
@@ -9,8 +16,7 @@
         <br>
         <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm" role="button">Add New Classroom</a>
         <hr/>
-        </div>
-        
+        </div
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
@@ -20,7 +26,7 @@
         {% endif %}
         
         {% if classes %}
-          <h5>Classroom assigned:</h5>
+          <h5><big>Classroom assigned:</big></h5>
           <table class="table table-hover table-bordered pad-right-table">
             <thead class='table-primary'>
             <tr>
@@ -31,6 +37,7 @@
               <th scope="col">Description</th>
               <th scope="col">Student Enrolled</th>
               <th scope="col">Edit Info</th>
+              <th scope="col">Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -47,10 +54,14 @@
               <td>
                 <a href='{% url "edit_course" course_id=course.id %}'><i class="fas fa-edit"></i></a>
               </td>
+              <td><a href='{% url "delete_classroom" classroom_id=class.id %}'>
+                <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Warning"></i></a></td>
             </tr>
         {% endfor %}
             </tbody>
           </table>
+        {% else %}
+        <h4><div class="alert-inherit alert-info" role="alert"><i class="fas fa-exclamation"></i> No Classes assigned to this course.</div></h4>
         {% endif %}
         <div class="container">
          <div class="panel panel-login">
@@ -75,4 +86,30 @@
         </form>
         {% endfor %}
 </div>
+
+<!-- Need to learn JS how to pass Data into Modal for confirmation -->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">-->
+<!--  Launch demo modal-->
+<!--</button>-->
+
+<!-- Modal -->
+<!--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body" style='background:red'>-->
+<!--        ...-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--        <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 {% endblock %}

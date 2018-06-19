@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <style type="text/css">
-    body, html{height:100%;}
+    /*body, html{height:100%;} mess with auto*/
     .image{
     background-image: url("https://static1.squarespace.com/static/52f11228e4b0a96c7b51a92d/t/55e705bee4b03fc234f02b5e/1441203647587/?format=2500w");
     background-position: top right;
@@ -17,7 +17,10 @@
     border: 5px solid #344a5f;}
     </style>
     </head>
-    <body class='body-index aqualicious-gradient text-dark'>
+    <body style='height:100%;margin: 0;
+    background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-size:  auto 100%;
+    background: linear-gradient(-225deg, #9EFBD3 0%, #57E9F2 48%, #45D4FB 100%);'
+    class='body-index  text-dark'>
         <h1 class='text-center text-dark'style="font-size:50px">Welcome to Launch C. High Shool</h1><br>
         {% if messages %}
           <ul class="messages">
@@ -74,18 +77,21 @@
         <a href='/teacher/add_class'>teacher Add Class</a> II
         <a href='/admin'>Django Admin</a> II
         </div>
-         <span style='font-size:80px;'>
+         <span style='font-size:60px;'>
             <img src='https://d1.awsstatic.com/webteam/homepage/editorials/Site-Merch_Lightsail_Editorial.f3b6112b81a2512198937a63bc1d23381df43bcb.png' width="120" height="70">
             <i class="devicon-amazonwebservices-plain-wordmark text-danger"></i>
             <!--<img src="https://d1.awsstatic.com/LightsailAssets/icon_home_robot.7c86e1fe91a13b9e4ed0e836f5a42b232ff8a874.gif" alt="HTML5 Icon" width="45" height="45">-->
             <i class="devicon-python-plain-wordmark "style='color:#05314f'></i>
             <i class="devicon-django-line-wordmark colored"></i>
             <i class="devicon-mysql-plain-wordmark colored"></i>
-            <i class="devicon-linux-plain colored"></i>
+            <!--<i class="devicon-linux-plain colored"></i>-->
             <i class="devicon-bootstrap-plain-wordmark colored"></i>
-            <a href='https://github.com/Khoi938/AWS-SchoolApp'>
-                <i class="devicon-github-plain-wordmark colored"></i>
-            </a>
+            <a href='https://github.com/Khoi938/AWS-SchoolApp'>                
+            <i class="devicon-github-plain-wordmark colored"></i>
+                <i class="fab fa-github-alt"></i></a>
+                <i class="fab fa-linux"></i>
+                <i class="fab fa-linkedin"></i>
+                <i class="fab fa-stack-overflow"></i>
         </span>
         </br>
     </body>

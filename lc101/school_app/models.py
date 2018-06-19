@@ -84,7 +84,7 @@ class Classroom(models.Model):
     # Use for statement to get value
     # Course = models.ManyToManyField(Course, blank=True)
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='classroom_by_teacher')
-    course = models.ForeignKey(Course,blank=True, null=True, on_delete = models.SET_NULL, related_name='course_in_classroom')
+    course = models.ForeignKey('Course',blank=True, null=True, on_delete = models.SET_NULL, related_name='course_in_classroom')
     student = models.ManyToManyField(Student, blank=True)
     def __str__(self):
         return 'Course: ' + self.course_title +' Room #: '+self.room_number
