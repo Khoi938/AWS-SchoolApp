@@ -15,12 +15,12 @@
         <h3 style='padding-left: 5px'></h3>
         <div style="width: 400px">
           <div style='width:300px'>
-        <h4 style='padding-left: 5px'>{{ course.semester }}, {{ course.year }}</h4>
+        <h4 style='padding-left: 5px'>{{ classroom.time }}</h4>
         <hr class='hr-line'/>
-        <h4 style='padding-left: 5px'>{{course.course_title}}</h4>
+        <h4 style='padding-left: 5px'>{{classroom.course_title}}</h4>
         <hr class='hr-line'/>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        <big>Create additional class:</big>
+        <big>Cancel Edit</big>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
         </div>
         </div>
@@ -32,20 +32,20 @@
           </ul> 
         {% endif %}
     <form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
-      <input type="hidden" name="course_id" value='{{course.id}}'/>
+      <input type="hidden" name="classroom_id" value='{{classroom.id}}'/>
       
         <div class="input-group mb-3" style='width:400px' >
         <div>
         <div class="input-group-prepend">
           <label class="btn btn-info" for='' >Title / Alias &nbsp</label>
         </div>
-          <textarea class="form-control" style='width:365px' name='course_title' id="" rows="1" cols='40' placeholder="ex. {{course.course_title}} Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
+          <textarea class="form-control" style='width:365px' name='course_title' id="" rows="1" cols='40' data-toggle="popover" title="" data-content="For your reference only"required>{{classroom.course_title}}</textarea>
           
           <hr/>
           <button class="btn btn-info" >Time Slot &nbsp&nbsp&nbsp</button>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="Spring" Checked>
+            <input class="form-check-input" type="radio" name="time" id="" value="8:00 AM">
             <label class="form-check-label" for="">8:00 AM</label>
           </div>
           <div class="form-check form-check-inline">
@@ -74,21 +74,21 @@
             <label class="form-check-label" for="">3:00 PM &nbsp</label>
           </div>
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="other">
+            <input class="form-check-input" type="radio" name="time" id="" value="other" checked>
             <label class="form-check-label" for="">Other:</label>
           </div>
           <div style = 'width:140px;right-align:10px'class="form-check form-check-inline">
-            <input type='text'class="form-control" name="custom_time" id="" placeholder='ex. 9:30 AM' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
+            <input type='text'class="form-control" name="custom_time" id="" value='{{ classroom.time }}' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
           </div><br><br>
         <div class="input-group mb-3" style='width:365px' >
           <div class="input-group-prepend">
             <button class="btn btn-info" >Room Number &nbsp&nbsp</button>
           </div>
-            <input type="text" class="form-control" name='room_number'id="" maxlength="10" placeholder="Room #" data-toggle="popover" title="" data-content='Where you do your lecture' required>
+            <input type="text" class="form-control" name='room_number'id="" maxlength="10" value='{{ classroom.room_number }}' data-toggle="popover" title="" data-content='Where you do your lecture' required>
         </div>
         <div>
           <label class="btn btn-info" for='description' >Course Description</label>
-          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
+          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{classroom.course_title}} Gloria" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
           <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
           <button style='width:150px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-chalkboard-teacher"></i> Add Class</button>
         </div>

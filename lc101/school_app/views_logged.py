@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from school_app.models import *
-from school_app.views_functions import is_teacher, is_login, sort_order
+from school_app.views_functions import is_teacher, is_login, sort_order, other_check
 
         
 #------ Teacher's Controller Logic-------
@@ -25,6 +25,8 @@ def teacher(request,sort=None):
 
 # ------ Add Course, Edit Course ---------- 
 def add_course(request):
+    if is_login(request) == False: 
+        return redirect('/login')
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
@@ -62,10 +64,12 @@ def add_course(request):
             return redirect('/teacher/add_course')
             # return render(request,'teacher/add_course.html')
         else:
-            return render(request,'teacher/add_course.html')
+            return render(request,'teacher/course/add_course.html')
             
 
 def edit_course(request,course_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
@@ -82,20 +86,24 @@ def edit_course(request,course_id=None):
             return redirect('/teacher')
         else:
             edit_course=Course.objects.filter(id=class_id)
-            return render(request,'teacher/edit_course.html',{'edit_course':edit_course})
+            return render(request,'teacher/course/edit_course.html',{'edit_course':edit_course})
             
 # ------ Classroom Views, Add Classroom, Edit Classroom-----
 def classroom(request,course_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
         course = Course.objects.filter(id=course_id).first()
         classes = Classroom.objects.filter(course=course)
-        return render(request,'teacher/classroom/classroom_list_by_course.html',
+        return render(request,'teacher/classroom/view_classroom.html',
         {'classes':classes,'course':course})
         
 def add_classroom(request,course_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
@@ -103,20 +111,46 @@ def add_classroom(request,course_id=None):
         if request.method == 'POST':
             course_id = request.POST['course_id']
             course_title = request.POST['course_title']
-            time = request.POST['time']
+            time = other_check(request.POST['time'],request.POST['custom_time'])
             room_number = request.POST['room_number']
             description = request.POST['description']
             
             course = Course.objects.filter(id=course_id).first()
             classroom = Classroom.objects.create(course_title=course_title, teacher_name=request.user.get_full_name,
-            room_number=room_number, time=time, teacher=request.user.teacher, course=course)
-            messages.success(request, 'New Class have been succesfully added to "'+course.course_title+'".' )
+            room_number=room_number, time=time, teacher=request.user.teacher, course=course,description=description)
+            messages.success(request, 'New class have been succesfully added to '+course.course_title+'.' )
             return redirect('/teacher/classroom/'+course_id)
         course = Course.objects.filter(id=course_id).first()
-        return render(request,'teacher/classroom/add_classroom.html',
+        return render(request,'teacher/classroom/edit_classroom.html',
         {'course':course})
+
+def edit_classroom(request,classroom_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        if request.method == 'POST':
+            course_id = request.POST['course_id']
+            course_title = request.POST['course_title']
+            time = other_check(request.POST['time'],request.POST['custom_time'])
+            room_number = request.POST['room_number']
+            description = request.POST['description']
+            
+            course = Course.objects.filter(id=course_id).first()
+            classroom = Classroom.objects.create(course_title=course_title, teacher_name=request.user.get_full_name,
+            room_number=room_number, time=time, teacher=request.user.teacher, course=course,description=description)
+            messages.success(request, 'New class have been succesfully added to '+course.course_title+'.' )
+            return redirect('/teacher/classroom/'+course_id)
+            
+        classroom = Classroom.objects.filter(id=classroom_id).first()
+        return render(request,'teacher/classroom/edit_classroom.html',
+        {'classroom':classroom})
     
 def delete_classroom(request,classroom_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
@@ -131,6 +165,8 @@ def delete_classroom(request,classroom_id=None):
         
         
 def student_list(request):
+    if is_login(request) == False: 
+        return redirect('/login')
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
@@ -185,6 +221,8 @@ def logout(request):
 
 #----- Redirect User to homepage according to status -----
 def home_redirect(request):
+    if is_login(request) == False: 
+        return redirect('/login')
     login_check(request)
     if request.user.profile.is_teacher == True:
         return redirect('/teacher')

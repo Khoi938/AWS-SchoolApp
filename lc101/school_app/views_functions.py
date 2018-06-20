@@ -30,7 +30,15 @@ def add_class(request, student, subject):
             return False
         else:
             student.enrolled.add(subject)
-            return True
+            return 
+# Use to check radio input text field for custom entry
+def other_check(post,custom):
+    if post == 'other' or post == 'Other':
+        return custom
+    else: 
+        return post
+    
+# Sort order in Teacher homepage Course List 
 def sort_order(x):
     if x == 1:
         return 'years'

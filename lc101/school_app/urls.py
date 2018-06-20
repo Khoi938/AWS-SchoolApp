@@ -19,7 +19,10 @@ urlpatterns=[
     
     path('teacher/classroom', views_logged.classroom, name='classroom_list'),
     path('teacher/classroom/<int:course_id>', views_logged.classroom, name='classroom_list'),
+   
+    path('teacher/classroom/edit_classroom/<int:classroom_id>', views_logged.edit_classroom, name='edit_classroom'),
     path('teacher/classroom/delete_classroom/<int:classroom_id>', views_logged.delete_classroom, name='delete_classroom'),
+   
     path('teacher/classroom/add_classroom', views_logged.add_classroom, name='add_classroom'),
     path('teacher/classroom/add_classroom/<int:course_id>', views_logged.add_classroom, name='add_classroom'),
    
