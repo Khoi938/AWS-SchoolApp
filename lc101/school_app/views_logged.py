@@ -66,7 +66,7 @@ def add_course(request):
         else:
             return render(request,'teacher/course/add_course.html')
             
-
+# Not yet built Moved to Lesson Plan
 def edit_course(request,course_id=None):
     if is_login(request) == False: 
         return redirect('/login')
@@ -116,12 +116,12 @@ def add_classroom(request,course_id=None):
             description = request.POST['description']
             
             course = Course.objects.filter(id=course_id).first()
-            classroom = Classroom.objects.create(course_title=course_title, teacher_name=request.user.get_full_name,
+            classroom = Classroom.objects.create(course_title=course_title, course_id=course_id, teacher_name=request.user.get_full_name,
             room_number=room_number, time=time, teacher=request.user.teacher, course=course,description=description)
             messages.success(request, 'New class have been succesfully added to '+course.course_title+'.' )
             return redirect('/teacher/classroom/'+course_id)
         course = Course.objects.filter(id=course_id).first()
-        return render(request,'teacher/classroom/edit_classroom.html',
+        return render(request,'teacher/classroom/add_classroom.html',
         {'course':course})
 
 def edit_classroom(request,classroom_id=None):
@@ -132,21 +132,25 @@ def edit_classroom(request,classroom_id=None):
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
         if request.method == 'POST':
-            course_id = request.POST['course_id']
+            classroom_id = request.POST['classroom_id']
             course_title = request.POST['course_title']
             time = other_check(request.POST['time'],request.POST['custom_time'])
             room_number = request.POST['room_number']
             description = request.POST['description']
             
-            course = Course.objects.filter(id=course_id).first()
-            classroom = Classroom.objects.create(course_title=course_title, teacher_name=request.user.get_full_name,
-            room_number=room_number, time=time, teacher=request.user.teacher, course=course,description=description)
-            messages.success(request, 'New class have been succesfully added to '+course.course_title+'.' )
-            return redirect('/teacher/classroom/'+course_id)
+            classroom = Classroom.objects.filter(id=classroom_id).first()
+            classroom.course_title = course_title
+            classroom.time = time
+            classroom.room_number = room_number
+            classroom.description = description
+            classroom.save()
+            messages.success(request, classroom.course_title + ' sucessfully edited.' )
+            return redirect('/teacher/classroom/'+str(classroom.course_id))
             
         classroom = Classroom.objects.filter(id=classroom_id).first()
+        course_id = classroom.course.id
         return render(request,'teacher/classroom/edit_classroom.html',
-        {'classroom':classroom})
+        {'classroom':classroom,'course_id':course_id})
     
 def delete_classroom(request,classroom_id=None):
     if is_login(request) == False: 
@@ -163,7 +167,20 @@ def delete_classroom(request,classroom_id=None):
         messages.success(request, detached_classroom.course_title+" @"+detached_classroom.time+' sucessfully removed.')
         return redirect('/teacher/classroom/'+str(course_id))
         
-        
+# ------ Lesson Plan View, Add, Edit, update ------
+def lesson_plan(request,course_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        if request.method == 'POST':
+            return 2
+        return render(request,'teacher/lesson_plan/view_lesson_plan.html')
+            
+
+
 def student_list(request):
     if is_login(request) == False: 
         return redirect('/login')

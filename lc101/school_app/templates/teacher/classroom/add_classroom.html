@@ -22,6 +22,8 @@
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
         <big>Create additional class:</big>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
+        <a class="btn btn-primary" href='{% url "classroom_list" course_id=course.id %}'><i class="fas fa-step-backward"></i> Cancel </a></a>
+        <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
         </div>
         </div>
         {% if messages %}
@@ -88,9 +90,9 @@
         </div>
         <div>
           <label class="btn btn-info" for='description' >Course Description</label>
-          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
+          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria Mendez" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
           <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
-          <button style='width:150px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-chalkboard-teacher"></i> Add Class</button>
+          <button style='width:150px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-chalkboard"></i> Add Class</button>
         </div>
         </div>
     </form>

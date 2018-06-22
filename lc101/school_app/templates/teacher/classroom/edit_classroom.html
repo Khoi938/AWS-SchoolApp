@@ -20,9 +20,8 @@
         <h4 style='padding-left: 5px'>{{classroom.course_title}}</h4>
         <hr class='hr-line'/>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        <big>Cancel Edit</big>
+        <a class="btn btn-primary" href='{% url "classroom_list" course_id=course_id %}'><i class="fas fa-step-backward"></i> Cancel edit</a></a>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        </div>
         </div>
         {% if messages %}
           <ul class="messages">
@@ -31,7 +30,8 @@
         {% endfor %}
           </ul> 
         {% endif %}
-    <form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
+        </div>
+    <form action="/teacher/classroom/edit_classroom", method="post", id=''> {% csrf_token %}
       <input type="hidden" name="classroom_id" value='{{classroom.id}}'/>
       
         <div class="input-group mb-3" style='width:400px' >
@@ -88,9 +88,9 @@
         </div>
         <div>
           <label class="btn btn-info" for='description' >Course Description</label>
-          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{classroom.course_title}} Gloria" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
+          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' data-toggle="popover" title="" data-content="Briefly describe your Course"required>{{ classroom.description }}</textarea>
           <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
-          <button style='width:150px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-chalkboard-teacher"></i> Add Class</button>
+          <button style='width:175px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-cloud-upload-alt"></i> Submit Changes</button>
         </div>
         </div>
     </form>

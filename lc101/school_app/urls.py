@@ -11,20 +11,24 @@ urlpatterns=[
     #when user visit this address, call this function
     path('teacher',views_logged.teacher, name='teacher'),
     path('teacher/<int:sort>/',views_logged.teacher, name='teacher_sort'),
-    path('teacher/home',views_logged.teacher, name='teacher_home'),
-    path('teacher/add_course',views_logged.add_course, name='add_course'),
+    # path('teacher/home',views_logged.teacher, name='teacher_home'),
     
+    path('teacher/add_course',views_logged.add_course, name='add_course'),
     path('teacher/edit_course', views_logged.edit_course, name='edit_course'),
     path('teacher/edit_course/<int:course_id>/', views_logged.edit_course, name='edit_course'),
-    
-    path('teacher/classroom', views_logged.classroom, name='classroom_list'),
-    path('teacher/classroom/<int:course_id>', views_logged.classroom, name='classroom_list'),
    
-    path('teacher/classroom/edit_classroom/<int:classroom_id>', views_logged.edit_classroom, name='edit_classroom'),
-    path('teacher/classroom/delete_classroom/<int:classroom_id>', views_logged.delete_classroom, name='delete_classroom'),
+    path('teacher/lesson_plan/<int:course_id>/',views_logged.lesson_plan, name='lesson_plan'),
+    path('teacher/lesson_plan/<int:course_id>/<int:plan_id>/',views_logged.lesson_plan, name='add_lesson_plan'),
    
     path('teacher/classroom/add_classroom', views_logged.add_classroom, name='add_classroom'),
     path('teacher/classroom/add_classroom/<int:course_id>', views_logged.add_classroom, name='add_classroom'),
+   
+    path('teacher/classroom', views_logged.classroom, name='classroom_list'),
+    path('teacher/classroom/<int:course_id>', views_logged.classroom, name='classroom_view'),
+    
+    path('teacher/classroom/edit_classroom', views_logged.edit_classroom, name='edit_classroom'),
+    path('teacher/classroom/edit_classroom/<int:classroom_id>', views_logged.edit_classroom, name='edit_classroom'),
+    path('teacher/classroom/delete_classroom/<int:classroom_id>', views_logged.delete_classroom, name='delete_classroom'),
    
     path('teacher/student_list', views_logged.student_list, name='student_list'),
     path('teacher/student_views', views_logged.student_views, name='student_views'),
