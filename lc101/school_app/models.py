@@ -47,21 +47,18 @@ class Course(models.Model):
     year = models.CharField(max_length=4,default='')
     teacher_name = models.CharField(max_length=50,default='')
     description = models.CharField(max_length=450,default='')
-    #Alert If  related name is use in ForeignKey, _set cannot be use! 
-    teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='course_by_teacher')
-    department = models.ForeignKey('Department',blank=True, null=True, on_delete = models.SET_NULL, related_name='belong_in_department')
+    #Alert If  related name is use in ForeignKey, _set cannot be use!
     
+    department = models.ForeignKey('Department',blank=True, null=True, on_delete = models.SET_NULL, related_name='belong_in_department')
+    teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='course_by_teacher')
     create_date = models.DateField(auto_now_add=True , blank=True,null=True,)
-    #classroom = models.ForeignKey('Classroom', blank=True,null=True, on_delete = models.SET_NULL)
-# A Course is bound to the teacher and create a classom upon creation. More room can be added later
+    
+# A Course is bound to the teacher and create a classroom upon creation. More room can be added later
 
-class lesson_plan(models.Model):
+class Lesson_plan(models.Model):
     course_title = models.CharField(max_length=50,default='')
     teacher_idx = models.CharField(max_length=10,default='')
-    create_date = models.DateField(auto_now_add=True, blank=True,null=True,)
-    last_modifield = models.DateTimeField(auto_now=True, blank=True,null=True,)
-   
-    weekly_agenda = models.CharField(max_length=450,default='Agenda Goes Here')
+    
     monday_date = models.DateField(blank=True, null=True)
     tuesday_date = models.DateField(blank=True, null=True)
     wednesday_date = models.DateField(blank=True, null=True)
@@ -75,9 +72,13 @@ class lesson_plan(models.Model):
     friday_plan= models.CharField(max_length=400,default='g')
     
     weekend_plan = models.CharField(max_length=300,default='h')
+    weekly_agenda = models.CharField(max_length=450,default='Agenda Goes Here')
+    week_number = models.CharField(max_length=10,default='')
+    last_modifield = models.DateTimeField(auto_now=True, blank=True,null=True,)
     
-    teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='lesson_plan')
-    
+    teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL)
+    course = models.ForeignKey('Course',blank=True, null=True, on_delete = models.SET_NULL)
+    create_date = models.DateField(auto_now_add=True, blank=True,null=True,)
     def __str__(self):
         return 'Lesson plan for '+self.course_title +' Teacher: '+ str(self.teacher)
 

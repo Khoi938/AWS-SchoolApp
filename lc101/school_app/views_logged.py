@@ -177,9 +177,25 @@ def lesson_plan(request,course_id=None):
             return redirect('/')
         if request.method == 'POST':
             return 2
-        return render(request,'teacher/lesson_plan/view_lesson_plan.html')
             
+        course = Course.objects.filter(id=course_id).first()
+        lesson_plan = Lesson_plan.objects.filter(course=course)
+        return render(request,'teacher/lesson_plan/view_lesson_plan.html',
+        {'course':course,'lesson_plan':lesson_plan})
 
+def add_lesson_plan(request,course_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        if request.method == 'POST':
+            return 2
+        course = Course.objects.filter(id=course_id).first()
+        return render(request,'teacher/lesson_plan/add_lesson_plan.html',
+        {'course':course})
+            
 
 def student_list(request):
     if is_login(request) == False: 

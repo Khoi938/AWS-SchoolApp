@@ -20,7 +20,7 @@
         <h4 style='padding-left: 5px'>{{classroom.course_title}}</h4>
         <hr class='hr-line'/>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        <a class="btn btn-primary" href='{% url "classroom_list" course_id=course_id %}'><i class="fas fa-step-backward"></i> Cancel edit</a></a>
+        <a class="btn btn-primary" href='{% url "classroom_view" course_id=course_id %}'><i class="fas fa-step-backward"></i> Cancel edit</a></a>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
         </div>
         {% if messages %}

@@ -19,7 +19,7 @@ def index(request):
         if user is not None:
             auth_login(request, user)
             if user.profile.is_teacher == True:
-                return redirect('/teacher/home')
+                return redirect('/teacher')
                 
             else:
                 return redirect('/student/home',{'user':user})
