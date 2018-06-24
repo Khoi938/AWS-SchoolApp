@@ -6,8 +6,8 @@
         $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
     });
-</script>
-<div class="container" style='padding-top:25px; padding-left:20px'>
+</script><form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
+<div class="container-fuild" style='padding-top:25px; padding-left:20px;padding-right:40px'>
          <div class="panel panel-login">
         <div class="panel-body">
           <div class="row">
@@ -19,11 +19,6 @@
         <hr class='hr-line'/>
         <h4 style='padding-left: 5px'>{{course.course_title}}</h4>
         <hr class='hr-line'/>
-        <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        <big>Create additional class:</big>
-        <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        <a class="btn btn-primary" href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-step-backward"></i> Cancel </a></a>
-        <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
         </div>
         </div>
         {% if messages %}
@@ -32,69 +27,72 @@
              <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
         {% endfor %}
           </ul> 
-        {% endif %}
+        {% endif %}<hr/></div>
     <form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
       <input type="hidden" name="course_id" value='{{course.id}}'/>
-      
-        <div class="input-group mb-3" style='width:400px' >
-        <div>
-        <div class="input-group-prepend">
-          <label class="btn btn-info" for='' >Title / Alias &nbsp</label>
-        </div>
-          <textarea class="form-control" style='width:365px' name='course_title' id="" rows="1" cols='40' placeholder="ex. {{course.course_title}} Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
-          
-          <hr/>
-          <button class="btn btn-info" >Time Slot &nbsp&nbsp&nbsp</button>
+    <hr/></div>
+      <div class="form-row" style=''>
+          <div class="col-md-2 mb-3">
+            <label class="btn btn-info" for='' >Week #</label>
+            <input type="text" maxlength="2" placeholder='ex. Week 1' data-toggle="popover" title="" data-content="Digit only" data-placement="bottom" class="form-control"required>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="Spring" Checked>
-            <label class="form-check-label" for="">8:00 AM</label>
+          <div class="col-md-6 mb-3">
+            <label class="btn btn-info" for='' >Agenda of the week</label>
+            <textarea class="form-control" name='course_title' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="9:00 AM">
-            <label class="form-check-label" for="">9:00 AM</label>
+          <div class="col-md-4 mb-3"></div></div><hr/>
+      <div class="form-row" style=''>
+          <div class="col-md-2 mb-3">
+            <label class="btn btn-info" for='' >Monday Date</label>
+            <input type="date" name='monday_date' class="form-control"required>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="10:00 AM">
-            <label class="form-check-label" for="">10:00 AM</label>
+          <div class="col-md-6 mb-3">
+            <label class="btn btn-info" for='' >Monday Assignment</label>
+            <textarea class="form-control" name='monday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="11:00 AM">
-            <label class="form-check-label" for="">11:00 AM</label>
-          </div> 
-          <br>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="1:00 PM">
-            <label class="form-check-label" for="">1:00 PM</label>
-          </div> 
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="2:00 PM">
-            <label class="form-check-label" for="">2:00 PM</label>
+          <div class="col-md-4 mb-3"></div>
+          <div class="col-md-2 mb-3">
+            <label class="btn btn-info" for='' >Tuesday Date</label>
+            <input type="date" name='tuesday_date' class="form-control"required>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="3:00 PM">
-            <label class="form-check-label" for="">3:00 PM &nbsp</label>
+          <div class="col-md-6 mb-3">
+            <label class="btn btn-info" for='' >Tuesday Assignment</label>
+            <textarea class="form-control" name='tuesday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
           </div>
-            <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="time" id="" value="other">
-            <label class="form-check-label" for="">Other:</label>
+          <div class="col-md-4 mb-3"></div>
+          <div class="col-md-2 mb-3">
+            <label class="btn btn-info" for='' >Wednesday Date</label>
+            <input type="date" name='wednesday_date' class="form-control"required>
           </div>
-          <div style = 'width:140px;right-align:10px'class="form-check form-check-inline">
-            <input type='text'class="form-control" name="custom_time" id="" placeholder='ex. 9:30 AM' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
-          </div><br><br>
-        <div class="input-group mb-3" style='width:365px' >
-          <div class="input-group-prepend">
-            <button class="btn btn-info" >Room Number &nbsp&nbsp</button>
+          <div class="col-md-6 mb-3">
+            <label class="btn btn-info" for='' >Wednesday Assignment</label>
+            <textarea class="form-control" name='wednesday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
           </div>
-            <input type="text" class="form-control" name='room_number'id="" maxlength="10" placeholder="Room #" data-toggle="popover" title="" data-content='Where you do your lecture' required>
-        </div>
-        <div>
-          <label class="btn btn-info" for='description' >Course Description</label>
-          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria Mendez" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
-          <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
+          <div class="col-md-4 mb-3"></div>
+          <div class="col-md-2 mb-3">
+            <label class="btn btn-info" for='' >Thursday Date</label>
+            <input type="date" name='thursday_date' class="form-control"required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="btn btn-info" for='' >Thursday Assignment</label>
+            <textarea class="form-control" name='thursday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
+          </div>
+          <div class="col-md-4 mb-3"></div>
+          <div class="col-md-2 mb-3">
+            <label class="btn btn-info" for='' >Friday Date</label>
+            <input type="date" name='friday_date' class="form-control"required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="btn btn-info" for='' >Friday Assignment</label>
+            <textarea class="form-control" name='friday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
+          </div>
+          <div class="col-md-4 mb-3"></div>
+        <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
           <button style='width:150px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-chalkboard"></i> Add Class</button>
         </div>
         </div>
+        
+        <br><br>
     </form>
 
 {% endblock %}
