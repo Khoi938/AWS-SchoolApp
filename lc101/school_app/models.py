@@ -58,6 +58,8 @@ class Course(models.Model):
 class Lesson_plan(models.Model):
     course_title = models.CharField(max_length=50,default='')
     teacher_idx = models.CharField(max_length=10,default='')
+    week_number = models.CharField(max_length=10,default='')
+    agenda = models.CharField(max_length=450,default='Agenda Goes Here')
     
     monday_date = models.DateField(blank=True, null=True)
     tuesday_date = models.DateField(blank=True, null=True)
@@ -70,14 +72,11 @@ class Lesson_plan(models.Model):
     wednesday_plan= models.CharField(max_length=400,default='d')
     thursday_plan= models.CharField(max_length=400,default='f')
     friday_plan= models.CharField(max_length=400,default='g')
-    
     weekend_plan = models.CharField(max_length=300,default='h')
-    weekly_agenda = models.CharField(max_length=450,default='Agenda Goes Here')
-    week_number = models.CharField(max_length=10,default='')
-    last_modifield = models.DateTimeField(auto_now=True, blank=True,null=True,)
     
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL)
     course = models.ForeignKey('Course',blank=True, null=True, on_delete = models.SET_NULL)
+    last_modifield = models.DateTimeField(auto_now=True, blank=True,null=True,)
     create_date = models.DateField(auto_now_add=True, blank=True,null=True,)
     def __str__(self):
         return 'Lesson plan for '+self.course_title +' Teacher: '+ str(self.teacher)

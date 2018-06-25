@@ -6,14 +6,17 @@
         $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
     });
-</script><form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
-<div class="container-fuild" style='padding-top:25px; padding-left:20px;padding-right:40px'>
+</script>
+<div class="container-fuild" style='padding-top:25px; padding-left:40px;padding-right:40px'>
          <div class="panel panel-login">
         <div class="panel-body">
           <div class="row">
             <!--<div class="col-lg-12">-->
+        
+      <div class="form-row" style=''>
+          <div class="col-md-7 mb-3">
         <h3 style='padding-left: 5px'></h3>
-        <div style="width: 400px">
+        <div style="width: 400px;padding-left: 10px">
           <div style='width:300px'>
         <h4 style='padding-left: 5px'>{{ course.semester }}, {{ course.year }}</h4>
         <hr class='hr-line'/>
@@ -21,26 +24,37 @@
         <hr class='hr-line'/>
         </div>
         </div>
+        </div>
+        <div class="col-md-5">
+          <!--<br><br>-->
+           <a class="btn btn-sm btn-primary" href='{% url "teacher" %}'><i class="fas fa-step-backward"></i> Cancel Add</a></a>
+        <br>
+        <hr/>
+        <h6 style='padding-left: 5px'>Add Lesson Below:</h6>
+        <!--<hr/>-->
+                <!--<hr class='hr-line'/>-->
+        </div>
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
              <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
         {% endfor %}
           </ul> 
-        {% endif %}<hr/></div>
-    <form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
+        {% endif %}</div><hr/></div>
+    <form action="/teacher/lesson_plan/add" method="post" id=''> {% csrf_token %}
       <input type="hidden" name="course_id" value='{{course.id}}'/>
     <hr/></div>
       <div class="form-row" style=''>
           <div class="col-md-2 mb-3">
             <label class="btn btn-info" for='' >Week #</label>
-            <input type="text" maxlength="2" placeholder='ex. Week 1' data-toggle="popover" title="" data-content="Digit only" data-placement="bottom" class="form-control"required>
+            <input type="text" name='week_number' maxlength="2" placeholder='ex. Week 1' data-toggle="popover" title="" data-content="Digit only" data-placement="bottom" class="form-control"required>
           </div>
           <div class="col-md-6 mb-3">
             <label class="btn btn-info" for='' >Agenda of the week</label>
-            <textarea class="form-control" name='course_title' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
+            <textarea class="form-control" name='agenda' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
-          <div class="col-md-4 mb-3"></div></div><hr/>
+          <div class="col-md-4 mb-3">
+          </div></div><hr/>
       <div class="form-row" style=''>
           <div class="col-md-2 mb-3">
             <label class="btn btn-info" for='' >Monday Date</label>
@@ -48,7 +62,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <label class="btn btn-info" for='' >Monday Assignment</label>
-            <textarea class="form-control" name='monday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
+            <textarea class="form-control" name='monday_plan' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
           <div class="col-md-4 mb-3"></div>
           <div class="col-md-2 mb-3">
@@ -57,7 +71,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <label class="btn btn-info" for='' >Tuesday Assignment</label>
-            <textarea class="form-control" name='tuesday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
+            <textarea class="form-control" name='tuesday_plan' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
           <div class="col-md-4 mb-3"></div>
           <div class="col-md-2 mb-3">
@@ -66,7 +80,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <label class="btn btn-info" for='' >Wednesday Assignment</label>
-            <textarea class="form-control" name='wednesday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
+            <textarea class="form-control" name='wednesday_plan' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
           <div class="col-md-4 mb-3"></div>
           <div class="col-md-2 mb-3">
@@ -75,7 +89,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <label class="btn btn-info" for='' >Thursday Assignment</label>
-            <textarea class="form-control" name='thursday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
+            <textarea class="form-control" name='thursday_plan' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
           <div class="col-md-4 mb-3"></div>
           <div class="col-md-2 mb-3">
@@ -84,9 +98,14 @@
           </div>
           <div class="col-md-6 mb-3">
             <label class="btn btn-info" for='' >Friday Assignment</label>
-            <textarea class="form-control" name='friday_plan' id="" rows="2" cols='30' placeholder="ex. {{course.course_title}} Class A"required></textarea>
+            <textarea class="form-control" name='friday_plan' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
           <div class="col-md-4 mb-3"></div>
+          <div class="col-md-6 mb-3">
+            <label class="btn btn-info" for='' >Weekend Assignment</label>
+            <textarea class="form-control" name='weekend_plan' id="" rows="2" cols='30' placeholder="Weekend HW"required></textarea>
+          </div>
+          </div>
         <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
           <button style='width:150px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-chalkboard"></i> Add Class</button>
         </div>

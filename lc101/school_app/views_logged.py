@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout as auth_logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.views.decorators.http import require_http_methods
 from school_app.models import *
 from school_app.views_functions import is_teacher, is_login, sort_order, other_check
 
@@ -168,6 +169,7 @@ def delete_classroom(request,classroom_id=None):
         return redirect('/teacher/classroom/'+str(course_id))
         
 # ------ Lesson Plan View, Add, Edit, update ------
+@require_http_methods(["GET"])
 def lesson_plan(request,course_id=None):
     if is_login(request) == False: 
         return redirect('/login')
@@ -175,14 +177,13 @@ def lesson_plan(request,course_id=None):
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
-        if request.method == 'POST':
-            return 2
             
         course = Course.objects.filter(id=course_id).first()
         lesson_plan = Lesson_plan.objects.filter(course=course)
         return render(request,'teacher/lesson_plan/view_lesson_plan.html',
         {'course':course,'lesson_plan':lesson_plan})
 
+# @require_http_methods(["POST"])
 def add_lesson_plan(request,course_id=None):
     if is_login(request) == False: 
         return redirect('/login')
@@ -190,13 +191,37 @@ def add_lesson_plan(request,course_id=None):
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
-        if request.method == 'POST':
-            return 2
+        if request.method == 'POST':    
+            course_id = request.POST['course_id']
+            agenda = request.POST['agenda']
+            week_number = request.POST['week_number']
+            weekend_plan = request.POST['weekend_plan']
+        
+            monday_date = request.POST['monday_date']
+            tuesday_date = request.POST['tuesday_date']
+            wednesday_date = request.POST['wednesday_date']
+            thursday_date = request.POST['thursday_date']
+            friday_date = request.POST['friday_date']
+        
+            monday_plan = request.POST['monday_plan']
+            tuesday_plan = request.POST['tuesday_plan']
+            wednesday_plan = request.POST['wednesday_plan']
+            thursday_plan = request.POST['thursday_plan']
+            friday_plan = request.POST['friday_plan']
+        
+            course = Course.objects.filter(id=course_id).first()
+            new_lesson = Lesson_plan.objects.create(course_title=course.course_title, teacher_idx=request.user.teacher.id,
+            week_number=week_number, agenda=agenda, teacher=request.user.teacher, course=course, monday_date=monday_date,
+            tuesday_date=tuesday_date, wednesday_date=wednesday_date, thursday_date=thursday_date, friday_date=friday_date,
+            monday_plan=monday_plan, tuesday_plan=tuesday_plan, wednesday_plan=wednesday_date, thursday_plan=thursday_plan, friday_plan=friday_plan,
+            weekend_plan=wednesday_plan)
+            messages.success(request, 'Lesson for week '+new_lesson.week_number+' sucessfully added.')
+            return redirect('/teacher/lesson_plan/'+course_id)
+        
         course = Course.objects.filter(id=course_id).first()
         return render(request,'teacher/lesson_plan/add_lesson_plan.html',
         {'course':course})
-            
-
+        
 def student_list(request):
     if is_login(request) == False: 
         return redirect('/login')

@@ -40,9 +40,9 @@
             <tbody>
         {% for lesson in lesson_plan %}
             <tr>
-              <th scope="row">{{ lesson.week }}</th>
+              <th scope="row">{{ lesson.week_number }}</th>
               <td>{{ lesson.monday_date }}</td>
-              <td>{{ lesson.weekly_agenda}}</td>
+              <td>{{ lesson.agenda}}</td>
               <td>
                 <a href='{% url "teacher"  %}'><i class="fas fa-users"></i></a>
               </td>
@@ -58,5 +58,6 @@
         {% else %}
         <h4><div class="alert-inherit alert-info" role="alert"><i class="fas fa-exclamation"></i> Current Course have no lesson planned. </div></h4>
         {% endif %}
+        <br><br>
 </div>
 {% endblock %}
