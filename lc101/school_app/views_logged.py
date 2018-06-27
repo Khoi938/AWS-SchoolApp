@@ -177,9 +177,26 @@ def lesson_plan(request,course_id=None):
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
-            
+#View a list of all the weekly assignment
         course = Course.objects.filter(id=course_id).first()
         lesson_plan = Lesson_plan.objects.filter(course=course)
+        if lesson_plan_id != None:
+            weekly_schedule = lesson_plan.filter(id==lesson_plan_id)
+            return render(request,'teacher/lesson_plan/view_lesson_plan.html',
+        {'course':course,'lesson_plan':lesson_plan})
+        return render(request,'teacher/lesson_plan/view_lesson_plan.html',
+        {'course':course,'lesson_plan':lesson_plan})
+        
+@require_http_methods(["GET"])
+def weekly_schedule(request,lesson_plan_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+            
+        weekly_schedule = Lesson_plan.objects.filter(id==lesson_plan_id)
         return render(request,'teacher/lesson_plan/view_lesson_plan.html',
         {'course':course,'lesson_plan':lesson_plan})
 
