@@ -14,7 +14,8 @@
         <h4 style='padding-left: 1px'>Id: {{course.course_number}}</h4>
         <hr class='hr-line'/>
         <br>
-        <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm" role="button">Add New Classroom</a>
+          <a href='{% url "teacher" %}' class="btn btn-sm btn-primary" ><i class="fas fa-step-backward"></i> Console</a></a>
+          <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm" role="button"><i class="fas fa-plus"></i> New Classroom</a>
         <hr/>
         </div
         {% if messages %}
@@ -30,7 +31,7 @@
           <table class="table table-hover table-bordered pad-right-table">
             <thead class='table-primary'>
             <tr>
-              <th scope="col" style="width: 5%">#</th>
+              <th scope="col" style="width: 8%">#</th>
               <th scope="col">Course Title/Alias</th>
               <th scope="col">Room Number</th>
               <th scope="col">Time</th>
