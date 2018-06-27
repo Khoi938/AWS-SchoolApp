@@ -29,7 +29,7 @@
           <table class="table table-hover table-bordered pad-right-table">
             <thead class='table-primary'>
             <tr>
-              <th scope="col">Week #</th>
+              <th scope="col"style="width: 8%">Week #</th>
               <th scope="col">Start Date</th>
               <th scope="col">Agenda</th>
               <th scope="col">View Lesson</th>
@@ -44,7 +44,7 @@
               <td>{{ lesson.monday_date }}</td>
               <td>{{ lesson.agenda}}</td>
               <td>
-                <a href='{% url "teacher"  %}'><i class="fas fa-users"></i></a>
+                <a href='{% url "weekly_schedule" lesson_plan_id=lesson.id  %}'><i class="fas fa-th-list"></i></a>
               </td>
               <td>
                 <a href='{% url "teacher"  %}'><i class="fas fa-edit"></i></a>

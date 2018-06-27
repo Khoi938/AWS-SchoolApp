@@ -19,6 +19,7 @@ urlpatterns=[
    
     path('teacher/lesson_plan',views_logged.lesson_plan, name='lesson_plan'),
     path('teacher/lesson_plan/<int:course_id>/',views_logged.lesson_plan, name='lesson_plan'),
+    path('teacher/lesson_plan/weekly_schedule/<int:lesson_plan_id>',views_logged.weekly_schedule, name='weekly_schedule'),
     path('teacher/lesson_plan/add',views_logged.add_lesson_plan, name='add_lesson_plan'),
     
     path('teacher/lesson_plan/add/<int:course_id>/',views_logged.add_lesson_plan, name='add_lesson_plan'),

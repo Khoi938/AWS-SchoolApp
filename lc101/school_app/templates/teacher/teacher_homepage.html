@@ -20,16 +20,16 @@
           <table class="table table-hover table-bordered pad-right-table">
             <thead class='table-primary'>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Course Number</th>
+              <th scope="col" style="width: 5%">#</th>
+              <th scope="col" style="width: 15%">Course Number</th>
               <th scope="col">Course Title
                 <a href='{% url "teacher" %}'><i class="fas fa-sort-alpha-down"></i></a></a>
               </th>
-              <th scope="col">Academic Year
+              <th scope="col" style="width: 20%">Academic Year
                 <a href='{% url "teacher_sort" sort=1 %}'><i class="fas fa-sort-numeric-down"></i></a></a>
               </th>
-              <th scope="col">View Classes</th>
-              <th scope="col">Lesson Plan</th>
+              <th scope="col" style="width: 13%">View Classes</th>
+              <th scope="col" style="width: 13%">Lesson Plan</th>
             </tr>
             </thead>
             <tbody>
@@ -39,16 +39,18 @@
               <td>{{ course.course_number }}</td>
               <td>{{ course.course_title }}</td>
               <td>{{ course.semester }}, {{ course.year }}</td>
-              <th style="width: 15%">
-                <a href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-th-list"></i></a></a>
-              </th>
-              <th style="width: 15%">
-                <a href='{% url "lesson_plan" course_id=course.id %}'><i class="fas fa-edit"></i></a>
-              </th>
+              <td>
+                <a href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-chalkboard-teacher"style='font-size:18px'></i></a></a>
+              </td>
+              <td>
+                <a href='{% url "lesson_plan" course_id=course.id %}'><i class="fas fa-list-ol" style='font-size:19px'></i></a>
+              </td>
             </tr>
         {% endfor %}
+            
             </tbody>
           </table>
         {% endif %}
+<br>
 </div>
 {% endblock %}
