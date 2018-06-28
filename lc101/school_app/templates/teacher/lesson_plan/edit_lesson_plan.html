@@ -26,13 +26,9 @@
         </div>
         </div>
         <div class="col-md-5">
-          <!--<br><br>-->
-           <a class="btn btn-sm btn-primary" href='{% url "lesson_plan" course_id=course.id %}'><i class="fas fa-ban"></i> Cancel Edit</a></a>
-        <br>
+        <h5 style='padding-left: 5px'>Week {{ lesson_plan.week_number }} schedule:</h5>
         <hr/>
-        <h6 style='padding-left: 5px'>Edit week {{ lesson_plan.week_number }} schedule:</h6>
-        <hr/>
-                <!--<hr class='hr-line'/>-->
+           <a class="btn btn-sm btn-primary" href='{% url "weekly_lesson_plan" lesson_plan_id=lesson_plan.id %}'><i class="fas fa-ban"></i> Cancel Edit</a></a>
         </div>
         {% if messages %}
           <ul class="messages">
@@ -41,7 +37,7 @@
         {% endfor %}
           </ul> 
         {% endif %}</div></div><hr>
-    <form action="/teacher/lesson_plan/add" method="post" id=''> {% csrf_token %}
+    <form action="/teacher/lesson_plan/edit_schedule" method="post" id=''> {% csrf_token %}
       <input type="hidden" name="course_id" value='{{course.id}}'/>
     </div>
       <div class="form-row" style=''>

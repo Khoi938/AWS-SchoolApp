@@ -21,7 +21,8 @@
     background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-size:  auto 100%;
     background: linear-gradient(-225deg, #9EFBD3 0%, #57E9F2 48%, #45D4FB 100%);'
     class='body-index  text-dark'>
-        <h1 class='text-center text-dark'style="font-size:50px">Welcome to Launch C. High Shool</h1><br>
+        <h1 class='text-center text-dark'style="font-size:50px;text-shadow: 3px 3px 8px rgba(150, 150, 150, 1);">
+            Welcome to Launch C. High Shool</h1><br>
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
@@ -29,15 +30,16 @@
         {% endfor %}
           </ul> 
         {% endif %}
-        <div class='image rounded'><br><br>
-        <div class="container">
+        <div class='image rounded shadow'><br><br>
+        <div class="container ">
         {% if user.is_authenticated %}
         <div style='width:350px'>
             <h4>You are currently logged in as {{user.username}}</h4>
             <hr style="text-align:left;margin-left:0;width:350px;height:0px;padding: 0px"/>
-            <a href="/home_redirect" class="btn btn-primary btn-md"><i class="fas fa-home"></i> Homepage </a> or
-            <a href="/logout" class="btn btn-warning btn-md">&nbsp <i class="fas fa-sign-out-alt"></i> Logout &nbsp &nbsp</a> 
+            <a href="/home_redirect" class="btn btn-primary btn-md shadow-sm"><i class="fas fa-home"></i> Homepage </a> or
+            <a href="/logout" class="btn btn-warning btn-md shadow-sm">&nbsp <i class="fas fa-sign-out-alt"></i> Logout &nbsp &nbsp</a> 
             <hr style="text-align:left;margin-left:0;width:350x;height:0px;padding: 0px"/>
+            <br>
         </div></br></br></br></br>
         {% else %}
         <div class="panel panel-login">
@@ -58,12 +60,11 @@
             </tr>   
         </table>
         <div class="col-xs-6 form-group">   
-            <button class="btn btn-md btn-primary" id="login"><i class="fa fa-lock"></i> Login »</button>
+            <button class="btn btn-md btn-primary shadow-sm" id="login"><i class="fa fa-lock"></i> Login »</button>
         </div>
         </form>
         <hr style="text-align:left;margin-left:0;width:315px;height:0px;padding: 0px"/>
         </div></div></div></div></span>
-        </br>
         </br>
         <div>New Student and Educator register here.</div>
         <a href='/register'>Register</a>

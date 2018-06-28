@@ -9,15 +9,14 @@
         <div style="width: 280px">
         <h4 style='padding-left: 1px'>{{ course.semester }}, {{ course.year }}</h4>
         <hr class='hr-line'/>
-        <h4 style='padding-left: 1px'>{{course.course_title}}</h4>
+        <h4 style='padding-left: 1px'>{{ course.course_title }}</h4>
         <hr class='hr-line'/>
         <h4 style='padding-left: 1px'>Id: {{course.course_number}}</h4>
         <hr class='hr-line'/>
         <br>
-          <a href='{% url "teacher" %}' class="btn btn-sm btn-primary" ><i class="fas fa-step-backward"></i> Console</a></a>
-          <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm" role="button"><i class="fas fa-plus"></i> New Classroom</a>
-        <hr/>
-        </div
+          <a href='{% url "teacher" %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Console</a></a>
+          <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm shadow-sm" role="button"><i class="fas fa-plus"></i> New Classroom</a>
+        <hr/></div>
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
@@ -27,12 +26,13 @@
         {% endif %}
         
         {% if classes %}
-          <h5><big>Classroom assigned:</big></h5>
-          <table class="table table-hover table-bordered pad-right-table">
+          <h5><big>Classes assigned to {{ course.course_title }} :</big></h5>
+          <div class='mr-2'>
+          <table class="table table-hover table-bordered pad-right-table shadow ">
             <thead class='table-primary'>
             <tr>
-              <th scope="col" style="width: 8%">#</th>
-              <th scope="col">Course Title/Alias</th>
+              <th scope="col" style="width: 5%">#</th>
+              <th scope="col">Course Title / Alias</th>
               <th scope="col">Room Number</th>
               <th scope="col">Time</th>
               <th scope="col">Description</th>
@@ -64,29 +64,8 @@
         {% else %}
         <h4><div class="alert-inherit alert-info" role="alert"><i class="fas fa-exclamation"></i> No Classes assigned to this course.</div></h4>
         {% endif %}
-        <div class="container">
-         <div class="panel panel-login">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-12">
-        
-        {% for student in students %}
-        <h3>Course Selection Form.</h3>
-        <br>
-        <form action="/teacher/student_views" method="post" id='course_select'> {% csrf_token %}
-            <input name="student_id" type="hidden" value="{{student.user.id}}">
-        <label for="course">Pick Course:</label>
-        <select class="selectpicker" data-style="btn-info" name='classroom_id'>
-        {% for classroom in all_classroom %}
-            <option value='{{classroom.id}}'>{{classroom.subject}}</option>
-        {% endfor %}
-        </select>
-        <div class="col-xs-6 form-group">     
-            <input class="btn btn-md btn-success" type="submit" id="login" value="Add Class">
-        </div>
-        </form>
-        {% endfor %}
-</div>
+</div></div><br>
+{% endblock %}
 
 <!-- Need to learn JS how to pass Data into Modal for confirmation -->
 <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">-->
@@ -113,4 +92,3 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
-{% endblock %}

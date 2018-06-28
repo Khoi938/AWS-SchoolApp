@@ -17,7 +17,8 @@
         </ul>
         {% if request.user.teacher.course_by_teacher.all.count > 0 %}
           <h4>Your Courses:</h4>
-          <table class="table table-hover table-bordered pad-right-table">
+          <div class="mr-2">
+          <table class="table table-hover table-bordered shadow">
             <thead class='table-primary'>
             <tr>
               <th scope="col" style="width: 8%">#</th>
@@ -50,6 +51,7 @@
             
             </tbody>
           </table>
+          </div>
         {% endif %}
 <br>
 </div>

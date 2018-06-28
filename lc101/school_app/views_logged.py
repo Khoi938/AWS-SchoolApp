@@ -274,6 +274,7 @@ def edit_lesson_plan(request,lesson_plan_id=None):
         course = lesson_plan.course
         return render(request,'teacher/lesson_plan/edit_lesson_plan.html',
         {'course':course,'lesson_plan':lesson_plan})
+        
 def student_list(request):
     if is_login(request) == False: 
         return redirect('/login')

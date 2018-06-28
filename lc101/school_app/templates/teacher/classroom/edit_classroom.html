@@ -14,13 +14,17 @@
             <!--<div class="col-lg-12">-->
         <h3 style='padding-left: 5px'></h3>
         <div style="width: 400px">
-          <div style='width:300px'>
-        <h4 style='padding-left: 5px'>{{ classroom.time }}</h4>
-        <hr class='hr-line'/>
+        <div style='width:300px'>
         <h4 style='padding-left: 5px'>{{classroom.course_title}}</h4>
         <hr class='hr-line'/>
+        <h4 style='padding-left: 5px'>{{ classroom.time }}</h4>
+        <hr class='hr-line'/>
+        <h4 style='padding-left: 5px'>Room: {{classroom.room_number}}</h4>
+        <hr class='hr-line'/>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        <a class="btn btn-primary" href='{% url "classroom_view" course_id=course_id %}'><i class="fas fa-step-backward"></i> Cancel edit</a></a>
+        <div style='padding-left: 5px'>
+          <a class="btn btn-sm btn-primary shadow-sm" href='{% url "classroom_view" course_id=course_id %}'><i class="fas fa-ban"></i> Cancel Edit</a></a>
+        </div>
         <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
         </div>
         {% if messages %}
@@ -90,7 +94,7 @@
           <label class="btn btn-info" for='description' >Course Description</label>
           <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' data-toggle="popover" title="" data-content="Briefly describe your Course"required>{{ classroom.description }}</textarea>
           <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
-          <button style='width:175px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-cloud-upload-alt"></i> Submit Changes</button>
+          <button style='width:175px' class="btn btn-md btn-success btn-block text-center shadow-sm"><i class="fas fa-cloud-upload-alt"></i> Submit Changes</button>
         </div>
         </div>
     </form>

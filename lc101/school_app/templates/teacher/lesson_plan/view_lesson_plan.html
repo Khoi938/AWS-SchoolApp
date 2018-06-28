@@ -6,16 +6,18 @@
     });
 </script>
 <div class='content'>
+      <div class="form-row" style=''>
+        <div class="col-md-5 mb-3">
         <div style="width: 320px">
         <h4 style='padding-left: 1px'>{{ course.semester }}, {{ course.year }}</h4>
         <hr class='hr-line'/>
         <h4 style='padding-left: 1px'>{{course.course_title}}</h4>
         <hr class='hr-line'/>
-        <br>
-          <a href='{% url "teacher" %}' class="btn btn-sm btn-primary" ><i class="fas fa-step-backward"></i> Console</a></a>
-        <a href='{% url "edit_lesson_plan" lesson_plan_id=lesson_plan.id %}' class="btn btn-info btn-sm" role="button"><i class="fas fa-pencil-alt"></i> Edit Schedule</a>
+        <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
+        <a href='{% url "teacher" %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Schedule List</a>
+        <a href='{% url "edit_lesson_plan" lesson_plan_id=lesson_plan.id %}' class="btn btn-info btn-sm shadow-sm" role="button"><i class="fas fa-pencil-alt"></i> Edit Schedule</a>
         <hr/>
-        </div>
+        </div></div>
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
@@ -23,15 +25,21 @@
         {% endfor %}
           </ul> 
         {% endif %}
-        <h5>Schedule for week {{ lesson_plan.week_number }}</h5>
-          <table class="table table-hover table-bordered pad-right-table">
+        <div class="col-md-5 mb-3">
+        <div class="rounded border border-info shadow-sm" style="width: 320px">
+        <div class="mr-1 mt-1 ml-1">
+        <!--<div class="card border-info bg-light" style='background: linear-gradient(to right, #e0eafc, #cfdef3);'>-->
+        <h4> Schedule for week {{ lesson_plan.week_number }}</h4>
+        <hr style='margin-top:-3px; background-color: #5bc0de;' />
+        <h6 style='margin-top:-7px'><strong>Agenda:</strong> {{ lesson_plan.agenda }}</h6><br><br>
+        </div></div></div>
+          <table class="table table-hover table-bordered  shadow mr-2">
             <thead class='table-primary'>
             <tr>
               <th scope="col" style="width: 15%">Day</th>
               <th scope="col" style="width: 15%">Date</th>
               <th scope="col">Assignment</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Document /w</th>
+              <th scope="col">Document Not yet</th>
             </tr>
             </thead>
             <tbody>
@@ -39,47 +47,29 @@
               <th scope="row">Monday</th>
               <td>{{ lesson_plan.monday_date }}</td>
               <td>{{ lesson_plan.monday_plan }}</td>
-              <td>
-                 <a href='{% url "teacher"   %}'><i class="fas fa-th-list"></i></a>
-              </td>
             </tr>
             <tr>
               <th scope="row">Tuesday</th>
               <td>{{ lesson_plan.tuesday_date }}</td>
               <td>{{ lesson_plan.tuesday_plan}}</td>
-              <td>
-                <a href='{% url "teacher"   %}'><i class="fas fa-th-list"></i></a>
-              </td>
             </tr>
             <tr>
               <th scope="row">Wednesday</th>
               <td>{{ lesson_plan.wednesday_date }}</td>
               <td>{{ lesson_plan.wednesday_plan}}</td>
-              <td>
-                <a href='{% url "teacher"   %}'><i class="fas fa-th-list"></i></a>
-              </td>
             </tr>
               <th scope="row">Thursday</th>
               <td>{{ lesson_plan.thursday_date }}</td>
               <td>{{ lesson_plan.thursday_plan}}</td>
-              <td>
-                <a href='{% url "teacher"   %}'><i class="fas fa-th-list"></i></a>
-              </td>
             </tr>
             <tr>
               <th scope="row">Friday</th>
               <td>{{ lesson_plan.friday_date }}</td>
               <td>{{ lesson_plan.friday_plan}}</td>
-              <td>
-                <a href='{% url "teacher"   %}'><i class="fas fa-th-list"></i></a>
-              </td>
             </tr>
             <tr>
               <th scope="row">Weekend</th>
               <td colspan="2">{{ lesson_plan.weekend_plan }}</td>
-              <td>
-                <a href='{% url "teacher"   %}'><i class="fas fa-th-list"></i></a>
-              </td>
             </tr>
             </tbody>
           </table>

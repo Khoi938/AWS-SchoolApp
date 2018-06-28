@@ -11,9 +11,16 @@
   height:100%;
         margin: 0;
     background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-size:  auto 100%;
-    
 }
-  
+.body-index-2{
+  padding-top: 60px; padding-left:30px; padding-right:10px;
+  color:#666666;
+  font-family:sans-serif;
+  font-weight:400;
+  height:100%;margin: 0;
+    background-repeat: no-repeat;background-attachment: fixed;background-size: cover;background-size:  auto 100%;
+    background: linear-gradient(-225deg, #9EFBD3 0%, #57E9F2 48%, #45D4FB 100%);
+}
 .body-registration{
   padding-top: 40px;
   padding-left:30px;
@@ -29,7 +36,7 @@
 .content{
   padding-top: 35px;
   padding-left:50px;}
-  
+
 .table-nonfluid {width: auto !important;}
 
 .black-font{color:black;}
@@ -50,7 +57,8 @@
 .hr-line{height: 1px; background-color: dimgrey;
   padding: 1px; margin: 0px;}
 .hr-divider{text-align:left;margin-left:0;width:315px;height:0px;padding: 0px}
-
+.hr-small-gap{text-align:left;margin-left:0;height:0px;padding: 0px}
+.hr-button-gap{height:0px; visibility:hidden; margin-bottom:-10px;}
 
 /* ----- Modified Bootstrap Tag ------*/
 .form-control-inherit{display:block;padding:.375rem .75rem;font-size:1rem;line-height:1.5;color:#495057;
