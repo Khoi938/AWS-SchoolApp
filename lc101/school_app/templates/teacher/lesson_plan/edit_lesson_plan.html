@@ -37,14 +37,12 @@
         {% endfor %}
           </ul> 
         {% endif %}</div></div><hr>
-    <form action="/teacher/lesson_plan/edit_schedule" method="post" id=''> {% csrf_token %}
-      <input type="hidden" name="course_id" value='{{course.id}}'/>
-    </div>
+    <form action="/teacher/lesson_plan/edit_schedule/" method="post" id=''> {% csrf_token %}
+      <input type="hidden" name="course_id" value='{{ course.id }}'/>
+      <input type="hidden" name="lesson_plan_id" value='{{ lesson_plan.id }}'/>
+    </div> 
+    <!--that div above move margin to right-->
       <div class="form-row" style=''>
-          <!--<div class="col-md-2 mb-3">-->
-          <!--  <label class="btn btn-info" for='' >Week #</label>-->
-          <!--  <input type="text" name='week_number' maxlength="2" placeholder='ex. Week 1' data-toggle="popover" title="" data-content="Digit only" data-placement="bottom" class="form-control"required>-->
-          <!--</div>-->
           <div class="col-md-4 mb-3">
             <label class="btn btn-info" for='' >Agenda of the week</label>
             <textarea class="form-control" name='agenda' id="" rows="2" cols='30'required>{{ lesson_plan.agenda }}</textarea>
@@ -106,7 +104,7 @@
           <button style='width:150px;text-align: center;' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-paperclip"></i> Save Edit </button>
         </div>
         </div>
-        
+        </div>
         <br><br>
     </form>
 

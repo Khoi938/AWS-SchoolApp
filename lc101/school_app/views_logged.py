@@ -245,8 +245,8 @@ def edit_lesson_plan(request,lesson_plan_id=None):
             return redirect('/')
         if request.method == 'POST':    
             course_id = request.POST['course_id']
+            lesson_plan_id = request.POST['lesson_plan_id']
             agenda = request.POST['agenda']
-            week_number = request.POST['week_number']
             weekend_plan = request.POST['weekend_plan']
         
             monday_date = request.POST['monday_date']
@@ -261,14 +261,13 @@ def edit_lesson_plan(request,lesson_plan_id=None):
             thursday_plan = request.POST['thursday_plan']
             friday_plan = request.POST['friday_plan']
         
-            course = Course.objects.filter(id=course_id).first()
-            new_lesson = Lesson_plan.objects.create(course_title=course.course_title, teacher_idx=request.user.teacher.id,
-            week_number=week_number, agenda=agenda, teacher=request.user.teacher, course=course, monday_date=monday_date,
-            tuesday_date=tuesday_date, wednesday_date=wednesday_date, thursday_date=thursday_date, friday_date=friday_date,
-            monday_plan=monday_plan, tuesday_plan=tuesday_plan, wednesday_plan=wednesday_plan, thursday_plan=thursday_plan, friday_plan=friday_plan,
-            weekend_plan=wednesday_plan)
-            messages.success(request, 'Lesson for week '+new_lesson.week_number+' sucessfully added.')
-            return redirect('/teacher/lesson_plan/'+course_id)
+            # course = Course.objects.filter(id=course_id).first()
+            Lesson_plan.objects.filter(id=lesson_plan_id).update(agenda=agenda, monday_date=monday_date, 
+            tuesday_date=tuesday_date, wednesday_date=wednesday_date, thursday_date=thursday_date, 
+            friday_date=friday_date, monday_plan=monday_plan, tuesday_plan=tuesday_plan, wednesday_plan=wednesday_plan, 
+            thursday_plan=thursday_plan, friday_plan=friday_plan, weekend_plan=wednesday_plan)
+            messages.success(request, 'Schedule sucessfully updated.')
+            return redirect('/teacher/lesson_plan/weekly_schedule/'+lesson_plan_id)
         
         lesson_plan = Lesson_plan.objects.filter(id=lesson_plan_id).first()
         course = lesson_plan.course

@@ -217,6 +217,10 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+When you use post in form URL must alway match. In Django the the / is auto append 
+so all URL is uniform. When post request is sent via no slash. Django redierct to the / version 
+losing the post data in the process 
+
 
               {% with number=0 %}
               {% endwith %}
