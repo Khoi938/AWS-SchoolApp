@@ -265,7 +265,7 @@ def edit_lesson_plan(request,lesson_plan_id=None):
             Lesson_plan.objects.filter(id=lesson_plan_id).update(agenda=agenda, monday_date=monday_date, 
             tuesday_date=tuesday_date, wednesday_date=wednesday_date, thursday_date=thursday_date, 
             friday_date=friday_date, monday_plan=monday_plan, tuesday_plan=tuesday_plan, wednesday_plan=wednesday_plan, 
-            thursday_plan=thursday_plan, friday_plan=friday_plan, weekend_plan=wednesday_plan)
+            thursday_plan=thursday_plan, friday_plan=friday_plan, weekend_plan=weekend_plan)
             messages.success(request, 'Schedule sucessfully updated.')
             return redirect('/teacher/lesson_plan/weekly_schedule/'+lesson_plan_id)
         
@@ -273,6 +273,15 @@ def edit_lesson_plan(request,lesson_plan_id=None):
         course = lesson_plan.course
         return render(request,'teacher/lesson_plan/edit_lesson_plan.html',
         {'course':course,'lesson_plan':lesson_plan})
+        
+def edit_lesson_plan(request,lesson_plan_id=None):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        
         
 def student_list(request):
     if is_login(request) == False: 

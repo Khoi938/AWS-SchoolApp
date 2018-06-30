@@ -5,27 +5,27 @@
     $('[data-toggle="popover"]').popover();   
     });
 </script>
-<div class='content'>
-      <div class="form-row" style=''>
-        <div class="col-md-5 mb-3">
+<div class='content' >
+  <div class="container-fuild form-row" style="width:100%">
+    <div class="col-md-6">
         <div style="width: 320px">
         <h4 style='padding-left: 1px'>{{ course.semester }}, {{ course.year }}</h4>
         <hr class='hr-line'/>
         <h4 style='padding-left: 1px'>{{course.course_title}}</h4>
         <hr class='hr-line'/>
         <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
-        <a href='{% url "teacher" %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Schedule List</a>
-        <a href='{% url "edit_lesson_plan" lesson_plan_id=lesson_plan.id %}' class="btn btn-info btn-sm shadow-sm" role="button"><i class="fas fa-pencil-alt"></i> Edit Schedule</a>
+        <a href='{% url "lesson_plan" course_id=course.id %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Lesson Outline</a>
+        <a href='{% url "edit_schedule" lesson_plan_id=lesson_plan.id %}' class="btn btn-info btn-sm shadow-sm" role="button"><i class="fas fa-pencil-alt"></i> Edit Schedule</a>
         <hr/>
-        </div></div>
-        <div class="col-md-5 mb-3">
+    </div></div>
+    <div class="col-md-6 mb-3">
         <div class="rounded border border-info shadow-sm" style="width: 320px">
         <div class="mr-1 mt-1 ml-1">
         <!--<div class="card border-info bg-light" style='background: linear-gradient(to right, #e0eafc, #cfdef3);'>-->
         <h4> Schedule for week {{ lesson_plan.week_number }}</h4>
         <hr style='margin-top:-3px; background-color: #5bc0de;' />
         <h6 style='margin-top:-7px'><strong>Agenda:</strong> {{ lesson_plan.agenda }}</h6><br><br>
-        </div></div></div>
+    </div></div></div>
         {% if messages %}
           <ul class="messages">
         {% for message in messages %}
@@ -33,7 +33,7 @@
         {% endfor %}
           </ul> 
         {% endif %}
-        </div>
+  </div>
         <div class='mr-2'>
           <table class="table table-hover table-bordered  shadow">
             <thead class='table-primary'>
@@ -75,6 +75,6 @@
             </tr>
             </tbody>
           </table></div>
-        <br><br>
-</div>
+        <br>
+</div></div>
 {% endblock %}
