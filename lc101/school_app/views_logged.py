@@ -167,7 +167,25 @@ def delete_classroom(request,classroom_id=None):
         detached_classroom.save()
         messages.success(request, detached_classroom.course_title+" @"+detached_classroom.time+' sucessfully removed.')
         return redirect('/teacher/classroom/'+str(course_id))
-        
+
+@require_http_methods(['POST'])
+def delete(request):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        # if request.method == 'POST':
+        classroom_id = request.POST['classroom_id']
+        detached_classroom = Classroom.objects.filter(id=classroom_id).first()
+        course_id = detached_classroom.course.id
+        detached_classroom.course = None
+        detached_classroom.teacher = None
+        detached_classroom.save()
+        messages.success(request, detached_classroom.course_title+" @"+detached_classroom.time+' sucessfully removed.')
+        return redirect('/teacher/classroom/'+str(course_id))
+                
 # ------ Lesson Plan View, Add, Edit, update ------
 @require_http_methods(["GET"])
 def lesson_plan(request,course_id=None): #list all lesson plan created

@@ -38,6 +38,9 @@ urlpatterns=[
     path('teacher/classroom/edit_classroom', views_logged.edit_classroom, name='edit_classroom'),
     path('teacher/classroom/edit_classroom/<int:classroom_id>', views_logged.edit_classroom, name='edit_classroom'),
     path('teacher/classroom/delete_classroom/<int:classroom_id>', views_logged.delete_classroom, name='delete_classroom'),
+    
+    path('teacher/classroom/delete_classroom/', views_logged.delete, name='delete'),
+   
    
     path('teacher/student_list', views_logged.student_list, name='student_list'),
     path('teacher/student_views', views_logged.student_views, name='student_views'),
