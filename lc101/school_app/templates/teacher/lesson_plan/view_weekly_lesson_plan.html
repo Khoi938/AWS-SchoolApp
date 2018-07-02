@@ -53,9 +53,9 @@
                 <a href='{% url "weekly_lesson_plan" lesson_plan_id=lesson.id  %}'><i class="fas fa-th-list"></i></a>
               </td>
               <td>
-                <a href='{% url "edit_schedule" lesson_plan_id=lesson.id  %}'><i class="fas fa-edit"></i></a>
+                <a href='{% url "edit_lesson_plan" lesson_plan_id=lesson.id  %}'><i class="fas fa-edit"></i></a>
               </td>
-              <td><a href='{% url "delete_schedule" course_id=course.id lesson_plan_id=lesson.id %}'>
+              <td><a href='{% url "delete_lesson_plan" course_id=course.id lesson_plan_id=lesson.id %}'>
                 <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="ALERT!"></i></a></td>
             </tr>
         {% endfor %}

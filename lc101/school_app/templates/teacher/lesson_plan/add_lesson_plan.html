@@ -41,7 +41,7 @@
         {% endfor %}
           </ul> 
         {% endif %}</div><hr/></div>
-    <form action="/teacher/lesson_plan/add" method="post" id=''> {% csrf_token %}
+    <form action="/teacher/lesson_plan/add/" method="post" id=''> {% csrf_token %}
       <input type="hidden" name="course_id" value='{{course.id}}'/>
     <hr/></div>
       <div class="form-row" style=''>
@@ -51,7 +51,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <label class="btn btn-info" for='' >Agenda of the week</label>
-            <textarea class="form-control" name='agenda' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
+            <textarea class="form-control" name='agenda' id="" rows="2" cols='30' placeholder="Agenda"required></textarea>
           </div>
           <div class="col-md-4 mb-3">
           </div></div><hr/>

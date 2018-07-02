@@ -37,7 +37,7 @@
         {% endfor %}
           </ul> 
         {% endif %}</div></div><hr>
-    <form action="/teacher/lesson_plan/update_schedule/" method="post" id=''> {% csrf_token %}
+    <form action="/teacher/lesson_plan/update_lesson_plan/" method="post" id=''> {% csrf_token %}
       <input type="hidden" name="course_id" value='{{ course.id }}'/>
       <input type="hidden" name="lesson_plan_id" value='{{ lesson_plan.id }}'/>
     </div> 

@@ -99,8 +99,22 @@ def classroom(request,course_id=None):
             return redirect('/')
         course = Course.objects.filter(id=course_id).first()
         classes = Classroom.objects.filter(course=course)
+        
+        time_list = []
+        for cla in classes:
+            time_list.append(cla.time)
+        conflict_index=[]
+        for time in time_list:
+            for index, time2 in enumerate(time_list):
+                count = 0
+                if time == time2:
+                    count += 1 
+                    if count >= 2:
+                        conflict_index.append(index+1)
+        
+            
         return render(request,'teacher/classroom/view_classroom.html',
-        {'classes':classes,'course':course})
+        {'classes':classes,'course':course,'conflict_index':conflict_index})
         
 def add_classroom(request,course_id=None):
     if is_login(request) == False: 
@@ -153,7 +167,7 @@ def edit_classroom(request,classroom_id=None):
         return render(request,'teacher/classroom/edit_classroom.html',
         {'classroom':classroom,'course_id':course_id})
     
-def delete_classroom(request,classroom_id=None):
+def detached_classroom(request,classroom_id=None): #Saving Data for Analytical Purpose
     if is_login(request) == False: 
         return redirect('/login')
     if is_login(request) == True:
@@ -162,7 +176,7 @@ def delete_classroom(request,classroom_id=None):
             return redirect('/')
         detached_classroom = Classroom.objects.filter(id=classroom_id).first()
         course_id = detached_classroom.course.id
-        detached_classroom.course = None
+        detached_classroom.course = None 
         detached_classroom.teacher = None
         detached_classroom.save()
         messages.success(request, detached_classroom.course_title+" @"+detached_classroom.time+' sucessfully removed.')
@@ -198,7 +212,7 @@ def lesson_plan(request,course_id=None): #list all lesson plan created
 
         course = Course.objects.filter(id=course_id).first()
         lesson_plan = Lesson_plan.objects.filter(course=course)
-        return render(request,'teacher/lesson_plan/weekly_lesson_plan.html',
+        return render(request,'teacher/lesson_plan/view_weekly_lesson_plan.html',
         {'course':course,'lesson_plan':lesson_plan})
         
 @require_http_methods(["GET"])
@@ -212,7 +226,7 @@ def weekly_lesson_plan(request,lesson_plan_id=None): #view individual plan by id
             
         lesson_plan = Lesson_plan.objects.filter(id=lesson_plan_id).first()
         course = lesson_plan.course
-        return render(request,'teacher/lesson_plan/view_lesson_plan.html',
+        return render(request,'teacher/lesson_plan/view_individual_lesson_plan.html',
         {'course':course,'lesson_plan':lesson_plan})
 
 
@@ -285,20 +299,20 @@ def edit_lesson_plan(request,lesson_plan_id=None):
             friday_date=friday_date, monday_plan=monday_plan, tuesday_plan=tuesday_plan, wednesday_plan=wednesday_plan, 
             thursday_plan=thursday_plan, friday_plan=friday_plan, weekend_plan=weekend_plan)
             messages.success(request, 'Schedule sucessfully updated.')
-            return redirect('/teacher/lesson_plan/weekly_schedule/'+lesson_plan_id)
+            return redirect('/teacher/lesson_plan/weekly_lesson_plan/'+lesson_plan_id)
         
         lesson_plan = Lesson_plan.objects.filter(id=lesson_plan_id).first()
         course = lesson_plan.course
         return render(request,'teacher/lesson_plan/edit_lesson_plan.html',
         {'course':course,'lesson_plan':lesson_plan})
         
-def edit_lesson_plan(request,lesson_plan_id=None):
-    if is_login(request) == False: 
-        return redirect('/login')
-    if is_login(request) == True:
-        if request.user.profile.is_teacher == False:
-            messages.warning(request, "You don't have Instructor's Privilege!")
-            return redirect('/')
+# def edit_lesson_plan(request,lesson_plan_id=None):
+#     if is_login(request) == False: 
+#         return redirect('/login')
+#     if is_login(request) == True:
+#         if request.user.profile.is_teacher == False:
+#             messages.warning(request, "You don't have Instructor's Privilege!")
+#             return redirect('/')
         
         
 def student_list(request):

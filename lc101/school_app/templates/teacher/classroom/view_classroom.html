@@ -24,7 +24,9 @@
         {% endfor %}
           </ul> 
         {% endif %}
-        
+        {% if conflict_index %}
+          <h6 style='color:red'>POssible conflict</h6>
+        {% endif %}
         {% if classes %}
           <h5><big>Classes assigned to {{ course.course_title }} :</big></h5>
           <div class='mr-2'>
@@ -56,10 +58,10 @@
                 <a href='{% url "edit_classroom" classroom_id=class.id %}'><i class="fas fa-edit"></i></a>
               </td>
               <td>
-                <form action='/teacher/classroom/delete_classroom/' method='post'>{% csrf_token %}
+                <form action='/teacher/classroom/detached_classroom/' method='post'>{% csrf_token %}
                   <input type='hidden' name='classroom_id'value='{{ class.id }}'/>
                   <button type='submit' style='border:none;background:none;cursor: pointer;cursor: hand;'>
-                  <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="ALERT!"></i>
+                  <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"></i>
                   </button>
                 </form>
               </td>
