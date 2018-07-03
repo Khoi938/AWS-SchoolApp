@@ -60,8 +60,8 @@ def add_course(request):
             classroom.year = year
             classroom.save()
             
-            messages.success(request, 'Course: '+ new_course.course_title+', Department: '+ department.name+', Instructor: '+ 
-            request.user.get_full_name()+ ' succesfully created.' )
+            messages.success(request, 'Course: '+ new_course.course_title + ', Department: ' + department.name+', Instructor: '+ 
+            request.user.get_full_name() + ' succesfully created.' )
             return redirect('/teacher/add_course')
             # return render(request,'teacher/add_course.html')
         else:
@@ -133,7 +133,7 @@ def add_classroom(request,course_id=None):
             course = Course.objects.filter(id=course_id).first()
             classroom = Classroom.objects.create(course_title=course_title, course_id=course_id, teacher_name=request.user.get_full_name,
             room_number=room_number, time=time, teacher=request.user.teacher, course=course,description=description)
-            messages.success(request, 'New class have been succesfully added to '+course.course_title+'.' )
+            messages.success(request, 'New class @' + classroom.time + 'succesfully added.')
             return redirect('/teacher/classroom/'+course_id)
         course = Course.objects.filter(id=course_id).first()
         return render(request,'teacher/classroom/add_classroom.html',
@@ -167,40 +167,24 @@ def edit_classroom(request,classroom_id=None):
         return render(request,'teacher/classroom/edit_classroom.html',
         {'classroom':classroom,'course_id':course_id})
     
-def detached_classroom(request,classroom_id=None): #Saving Data for Analytical Purpose
-    if is_login(request) == False: 
-        return redirect('/login')
-    if is_login(request) == True:
-        if request.user.profile.is_teacher == False:
-            messages.warning(request, "You don't have Instructor's Privilege!")
-            return redirect('/')
-        detached_classroom = Classroom.objects.filter(id=classroom_id).first()
-        course_id = detached_classroom.course.id
-        detached_classroom.course = None 
-        detached_classroom.teacher = None
-        detached_classroom.save()
-        messages.success(request, detached_classroom.course_title+" @"+detached_classroom.time+' sucessfully removed.')
-        return redirect('/teacher/classroom/'+str(course_id))
-
 @require_http_methods(['POST'])
-def delete(request):
+def detached_classroom(request): #Saving Data for Analytical Purpose
     if is_login(request) == False: 
         return redirect('/login')
     if is_login(request) == True:
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
-        # if request.method == 'POST':
         classroom_id = request.POST['classroom_id']
         detached_classroom = Classroom.objects.filter(id=classroom_id).first()
         course_id = detached_classroom.course.id
         detached_classroom.course = None
         detached_classroom.teacher = None
         detached_classroom.save()
-        messages.success(request, detached_classroom.course_title+" @"+detached_classroom.time+' sucessfully removed.')
+        messages.success(request, detached_classroom.course_title + " @" + detached_classroom.time + ' sucessfully removed.')
         return redirect('/teacher/classroom/'+str(course_id))
                 
-# ------ Lesson Plan View, Add, Edit, update ------
+# ------ Lesson Plan View, Add, Edit, delete ------
 @require_http_methods(["GET"])
 def lesson_plan(request,course_id=None): #list all lesson plan created
     if is_login(request) == False: 
@@ -261,7 +245,7 @@ def add_lesson_plan(request,course_id=None):
             tuesday_date=tuesday_date, wednesday_date=wednesday_date, thursday_date=thursday_date, friday_date=friday_date,
             monday_plan=monday_plan, tuesday_plan=tuesday_plan, wednesday_plan=wednesday_plan, thursday_plan=thursday_plan, friday_plan=friday_plan,
             weekend_plan=wednesday_plan)
-            messages.success(request, 'Lesson for week '+new_lesson.week_number+' sucessfully added.')
+            messages.success(request, 'Lesson for week ' + new_lesson.week_number + ' sucessfully added.')
             return redirect('/teacher/lesson_plan/'+course_id)
         
         course = Course.objects.filter(id=course_id).first()
@@ -305,15 +289,22 @@ def edit_lesson_plan(request,lesson_plan_id=None):
         course = lesson_plan.course
         return render(request,'teacher/lesson_plan/edit_lesson_plan.html',
         {'course':course,'lesson_plan':lesson_plan})
-        
-# def edit_lesson_plan(request,lesson_plan_id=None):
-#     if is_login(request) == False: 
-#         return redirect('/login')
-#     if is_login(request) == True:
-#         if request.user.profile.is_teacher == False:
-#             messages.warning(request, "You don't have Instructor's Privilege!")
-#             return redirect('/')
-        
+ 
+@require_http_methods(['POST'])      
+def delete_lesson_plan(request):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+            
+        lesson_plan_id = request.POST['lesson_plan_id']
+        lesson_plan = Lesson_plan.objects.filter(id=lesson_plan_id).first()
+        course_id = lesson_plan.course.id
+        lesson_plan.delete()
+        messages.success(request,'Schedule for week ' + lesson_plan.week_number + ' sucessfully removed.')
+        return redirect('/teacher/lesson_plan/'+str(course_id)+'/')
         
 def student_list(request):
     if is_login(request) == False: 

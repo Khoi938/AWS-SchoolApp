@@ -23,6 +23,7 @@ urlpatterns=[
     path('teacher/lesson_plan/update_lesson_plan/',views_logged.edit_lesson_plan, name='update_lesson_plan'),
     path('teacher/lesson_plan/edit_lesson_plan/<int:lesson_plan_id>',views_logged.edit_lesson_plan, name='edit_lesson_plan'),
     path('teacher/lesson_plan/delete_lesson_plan/<int:course_id>/<int:lesson_plan_id>',views_logged.edit_lesson_plan, name='delete_lesson_plan'),
+    path('teacher/lesson_plan/delete_lesson_plan/',views_logged.delete_lesson_plan, name='delete_lesson_plan'),
     
     path('teacher/lesson_plan/add/',views_logged.add_lesson_plan, name='save_lesson_plan'),#save newly created lesson_plan
     path('teacher/lesson_plan/add/<int:course_id>/',views_logged.add_lesson_plan, name='add_lesson_plan'),
@@ -36,7 +37,7 @@ urlpatterns=[
     
     path('teacher/classroom/edit_classroom/', views_logged.edit_classroom, name='save_edit_classroom'),
     path('teacher/classroom/edit_classroom/<int:classroom_id>', views_logged.edit_classroom, name='edit_classroom'),
-    path('teacher/classroom/detached_classroom/', views_logged.delete, name='detached_classroom'),
+    path('teacher/classroom/detached_classroom/', views_logged.detached_classroom, name='detached_classroom'),
    
    
     # path('teacher/classroom/detached_classroom/<int:classroom_id>', views_logged.detached_classroom, name='detached_classroom'),
