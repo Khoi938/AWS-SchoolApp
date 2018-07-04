@@ -54,13 +54,16 @@
       {% if request.user.username %}
           Username: {{ request.user.username }} &ensp;II&ensp;
       {% endif %}
-        {% if request.user.profile.is_teacher %}
+      {% if request.user.profile.is_teacher %}
           Educator: {{request.user.first_name}} &ensp;
-        {% endif %}
+      {% endif %}
       <!--<form class="form-inline">-->
       <!--  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit"> <i class="fas fa-user-cog"></i> My Account</button>
+        <!--<button class="btn btn-outline-light my-2 my-sm-0" type="submit"> <i class="fas fa-user-cog"></i> My Account</button>-->
       <!--</form>-->
+      <a href='/account_management/' class='btn btn-outline-light shadow'>
+         <i class="fas fa-user-cog"></i> My Account
+      </a>
     </div>
   </nav>
     </header>

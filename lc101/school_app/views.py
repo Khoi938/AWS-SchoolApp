@@ -7,7 +7,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
 from django.template import Context, Template
+
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.views.decorators.http import require_http_methods
+
 # '/' mean base no '/' mean add to current path, Django render function implicit locate 'templates/'
+
 
 
 # -------Homepage with Login---------
@@ -32,7 +37,7 @@ def index(request):
 # Combines a given template with a given context dictionary and returns an 
 # HttpResponse object with that rendered text.
 
-# -------- Register and Login, Logout is in views_logged.py-------
+# -------- Register, Login, Logout -------
 def register(request):
     if request.method== 'POST':
         username = request.POST['username']
@@ -99,8 +104,21 @@ def login(request):
             return render(request,'registration/login.html') 
     
     return render(request,'registration/login.html')
-    
 
+def logout(request):
+    if is_login(request) == False: 
+        return redirect('/homepage')
+    username = request.user.username #request.user.get_full_name()
+    messages.success(request, username + ' Sucessfully logged out.')
+    auth_logout(request)
+    return redirect('/')   
+
+#------ Account Management and Profiles Views/Edit -----
+
+def account_management(request):
+    if is_login(request) == False: 
+        return redirect('/login')
     
+    return render(request,'account_profiles/view_account.html')
 
     

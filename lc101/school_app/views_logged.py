@@ -9,6 +9,9 @@ from django.views.decorators.http import require_http_methods
 from school_app.models import *
 from school_app.views_functions import is_teacher, is_login, sort_order, other_check
 
+#Logic for logged in User/ Specfic Non-Generic
+
+#------ Generic View/Edit profile-------
         
 #------ Teacher's Controller Logic-------
 

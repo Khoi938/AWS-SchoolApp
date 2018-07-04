@@ -7,6 +7,7 @@ urlpatterns=[
     path('',views.index, name = 'index'),
     path('homepage',views.index, name = 'homepage'),
     path('register',views.register, name='register'),
+    path('account_management/',views.account_management, name='account_management'),
     
     #when user visit this address, call this function
     path('teacher',views_logged.teacher, name='teacher'),
@@ -51,4 +52,4 @@ urlpatterns=[
     
     path('home_redirect',views_logged.home_redirect, name = 'home_redirect'),
     path('login',views.login, name='login'),
-    path('logout',views_logged.logout, name='logout')]
+    path('logout',views.logout, name='logout')]
