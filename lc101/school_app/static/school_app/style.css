@@ -1,5 +1,4 @@
 .body-index {
-  
   padding-top: 60px;
   padding-left:30px;
   padding-right:10px;
@@ -33,9 +32,13 @@
   background: linear-gradient(to right, #e0eafc, #cfdef3);
   background-size: 600% 100%;}
   
+/*Create padding on main content*/
 .content{
   padding-top: 35px;
   padding-left:50px;}
+  
+/*This make a hyperlink stay dark and not underline, also make whole block clickable*/
+.normal-link-block{display: block;text-decoration: none;color:black;}
 
 .table-nonfluid {width: auto !important;}
 

@@ -1,38 +1,60 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class='container-fuild'>
+    
+<!--</div> style='overflow: hidden;'>-->
     <div class='content'>
-    <div class='row border border-primary mr-2'>
-        <div class='col-md-4 border border-primary'>
-            <table class='table border-primary table-hover'>
+    <div class='row mr-2'>
+        <div class='col-md-4 nav navigation' style='height: 400px;overflow: hidden;'>
+            <table class='table table-bordered border border-info table-hover shadow mr-2 mt-4' style='background:white'>
+              <tbody>
+                <tr><th scope="row">
+                    <a href='#personal' style='display: block;text-decoration: none;'>Personal Details</a></th>
+                </tr>
+                <tr><th scope="row">
+                    <a href='#profiles' style='display: block;text-decoration: none;'>Account Profiles</a></th>
+                </tr>
+                <tr><th scope="row">
+                    <a href='#account' style='display: block;text-decoration: none;'>Account Management</a></th>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+            <div class='col-md-8 rounded' style=' height: 400px;overflow: hidden;overflow-y: scroll;'>
+        
+            <table class='table border-primary table-hover' style='background:white'>
                 <tbody>
                 <tr>
-                  <th scope="row">Stuff</th>
+                  <td scope="row" colspan="3" id='personal'><big><i class="far fa-user"></i> Personal Details</big></td>
+                </tr>
+                <tr>
+                  <td scope="row" style='width:33%;'><strong>First Name</strong><br>
+                  Khoi<br>
+                  <td scope='row' style='width:33%;'><strong>Last Name</strong><br>
+                  Le<br></td>
+                  <td scope="row" style='width:33%;'><strong>Middle Name</strong><br>
+                  Ba</td>
+                </tr>
+                <tr>
+                  <td scope="row" colspan="3"><strong>Address</strong><br>
+                  5555 Town N Country Tampa FL
+                  </td>
                  </tr>
                 <tr>
                     <th scope="row" style="border-color:red;">Stuff</th>
                 </tr>
-                <tr>
+                                <tr>
+                    <th scope="row" style="border-color:red;">Stuff</th>
+                </tr>
+                                <tr>
                   <th scope="row" style="border-color:red;">Stuff</th>
                  </tr>
                 <tr>
                     <th scope="row" style="border-color:red;">Stuff</th>
                 </tr>
-            
-                </tbody>
-            </table>
-        </div>
-            <div class='col-md-8 border border-primary'>
-            <h1>Other stuff</h1>
-            <table class='table border-primary table-hover'>
-                <tbody>
-                <tr>
-                  <th scope="row">Stuff</th>
-                 </tr>
-                <tr>
+                                <tr>
                     <th scope="row" style="border-color:red;">Stuff</th>
-                </tr>
-                <tr>
+                </tr>                <tr>
                   <th scope="row" style="border-color:red;">Stuff</th>
                  </tr>
                 <tr>
@@ -41,10 +63,59 @@
                                 <tr>
                     <th scope="row" style="border-color:red;">Stuff</th>
                 </tr>
+                                <tr>
+                  <th scope="row" style="border-color:red;">Stuff</th>
+                 </tr>
+                <tr>
+                    <th scope="row" style="border-color:red;">Stuff</th>
+                </tr>
+                                <tr>
+                    <th scope="row" style="border-color:red;">Stuff</th>
+                </tr>                <tr>
+                  <th scope="row" style="border-color:red;">Stuff</th>
+                 </tr>
+                <tr>
+                    <th scope="row" style="border-color:red;">Stuff</th>
+                </tr>
+                                <tr>
+                    <th scope="row" id='bottom' style="border-color:red;">bottom</th>
+                </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    
+    <!--<div class="Content" style='display: flex;-->
+    <!--overflow: hidden;-->
+    <!--height: 100vh;-->
+    <!--margin-top: -100px;-->
+    <!--padding-top: 100px;-->
+    <!--position: relative;-->
+    <!--width: 100%;-->
+    <!--backface-visibility: hidden;-->
+    <!--will-change: overflow;'>-->
+    <!--    <div class="Wrapper" style='position: absolute;-->
+    <!--width: 100%;-->
+    <!--height: 100%;'>-->
+    <!--        <div class="RightContent" style='float: right;'>-->
+    <!--            <p>You can fix the width of this content.</p>-->
+    <!--            <p>if you wont, his width will stretch just as it needs to.</p>-->
+                
+    <!--        </div>-->
+    <!--        <div class="LeftContent" style='overflow: auto;-->
+    <!--height: auto;-->
+    <!--padding: .5rem;-->
+    <!---webkit-overflow-scrolling: touch;-->
+    <!---ms-overflow-style: none;'>-->
+    <!--            <p>this will scroll</p>-->
+    <!--            <br>-->
+    <!--            lala-->
+    <!--            <br>lalal<br>lalal<br>lala<br><p>this will scroll</p><p>this will scroll</p><p>this will scroll</p><p>this will scroll</p><p>this will scroll</p><p>this will scroll</p>-->
+    <!--                <p>this will scroll</p><p>this will scroll</p><p>this will scroll</p><p>this will scroll</p><p>this will scroll</p><p>this will scroll</p>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    </div>
+
     </div>
 </div>
 
