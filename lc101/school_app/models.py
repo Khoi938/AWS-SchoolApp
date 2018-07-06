@@ -10,6 +10,7 @@ class Profile(models.Model):
     about = models.TextField(max_length=350, blank=True)
     address = models.CharField(max_length=200, blank=True)
     # zip_code = models.CharField(max_length=20, blank=True)
+    # phone_number = models.CharField(max_length=20, blank=True)
     
     birth_date = models.DateField(null=True, blank=True)
     school_id = models.IntegerField(null=True, blank = True, default=0)

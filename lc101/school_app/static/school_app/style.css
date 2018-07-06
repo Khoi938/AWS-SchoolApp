@@ -34,8 +34,10 @@
   
 /*Create padding on main content*/
 .content{
-  padding-top: 35px;
-  padding-left:50px;}
+  padding-top: 30px;
+  padding-left:50px;
+  padding-right:10px;
+}
   
 /*This make a hyperlink stay dark and not underline, also make whole block clickable*/
 .normal-link-block{display: block;text-decoration: none;color:black;}
