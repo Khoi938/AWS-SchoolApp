@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class='container-fuild'>
+    <div class='content '>
+    <div class='row mr-2'>
+        <div class='col-md-4 nav navigation' style='height: 240px;overflow: hidden;'>
+            <h2>Account Services</h2>
+            <hr align='left'  style='width:360px;'>
+            <table class='table table-bordered border border-info table-hover shadow-sm' style='background:white'>
+              <tbody>
+                <tr><th scope="row">
+                    <a href='/account_management/#personal' style='display: block;text-decoration: none;'>Personal Details</a></th>
+                </tr>
+                <tr><th scope="row">
+                    <a href='#profiles' style='display: block;text-decoration: none;'>User Profiles</a></th>
+                </tr>
+                <tr><th scope="row">
+                    <a href='#account' style='display: block;text-decoration: none;'>Account Management</a></th>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+            <div class='col-md-8 rounded' style=' height: 400px;overflow: hidden;overflow-y: auto;'>
+        
+            <table class='table border-primary shadow mt-1' style='background:white'>
+                <tbody>
+                 {% block account_management %}
+                 {% endblock %}
+                </tbody>
+            </table>
+            <br><br>
+        </div>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

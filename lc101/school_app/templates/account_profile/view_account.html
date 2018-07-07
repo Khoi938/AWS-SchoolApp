@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+        $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
 <div class='container-fuild'>
     
 <!--</div> style='overflow: hidden;'>-->
@@ -23,7 +28,7 @@
               </tbody>
             </table>
         </div>
-            <div class='col-md-8 rounded' style=' height: 400px;overflow: hidden;overflow-y: scroll;'>
+            <div class='col-md-8 rounded' style=' height: 400px;overflow: hidden;overflow-y: auto;background:blue;'>
         
             <table class='table border-primary table-hover shadow mt-1' style='background:white'>
                 <tbody>
@@ -40,7 +45,7 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>Home Address</strong><br>
-                  5555 Town N Country Tampa FL 33615 &nbsp<a href='/home'><small><i class="far fa-edit"></i>address</small></a>
+                  5555 Town N Country Tampa FL 33615 &nbsp<a href='{% url "account_management_edit" modify="address" %}'><small><i class="far fa-edit"></i>address</small></a>
                   </td>
                 </tr>
                 <tr>
@@ -62,7 +67,7 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>Day of Birth</strong><br>
-                  4-6-1986 &nbsp<a href='/home'><small><i class="far fa-edit"></i>add</small></a>
+                  4-6-1986 &nbsp
                   </td>
                 </tr>
                 </tbody>
@@ -113,7 +118,7 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>School ID</strong><br>
-                  98293972974 &nbsp
+                  982-939-72974 &nbsp
                   </td>
                 </tr>
                 <tr>

@@ -1,0 +1,33 @@
+{% extends 'account_profile/edit_base.html' %}
+{% block account_management %}
+
+<tr>
+    <td scope="row" colspan="3"><strong>Current Home Address</strong><br>
+    5555 Town N Country Tampa FL 33615 &nbsp</td>
+</tr>
+<tr>
+    <td scope="row" colspan="3"><strong>New Address</strong><br>
+    <form style='border:0'>
+      <div class='form-row'>
+          <div class=col-md-12>
+            <label for="address">Street Address</label>
+            <input type="text" class='form-control' name="stuff" id='address'/>
+          </div>
+          <div class='col-md-5'>
+              <label>City</label>
+              <input type="text" class='form-control' name="city"/>
+          </div>
+          <div class='col-md-4'>
+              <label>State</label>
+              <input type="text" class='form-control'name="state"/>
+          </div>
+          <div class='col-md-3'>
+              <label>Zip</label>
+              <input type="text" class='form-control' name="zip_code"/>
+          </div>
+            <button class='btn btn-success shadow-sm text-center mt-1 ml-2'>Submit</button>
+        </div>
+    </form>
+    </td>
+</tr>
+{% endblock %}

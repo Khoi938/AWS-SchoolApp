@@ -9,6 +9,8 @@ urlpatterns=[
     path('register',views.register, name='register'),
     path('account_management/',views.account_management, name='account_management'),
     
+    path('account_management/<str:modify>',views.account_management_edit,name='account_management_edit'),
+    
     #when user visit this address, call this function
     path('teacher',views_logged.teacher, name='teacher'),
     path('teacher/<int:sort>/',views_logged.teacher, name='teacher_sort'),

@@ -119,6 +119,12 @@ def account_management(request):
     if is_login(request) == False: 
         return redirect('/login')
     
-    return render(request,'account_profiles/view_account.html')
-
+    return render(request,'account_profile/view_account.html')
+    
+def account_management_edit(request,modify=None):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if modify == 'address':
+        return render(request,'account_profile/edit_profile/edit_address.html')
+    
     
