@@ -14,7 +14,7 @@
         <div class='col-md-4 nav navigation' style='height: 240px;overflow: hidden;'>
             <h2>Account Services</h2>
             <hr align='left'  style='width:360px;'>
-            <table class='table table-bordered border border-info table-hover shadow-sm' style='background:white'>
+            <table class='table table-bordered border table-hover shadow-sm' style='background:white'>
               <tbody>
                 <tr><th scope="row">
                     <a href='#personal' style='display: block;text-decoration: none;'>Personal Details</a></th>
@@ -27,13 +27,20 @@
                 </tr>
               </tbody>
             </table>
+            {% if messages %}
+              <ul class="messages" style='list-style-type: none;'>
+            {% for message in messages %}
+              <li><div class="alert-inherit alert-success shadow-sm" role="alert">{{ message }}</div></li>
+            {% endfor %}
+              </ul> 
+            {% endif %}
         </div>
-            <div class='col-md-8 rounded' style=' height: 400px;overflow: hidden;overflow-y: auto;background:blue;'>
+            <div class='col-md-8 rounded' style=' height: 400px;overflow: hidden;overflow-y: auto;'>
         
-            <table class='table border-primary table-hover shadow mt-1' style='background:white'>
+            <table class='table table-hover shadow mt-1' style='background:white'>
                 <tbody>
                 <tr>
-                  <td scope="row" colspan="3" id='personal'><big><i class="far fa-user"></i> Personal Details</big></td>
+                  <td scope="row" colspan="3" id='personal'><big><i class="far fa-user" style='font-size:24px'></i> Personal Details</big></td>
                 </tr>
                 <tr>
                   <td scope="row" style='width:33%;'><strong>First Name</strong><br>
@@ -50,15 +57,15 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="far fa-envelope"></i> <strong>Email Address</strong><br>
-                  eclipse938@gmail.com &nbsp<a href='/home'><small><i class="far fa-edit"></i>email</small></a>
+                  eclipse938@gmail.com &nbsp<a href='{% url "account_management_edit" modify="email" %}'><small><i class="far fa-edit"></i>email</small></a>
                   </td>
                 </tr>
                 <tr colspan="3">
                   <td scope="row"><i class="fas fa-phone"></i> <strong>Phone Number</strong><br>
-                  813-810-5271 &nbsp<a href='/home'><small><i class="far fa-edit"></i>phone number</small></a>
+                  813-810-5271 &nbsp<a href='{% url "account_management_edit" modify="phone_number" %}'><small><i class="far fa-edit"></i>phone number</small></a>
                   </td>
                     <td scope="row"><strong>Emergency Contact</strong><br>
-                  911 <a href='/home'><small><i class="far fa-edit"></i>change</small></a>
+                  911 <a href='{% url "account_management_edit" modify="emergency_contact" %}'><small><i class="far fa-edit"></i>change</small></a>
                   </td>
                   </td>
                     <td scope="row"><strong>Relationship</strong><br>
@@ -76,7 +83,9 @@
             <table class='table border-primary table-hover shadow' style='background:white'>
                 <tbody>
                 <tr>
-                  <td scope="row" colspan="3" id='profiles'><big>User Profiles</big></td>
+                  <td scope="row" colspan="3" id='profiles'><big>
+                    <!--<i class="far fa-address-card" style='font-size:24px'></i> -->
+                  User Profiles</big></td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>Something About You</strong><br>

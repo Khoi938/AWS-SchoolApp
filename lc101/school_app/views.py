@@ -118,6 +118,8 @@ def logout(request):
 def account_management(request):
     if is_login(request) == False: 
         return redirect('/login')
+    if request.method == 'POST':
+        return None
     
     return render(request,'account_profile/view_account.html')
     
@@ -126,5 +128,11 @@ def account_management_edit(request,modify=None):
         return redirect('/login')
     if modify == 'address':
         return render(request,'account_profile/edit_profile/edit_address.html')
+    if modify == 'email':
+        return render(request,'account_profile/edit_profile/edit_email.html')
+    if modify == 'phone_number':
+        return render(request,'account_pofile/edit_profile/edit_phone_number.html')
+    if modify == 'emergency_contact':
+        return render(request,'account_profile/edit_profile/edit_emergency_contact.html')
     
     

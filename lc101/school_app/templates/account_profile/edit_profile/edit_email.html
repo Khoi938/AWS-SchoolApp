@@ -1,0 +1,21 @@
+{% extends 'account_profile/edit_profile/base.html' %}
+{% block account_management %}
+
+<tr>
+    <td scope="row" colspan="3"><strong>Current Email Address</strong><br>
+    5555 Town N Country Tampa FL 33615 &nbsp</td>
+</tr>
+<tr>
+    <td scope="row" colspan="3"><strong>New Email</strong><br>
+    <form action="/account_management/" method="post" style='border:0'>  {% csrf_token %}
+      <div class='form-row'>
+          <div class=col-md-6>
+            <!--<label for="address">Street Address</label>-->
+            <input type="email" class='form-control shadow-sm' name="email" id=''/>
+          </div>
+            <button class='btn btn-success shadow-sm text-center ml-2'>Save Changes</button>
+        </div>
+    </form>
+    </td>
+</tr>
+{% endblock %}
