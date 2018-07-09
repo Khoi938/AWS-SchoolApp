@@ -7,19 +7,19 @@
 </tr>
 <tr>
     <td scope="row" colspan="3"><strong>New Address</strong><br>
-    <form style='border:0'>
+    <form action='/account_management_save/' method='post'style='border:0'>{% csrf_token %}
       <div class='form-row'>
           <div class=col-md-12>
             <label for="address">Street Address</label>
-            <input type="text" class='form-control shadow-sm' name="stuff" id='address'/>
+            <input type="text" class='form-control shadow-sm' name="street_address" id='address'required/>
           </div>
           <div class='col-md-5'>
               <label>City</label>
-              <input type="text" class='form-control shadow-sm' name="city"/>
+              <input type="text" class='form-control shadow-sm' name="city" required/>
           </div>
           <div class='col-md-4'>
               <label>State</label>
-              <select class='form-control shadow-sm'>
+              <select class='form-control shadow-sm' name='state' required>
               
 	<option value="AL">Alabama</option>
 	<option value="AK">Alaska</option>
@@ -76,7 +76,7 @@
           </div>
           <div class='col-md-3'>
               <label>Zip</label>
-              <input type="text" class='form-control shadow-sm' name="zip_code"/>
+              <input type="text" class='form-control shadow-sm' name="zip_code" required/>
           </div>
             <button class='btn btn-success shadow-sm text-center mt-2 ml-2'>Save Changes</button>
         </div>

@@ -43,23 +43,24 @@ def register(request):
         username = request.POST['username']
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
+        middle_name = request.POST['middle_name']
+        
         password = request.POST['password']
         email = request.POST['email']
         school_id = request.POST['school_id']
         
-        input_dict = {'username':username, 'first_name':first_name, 'last_name':last_name, 
-        'email':email,'school_id':school_id}
+        input_dict = {'username':username, 'first_name':first_name, 'last_name':last_name,'middle_name':middle_name, 'email':email,'school_id':school_id}
         
         if User.objects.filter(username=username):
             messages.warning(request, 'Username has already been taken.')
             return render(request,'registration/register.html',{'input_dict':input_dict})
         
-        if school_id.isdigit() == False: # Check to see if str can be integer
+        if school_id.isdigit() == False: # Check to see if passed in str can be integer
             messages.warning(request, 'School id is an 8 digit number.')
             return render(request,'registration/register.html',{'input_dict':input_dict})
             
-        if len(school_id) < 8 or len(school_id) > 8:
-            messages.warning(request, 'School id is an 8 digit number.')
+        if len(school_id) < 10 or len(school_id) > 10:
+            messages.warning(request, 'School id is an 10 digit number.')
             return render(request,'registration/register.html',{'input_dict':input_dict})
             
         if Profile.objects.filter(school_id=school_id):
@@ -70,7 +71,8 @@ def register(request):
         ,first_name=first_name,email=email)# At this point receiver in models.py is called
         
         profile = Profile.objects.get(user=user)#.update(school_id=int(school_id))
-        profile.school_id = int(school_id) #todo later reduce db query
+        profile.school_id = school_id #todo later reduce db query
+        profile.middle_name = middle_name
         
         if int(school_id)%2 != 0:
             profile.is_student = True
@@ -118,8 +120,6 @@ def logout(request):
 def account_management(request):
     if is_login(request) == False: 
         return redirect('/login')
-    if request.method == 'POST':
-        return None
     
     return render(request,'account_profile/view_account.html')
     
@@ -134,5 +134,33 @@ def account_management_edit(request,modify=None):
         return render(request,'account_pofile/edit_profile/edit_phone_number.html')
     if modify == 'emergency_contact':
         return render(request,'account_profile/edit_profile/edit_emergency_contact.html')
-    
+
+def account_management_save(request):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if request.method == 'POST':
+        if 'street_address' in request.POST:
+            if request.POST['street_address'] and request.POST['city'] and request.POST['state'] and request.POST['zip_code']:
+                profile = Profile.objects.filter(user=request.user).first()
+                profile.street_address = request.POST['street_address'].upper()
+                profile.city = request.POST['city'].upper()
+                profile.state = request.POST['state']
+                profile.zip_code = request.POST['zip_code']
+                profile.save()
+                messages.success(request,'Home address sucessfully updated')
+                return redirect('/account_management/')
+            else:
+                messages.success(request,'Missing value, update unsucessful')
+                return redirect('/account_management/')
+        
+        if 'email' in request.POST:
+            if request.POST['email']:
+                user = User.objects.filter(id=request.user.id).first()
+                user.email = request.POST['email']
+                user.save()
+                messages.success(request,'Email address sucessfully updated')
+                return redirect('/account_management/')
+            else:
+                messages.success(request,'Invalid email address, update unsucessful')
+                return redirect('/account_management/')
     

@@ -10,6 +10,7 @@ urlpatterns=[
     path('account_management/',views.account_management, name='account_management'),
     
     path('account_management/<str:modify>',views.account_management_edit,name='account_management_edit'),
+    path('account_management_save/',views.account_management_save,name='account_management_save'),
     
     #when user visit this address, call this function
     path('teacher',views_logged.teacher, name='teacher'),

@@ -8,12 +8,16 @@ class Profile(models.Model):
     #username,first,last,email,password is extened from Django Auth User
     user = models.OneToOneField(User, null=True, on_delete = models.SET_NULL)
     about = models.TextField(max_length=350, blank=True)
-    address = models.CharField(max_length=200, blank=True)
+    
+    street_address = models.CharField(max_length=200, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    state = models.CharField(max_length=100, blank=True)
     zip_code = models.CharField(max_length=20, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     
+    middle_name = models.CharField(max_length=20, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    school_id = models.IntegerField(null=True, blank = True, default=0)
+    school_id = models.CharField(max_length=15,null=True, blank = True, default=0)
     
     is_student = models.BooleanField('Student', default=False)
     is_teacher = models.BooleanField('Teacher', default=False)

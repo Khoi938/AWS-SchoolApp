@@ -8,10 +8,10 @@
 <div class='container-fuild'>
     
 <!--</div> style='overflow: hidden;'>-->
-    <div class='content '>
-
+    <div class='content'>
     <div class='row mr-2'>
-        <div class='col-md-4 nav navigation' style='height: 240px;overflow: hidden;'>
+        <div class='col-md-4 nav navigation'>
+          <div style='height: auto;overflow: hidden;'>
             <h2>Account Services</h2>
             <hr align='left'  style='width:360px;'>
             <table class='table table-bordered border table-hover shadow-sm' style='background:white'>
@@ -28,12 +28,13 @@
               </tbody>
             </table>
             {% if messages %}
-              <ul class="messages" style='list-style-type: none;'>
+              <ul class="messages" style='list-style-type: none;margin-top:0'>
             {% for message in messages %}
               <li><div class="alert-inherit alert-success shadow-sm" role="alert">{{ message }}</div></li>
             {% endfor %}
               </ul> 
             {% endif %}
+        </div>
         </div>
             <div class='col-md-8 rounded' style=' height: 400px;overflow: hidden;overflow-y: auto;'>
         
@@ -44,20 +45,21 @@
                 </tr>
                 <tr>
                   <td scope="row" style='width:33%;'><strong>First Name</strong><br>
-                  Khoi<br>
+                  {{ request.user.first_name }}<br>
                   <td scope='row' style='width:33%;'><strong>Last Name</strong><br>
-                  Le<br></td>
+                  {{ request.user.last_name }}<br></td>
                   <td scope="row" style='width:33%;'><strong>Middle Name</strong><br>
-                  Ba</td>
+                  {{ request.user.profile.middle_name }}</td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>Home Address</strong><br>
-                  5555 Town N Country Tampa FL 33615 &nbsp<a href='{% url "account_management_edit" modify="address" %}'><small><i class="far fa-edit"></i>address</small></a>
+                  {{ user.profile.street_address }}<br>
+                  {{ user.profile.city }}, {{ user.profile.state }} {{ user.profile.zip_code }} &nbsp<a href='{% url "account_management_edit" modify="address" %}'><small><i class="far fa-edit"></i>address</small></a>
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="far fa-envelope"></i> <strong>Email Address</strong><br>
-                  eclipse938@gmail.com &nbsp<a href='{% url "account_management_edit" modify="email" %}'><small><i class="far fa-edit"></i>email</small></a>
+                  {{ user.email }} &nbsp<a href='{% url "account_management_edit" modify="email" %}'><small><i class="far fa-edit"></i>email</small></a>
                   </td>
                 </tr>
                 <tr colspan="3">
