@@ -15,6 +15,9 @@ class Profile(models.Model):
     zip_code = models.CharField(max_length=20, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     
+    emergency_contact = models.CharField(max_length=20, blank=True)
+    relationship = models.CharField(max_length=100, blank=True)
+    
     middle_name = models.CharField(max_length=20, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     school_id = models.CharField(max_length=15,null=True, blank = True, default=0)

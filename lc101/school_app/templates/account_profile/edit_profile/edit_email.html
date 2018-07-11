@@ -10,7 +10,7 @@
     <form action='/account_management_save/' method='post'style='border:0'>{% csrf_token %}
       <div class='form-row'>
           <div class=col-md-6>
-            <input type="email" class='form-control shadow-sm' name="email" id=''/>
+            <input type="email" class='form-control shadow-sm' name="email" id='' required/>
           </div>
             <button class='btn btn-success shadow-sm text-center ml-2'>Save Changes</button>
         </div>
