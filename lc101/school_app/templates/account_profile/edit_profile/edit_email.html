@@ -3,13 +3,13 @@
 
 <tr>
     <td scope="row" colspan="3"><strong>Current Email Address</strong><br>
-    <span class='ml-4'>{{ request.user.email }}</span></td>
+    <span class='ml-3'>{{ request.user.email }}</span></td>
 </tr>
 <tr>
     <td scope="row" colspan="3"><strong>New Email</strong><br>
     <form action='/account_management_save/' method='post'style='border:0'>{% csrf_token %}
       <div class='form-row'>
-          <div class=col-md-6>
+          <div class='col-md-6'>
             <input type="email" class='form-control shadow-sm' name="email" id='' required/>
           </div>
             <button class='btn btn-success shadow-sm text-center ml-2'>Save Changes</button>

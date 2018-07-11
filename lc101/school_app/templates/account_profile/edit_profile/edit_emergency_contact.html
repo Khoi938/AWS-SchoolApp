@@ -1,0 +1,42 @@
+{% extends 'account_profile/edit_profile/base.html' %}
+{% block account_management %}
+
+<tr>
+  <td scope="row" colspan=""><strong>Contact Phone Number</strong><br>
+    <span class='ml-3'>
+        {% if user.profile.emergency_contact %}
+            ({{ user.profile.emergency_contact|slice:':3' }}) 
+            {{ user.profile.emergency_contact|slice:'3:6' }} - {{ user.profile.emergency_contact|slice:'6:'}}&nbsp
+        {% else %}
+            <small>i.e. your mom, dad or best reached relative</small> 
+        {% endif %}
+    </span>
+  </td>
+  <td scope="row" colspan=""><strong>Relationship</strong><br>
+    <span class='ml-3'>{{ user.profile.relationship }}</span>
+  </td>
+</tr>
+<tr>
+<tr>
+  <td scope="row" colspan="3"><strong>Add New Contact</strong><br>
+    <form action='/account_management_save/' method='post'style='border:0'>{% csrf_token %}
+      <div class='form-row'>
+        <div class='col-md-4'>
+            <label for="phone_number">Phone Number</label><br>
+            <div class='form-inline'>
+              <input type="text" class='form-control shadow-sm' name="phone_number_1" maxlength="3" style='width:53px'id='' placeholder='555'required/> &nbsp
+              <input type="text" class='form-control shadow-sm' name="phone_number_2" maxlength="3" style='width:53px' id='' placeholder='555'required/> -
+              <input type="text" class='form-control shadow-sm' name="phone_number_3" maxlength="4" style='width:62px'id=''placeholder='5555' required/>
+            </div>
+        </div>
+        <div class='col-md-4'>
+            <label for="phone_number">Relationship</label><br>
+            <input type="text" class='form-control shadow-sm' name="relationship"required/>
+        </div>
+        <div class='col-md-2'>
+            <label for="phone_number">&nbsp</label><br>
+            <button class='btn btn-success shadow-sm text-center '>Save Changes</button>
+        </div>
+    </form>
+</tr>
+{% endblock %}
