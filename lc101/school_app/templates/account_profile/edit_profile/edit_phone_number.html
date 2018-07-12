@@ -13,16 +13,20 @@
         </span></td>
 </tr>
 <tr>
-    <td scope="row" colspan="3"><strong>New Phone Number</strong><br>
+    <td scope="row" colspan="3" class='pb-4'><strong>New Phone Number</strong><br>
     <form action='/account_management_save/' method='post'style='border:0'>{% csrf_token %}
-      <div class='form-inline'>
-          <div class='col-md-8' 'input-group-sm'>
-            <input type="text" class='form-control shadow-sm' name="phone_number_1" maxlength="3" style='width:53px'id='' placeholder='555'required/> &nbsp
-            <input type="text" class='form-control shadow-sm' name="phone_number_2" maxlength="3" style='width:53px' id='' placeholder='555'required/> -
-            <input type="text" class='form-control shadow-sm' name="phone_number_3" maxlength="4" style='width:62px'id=''placeholder='5555' required/>
-            <button class='btn btn-success shadow-sm text-center ml-2'>Save Changes</button>
-            </div>
-        </div>
+    <div class='form-row'>
+      <div class='col-md-4 mt-2'>
+          <div class='form-inline'>
+            <input type="text" class='form-control shadow-sm mr-1' name="phone_numbeR" maxlength="3" style='width:53px'id='' placeholder='555'required/> &nbsp
+            <input type="text" class='form-control shadow-sm mr-1' name="phone_number_2" maxlength="3" style='width:53px' id='' placeholder='555'required/> -
+            <input type="text" class='form-control shadow-sm ml-1 mr-1' name="phone_number_3" maxlength="4" style='width:62px'id=''placeholder='5555' required/>
+          </div>
+      </div>
+      <div class='col-md-4 mt-2'>
+            <button class='btn btn-success shadow-sm text-center'>Save Changes</button>
+      </div>
+    </div>
     </form>
     </td>
 </tr>

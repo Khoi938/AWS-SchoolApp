@@ -6,7 +6,7 @@
     5555 Town N Country Tampa FL 33615 &nbsp</td>
 </tr>
 <tr>
-    <td scope="row" colspan="3"><strong>New Address</strong><br>
+    <td scope="row" colspan="3" class='pb-4'><strong>New Address</strong><br>
     <form action='/account_management_save/' method='post'style='border:0'>{% csrf_token %}
       <div class='form-row'>
           <div class=col-md-12>
@@ -78,8 +78,10 @@
               <label>Zip</label>
               <input type="text" class='form-control shadow-sm' name="zip_code" required/>
           </div>
-            <button class='btn btn-success shadow-sm text-center mt-2 ml-2'>Save Changes</button>
-        </div>
+          <div class='col-md-3'>
+          	  <button class='btn btn-success shadow-sm text-center mt-2'>Save Changes</button>
+          </div>
+    </div>
     </form>
     </td>
 </tr>

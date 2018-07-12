@@ -164,8 +164,20 @@ def account_management_save(request):
                 messages.success(request,'Invalid email address, update unsucessful')
                 return redirect('/account_management/')
         
-        if 'phone_number_1' in request.POST:
-            emergency_contact = request.POST['phone_number_1'] + request.POST['phone_number_2'] + request.POST['phone_number_3']
+        if 'phone_number' in request.POST:
+            phone_number = request.POST['phone_number'] + request.POST['phone_number_2'] + request.POST['phone_number_3']
+            if phone_number.isnumeric() and len(phone_number)==10:
+                profile = Profile.objects.filter(user=request.user).first()
+                profile.phone_number = phone_number
+                profile.save()
+                messages.success(request,'Phone number sucessfully updated')
+                return redirect('/account_management/')
+            else:
+                messages.success(request,'Invalid phone number, update unsucessful')
+                return redirect('/account_management/')
+                # need to add Emr name as well
+        if 'emergency_contact' in request.POST:
+            emergency_contact = request.POST['emergency_contact'] + request.POST['emergency_contact_2'] + request.POST['emergency_contact_3']
             if emergency_contact.isnumeric() and len(emergency_contact)==10 and request.POST['relationship']:
                 profile = Profile.objects.filter(user=request.user).first()
                 profile.emergency_contact = emergency_contact
@@ -176,5 +188,4 @@ def account_management_save(request):
             else:
                 messages.success(request,'Invalid contact information, update unsucessful')
                 return redirect('/account_management/')
-                
                 
