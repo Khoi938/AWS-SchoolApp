@@ -56,6 +56,8 @@ LOGIN_REDIRECT_URL = 'home_redirect' #rout then redirect according to user prive
 SESSION_COOKIE_SECURE = not DEBUG
 MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 # LOGOUT_REDIRECT_URL = ''
+AUTHENTICATION_BACKENDS =['django.contrib.auth.backends.AllowAllUsersModelBackend']
+#This thing passed in ModelBackend and over write the Usercan auth to allow Is_active = false to pass through
 
 TEMPLATES = [
     {

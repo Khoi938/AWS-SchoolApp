@@ -22,16 +22,23 @@ def index(request):
         password = request.POST['password']
         user = authenticate(request,username=username, password=password)# Called User.Objects and Check db
         if user is not None:
+            if user.is_active == False:
+                messages.warning(request, 'Inactive Account. Please contact school Administrator')
+                return redirect('/')
             auth_login(request, user)
             if user.profile.is_teacher == True:
                 return redirect('/teacher')
-                
             else:
                 return redirect('/student/home',{'user':user})
-        else: 
-            messages.warning(request, 'Failed Login')
-            return HttpResponse('<h1>Failed Login </h1>')
-
+                
+        elif User.objects.filter(username=username).first() == None:
+            messages.warning(request, 'Username not found')
+            return render(request,'homepage/index.html')
+        
+        elif User.objects.filter(password=password).first() == None:
+            messages.warning(request, 'Incorrect password')
+            return render(request,'homepage/index.html') 
+            
     return render(request,'homepage/index.html')
 # render(request, template_name, context=None, content_type=None, status=None, using=None)
 # Combines a given template with a given context dictionary and returns an 

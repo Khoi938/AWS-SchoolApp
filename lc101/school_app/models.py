@@ -25,7 +25,11 @@ class Profile(models.Model):
     is_student = models.BooleanField('Student', default=False)
     is_teacher = models.BooleanField('Teacher', default=False)
     def __str__(self):
-        return self.user.get_full_name()
+        if self.user == None:
+            return 'User deleted - ' + str(self.school_id)
+        else:
+            return self.user.get_full_name()
+        
 @receiver(post_save, sender=User)# Create a Profile when a User is create.
 def create_profile_object(sender, instance, created, **kwargs):
     if created:
