@@ -55,15 +55,19 @@ def register(request):
         password = request.POST['password']
         email = request.POST['email']
         school_id = request.POST['school_id']
+        birth_date = request.POST['birth_date']
         
-        input_dict = {'username':username, 'first_name':first_name, 'last_name':last_name,'middle_name':middle_name, 'email':email,'school_id':school_id}
+        input_dict = {'username':username, 'first_name':first_name, 'last_name':last_name,'middle_name':middle_name, 'email':email,'school_id':school_id,'birth_date':birth_date}
+        # if '' in input_dict.values():
+        #     messages.warning(request, 'required field missing/incomplete')
+        #     return render(request,'registration/register.html',{'input_dict':input_dict})
         
         if User.objects.filter(username=username):
             messages.warning(request, 'Username has already been taken.')
             return render(request,'registration/register.html',{'input_dict':input_dict})
         
         if school_id.isdigit() == False: # Check to see if passed in str can be integer
-            messages.warning(request, 'School id is an 8 digit number.')
+            messages.warning(request, 'School id is an 10 digit number.')
             return render(request,'registration/register.html',{'input_dict':input_dict})
             
         if len(school_id) < 10 or len(school_id) > 10:
@@ -80,6 +84,7 @@ def register(request):
         profile = Profile.objects.get(user=user)#.update(school_id=int(school_id))
         profile.school_id = school_id #todo later reduce db query
         profile.middle_name = middle_name
+        profile.birth_date = birth_date
         
         if int(school_id)%2 != 0:
             profile.is_student = True
