@@ -72,7 +72,12 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="far fa-envelope"></i> <strong>Email Address</strong><br>
+                {% if user.email %}
                   {{ user.email }} &nbsp<a href='{% url "account_management_edit" modify="email" %}'><small><i class="far fa-edit"></i>email</small></a>
+                {% else %}
+                  <i class="fas fa-exclamation-circle red-font"></i> 
+                  <a href='{% url "account_management_edit" modify="email" %}'><small>your email adress</small></a>
+                {% endif %}
                   </td>
                 </tr>
                 <tr colspan="3">
@@ -98,7 +103,7 @@
                 {% else %}
                   <td scope="row" colspan='2'><strong>Emergency Contact</strong><br>
                   <i class="fas fa-exclamation-circle red-font"></i> 
-                  <a href='{% url "account_management_edit" modify="address" %}'><small>who we call</small></a>
+                  <a href='{% url "account_management_edit" modify="emergency_contact" %}'><small>who we call</small></a>
                   </td>
                 {% endif %}
                 </tr>
@@ -119,22 +124,22 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>Something About You</strong><br>
-                  I have a bird pet,  &nbsp<a href='/home'><small><i class="far fa-edit"></i>edit</small></a>
+                  I have a bird pet,  &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="fas fa-utensils"></i> <strong>Favorite Food</strong><br>
-                  Pizza &nbsp<a href='/home'><small><i class="far fa-edit"></i>edit</small></a>
+                  Pizza &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="fas fa-flask"></i> <strong>Favorite Subject</strong><br>
-                  Math &nbsp<a href='/home'><small><i class="far fa-edit"></i>edit</small></a>
+                  Math &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="fas fa-gamepad"></i><i class="fas fa-football-ball"></i><strong> Hobby</strong><br>
-                  Video Game &nbsp<a href='/home'><small><i class="far fa-edit"></i>add</small></a>
+                  Video Game &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>add</small></a>
                   </td>
                 </tr>
                 </tbody>
@@ -147,7 +152,7 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>Username</strong><br>
-                  Khoi938
+                  {{ user.username }}
                   </td>
                 </tr>
                 <tr>
@@ -157,12 +162,18 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>School ID</strong><br>
-                  982-939-72974 &nbsp
+                  {{ user.profile.school_id|slice:':3' }} - {{ user.profile.school_id|slice:'3:6' }} - {{ user.profile.school_id|slice:'6:'}}&nbsp
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong> Status</strong><br>
-                  Student Teacher Inactive
+                {% if user.profile.is_teacher %}
+                  Teacher
+                {% elif user.profile.is_student %}
+                  Student
+                {% else %}
+                  Account Inactivate
+                {% endif %}
                   </td>
                 </tr>
                 </tbody>

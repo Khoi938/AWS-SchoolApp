@@ -146,6 +146,8 @@ def account_management_edit(request,modify=None):
         return render(request,'account_profile/edit_profile/edit_phone_number.html')
     if modify == 'emergency_contact':
         return render(request,'account_profile/edit_profile/edit_emergency_contact.html')
+    if modify == 'about':
+        return render(request,'account_profile/edit_profile/edit_about.html')
 
 def account_management_save(request):
     if is_login(request) == False: 

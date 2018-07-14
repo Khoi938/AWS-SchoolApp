@@ -1,0 +1,34 @@
+{% extends 'account_profile/edit_profile/base.html' %}
+{% block account_management %}
+
+<tr>
+    <td scope="row" colspan="3"><strong>Current Home Address</strong><br>
+    5555 Town N Country Tampa FL 33615 &nbsp</td>
+</tr>
+<tr>
+    <td scope="row" colspan="3" id='profiles' class='pb-4'><big>
+        User Profiles</big></td>
+    <td>
+    <form action='/account_management_save/' method='post'style='border:0'>{% csrf_token %}
+      <div class='form-row'>
+          <div class=col-md-12>
+            <label for="address">about you</label>
+            <input type="textarea" class='form-control shadow-sm' name="street_address" id='address'required/>
+          </div>
+          <div class='col-md-5'>
+              <label>City</label>
+              <input type="text" class='form-control shadow-sm' name="city" required/>
+          </div>
+          
+          <div class='col-md-3'>
+              <label>Zip</label>
+              <input type="text" class='form-control shadow-sm' name="zip_code" required/>
+          </div>
+          <div class='col-md-3'>
+          	  <button class='btn btn-success shadow-sm text-center mt-2'>Save Changes</button>
+          </div>
+    </div>
+    </form>
+    </td>
+</tr>
+{% endblock %}

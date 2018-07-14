@@ -63,6 +63,9 @@
       <!--</form>-->
       <a href='/account_management/' class='btn btn-outline-light shadow'>
          <i class="fas fa-user-cog"></i> My Account
+      {% if user.profile.home_address == '' or user.profile.phone_number == '' or user.profile.emergency_contact == '' or user.email == '' %}
+        <i class="fas fa-exclamation-circle text-danger small"></i> 
+      {% endif %}
       </a>
     </div>
   </nav>

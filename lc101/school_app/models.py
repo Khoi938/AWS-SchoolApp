@@ -7,14 +7,13 @@ from django.dispatch import receiver
 class Profile(models.Model):
     #username,first,last,email,password is extened from Django Auth User
     user = models.OneToOneField(User, null=True, on_delete = models.SET_NULL)
-    about = models.TextField(max_length=350, blank=True)
     
     street_address = models.CharField(max_length=200, blank=True)
     city = models.CharField(max_length=100, blank=True)
     state = models.CharField(max_length=100, blank=True)
     zip_code = models.CharField(max_length=20, blank=True)
+   
     phone_number = models.CharField(max_length=20, blank=True)
-    
     emergency_contact = models.CharField(max_length=20, blank=True)
     relationship = models.CharField(max_length=100, blank=True)
     
@@ -24,6 +23,13 @@ class Profile(models.Model):
     
     is_student = models.BooleanField('Student', default=False)
     is_teacher = models.BooleanField('Teacher', default=False)
+    
+    
+    about = models.TextField(max_length=300, blank=True)
+    hobby = models.TextField(max_length=100, blank=True)
+    favorite_food = models.TextField(max_length=100, blank=True)
+    favorite_subject = models.TextField(max_length=100, blank=True)
+    
     def __str__(self):
         if self.user == None:
             return 'User deleted - ' + str(self.school_id)
