@@ -108,8 +108,8 @@
                 {% endif %}
                 </tr>
                 <tr>
-                  <td scope="row" colspan="3"><strong>Day of Birth</strong><br>
-                  4-6-1986 &nbsp
+                  <td scope="row" colspan="3" class='bp-2'><strong>Day of Birth</strong><br>
+                  {{ user.profile.birthday }}
                   </td>
                 </tr>
                 </tbody>
@@ -138,7 +138,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td scope="row" colspan="3"><i class="fas fa-gamepad"></i><i class="fas fa-football-ball"></i><strong> Hobby</strong><br>
+                  <td scope="row" colspan="3" class='bp-2'><i class="fas fa-gamepad"></i><i class="fas fa-football-ball"></i><strong> Hobby</strong><br>
                   Video Game &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>add</small></a>
                   </td>
                 </tr>
@@ -166,7 +166,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td scope="row" colspan="3"><strong> Status</strong><br>
+                  <td scope="row" colspan="3" class='bp-2'><strong> Status</strong><br>
                 {% if user.profile.is_teacher %}
                   Teacher
                 {% elif user.profile.is_student %}
@@ -178,7 +178,7 @@
                 </tr>
                 </tbody>
             </table>
-            <br><br>
+            <br>
         </div>
     </div>
     

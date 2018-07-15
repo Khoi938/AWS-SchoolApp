@@ -2,30 +2,33 @@
 {% block account_management %}
 
 <tr>
-    <td scope="row" colspan="3"><strong>Current Home Address</strong><br>
-    5555 Town N Country Tampa FL 33615 &nbsp</td>
-</tr>
-<tr>
-    <td scope="row" colspan="3" id='profiles' class='pb-4'><big>
+    <td scope="row" colspan="3" id='profiles'><big>
         User Profiles</big></td>
     <td>
+</tr>
+<tr>
+    <td scope='row' class='pb-4'>
     <form action='/account_management_save/' method='post'style='border:0'>{% csrf_token %}
       <div class='form-row'>
-          <div class=col-md-12>
-            <label for="address">about you</label>
+          <div class='col-md-7'>
+            <label for="address">something about you</label>
             <input type="textarea" class='form-control shadow-sm' name="street_address" id='address'required/>
           </div>
-          <div class='col-md-5'>
-              <label>City</label>
+          <div class='col-md-7'>
+              <label>your favorite food</label>
               <input type="text" class='form-control shadow-sm' name="city" required/>
           </div>
           
-          <div class='col-md-3'>
-              <label>Zip</label>
+          <div class='col-md-7'>
+              <label>your favorite subject</label>
               <input type="text" class='form-control shadow-sm' name="zip_code" required/>
           </div>
-          <div class='col-md-3'>
-          	  <button class='btn btn-success shadow-sm text-center mt-2'>Save Changes</button>
+          <div class='col-md-7'>
+              <label>your hobby</label>
+              <input type="text" class='form-control shadow-sm' name="zip_code" required/>
+          </div>
+          <div class=''>
+          	  <button class='btn btn-success shadow-sm text-center'>Save Changes</button>
           </div>
     </div>
     </form>
