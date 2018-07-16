@@ -5,13 +5,12 @@
     $('[data-toggle="popover"]').popover();   
     });
 </script>
-<div class='container-fuild'>
-    
+<div class='container-fuild'  id='personal'>
 <!--</div> style='overflow: hidden;'>-->
     <div class='content'>
     <div class='row mr-2'>
         <div class='col-md-4 nav navigation'>
-          <div style='height: auto;overflow: hidden;'>
+          <div style='height:auto ;overflow: hidden;position:fixed'>
             <h2>Account Services</h2>
             <hr align='left'  style='width:360px;'>
             <table class='table table-bordered border table-hover shadow-sm' style='background:white'>
@@ -36,12 +35,11 @@
             {% endif %}
         </div>
         </div>
-            <div class='col-md-8 rounded' style=' height: 400px;overflow: hidden;overflow-y: auto;'>
-        
+            <div class='col-md-8 rounded col-lg-offset-3' style=' height: auto;overflow: hidden;overflow-y: auto;'>
             <table class='table table-hover shadow mt-1' style='background:white'>
                 <tbody>
                 <tr>
-                  <td scope="row" colspan="3" id='personal'><big><i class="far fa-user" style='font-size:24px'></i> Personal Details</big></td>
+                  <td scope="row" colspan="3"><big><i class="far fa-user" style='font-size:24px'></i> Personal Details</big></td>
                 </tr>
                 <tr>
                 {% if request.user.profile.middle_name %}
@@ -124,22 +122,22 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>Something About You</strong><br>
-                  I have a bird pet,  &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
+                  {{ user.profile.about }}  &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="fas fa-utensils"></i> <strong>Favorite Food</strong><br>
-                  Pizza &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
+                  {{ user.profile.favorite_food }} &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="fas fa-flask"></i> <strong>Favorite Subject</strong><br>
-                  Math &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
+                  {{ user.profile.favorite_subject}} &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3" class='bp-2'><i class="fas fa-gamepad"></i><i class="fas fa-football-ball"></i><strong> Hobby</strong><br>
-                  Video Game &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>add</small></a>
+                  {{ user.profile.hobby }} &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>add</small></a>
                   </td>
                 </tr>
                 </tbody>

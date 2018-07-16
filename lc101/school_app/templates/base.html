@@ -30,7 +30,7 @@
 {% else %}
   <body>
 {% endif %}<header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top">
     <a class="navbar-brand" href="/teacher">Teacher Console</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -70,9 +70,9 @@
     </div>
   </nav>
     </header>
-
+    <div class='' style='padding-top:45px'>
     {% block content %}
     {% endblock %}
-
+    </div>
 </body>
 </html>

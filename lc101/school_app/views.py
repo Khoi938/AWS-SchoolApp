@@ -202,4 +202,27 @@ def account_management_save(request):
             else:
                 messages.success(request,'Invalid contact information, update unsucessful')
                 return redirect('/account_management/')
-                
+        
+        if 'about' in request.POST:
+            about = request.POST['about']
+            hobby = request.POST['hobby']
+            favorite_subject = request.POST['favorite_subject']
+            favorite_food = request.POST['favorite_food']
+            
+            profile = Profile.objects.filter(user=request.user).first()
+            if about:
+                profile.about = about
+            if hobby:
+                profile.hobby = hobby
+            if favorite_food:
+                profile.favorite_food = favorite_food
+            if favorite_subject:
+                profile.favorite_subject = favorite_subject
+            profile.save()
+            
+            messages.success(request,'update successful')
+            return redirect('/account_management/about')
+        else:
+            messages.success(request,'Invalid contact information, update unsucessful')
+            return redirect('/account_management/')
+                       
