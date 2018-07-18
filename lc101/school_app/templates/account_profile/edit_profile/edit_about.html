@@ -12,23 +12,47 @@
       <div class='form-row'>
           <div class='col-md-7'>
             <label for="address">something about you</label>
-            <textarea class='form-control shadow-sm' name="about" row='2' placeholder='I have a turtle, because i like turtle'required/></textarea>
+            <textarea class='form-control shadow-sm' name="about" row='2' placeholder='I have a turtle, because i like turtle'/></textarea>
              
             <label>your favorite food</label>
-            <input type="text" class='form-control shadow-sm' name="favorite_food" required/>
+            <input type="text" class='form-control shadow-sm' name="favorite_food"/>
             
             <label>your favorite subject</label>
-            <input type="text" class='form-control shadow-sm' name="favorite_subject" required/>
+            <input type="text" class='form-control shadow-sm' name="favorite_subject"/>
            
             <label>your hobby</label>
-            <input type="text" class='form-control shadow-sm' name="hobby" required/>
+            <input type="text" class='form-control shadow-sm' name="hobby"/>
             <div class=''>
           	  <button class='btn btn-success shadow-sm text-center mt-2'>Save Changes</button>
           </div>
           </div>
           <div class='col-md-5'>
-              <div class='card'>
-                  
+              <div class='card border-primary shadow-sm' style='padding-left:.5px;width:250px'>
+                <div class='card-header bg-light'>
+                  <h5>{{ user.get_full_name }}</h5>
+                    <ul class="nav nav-tabs card-header-tabs ">
+                      <li class="nav-item {{ active_dict.active_2 }}">
+                        <a class="nav-link " data-toggle="tab"href="#about">about</a>
+                      </li>
+                      <li class="nav-item {{ active_dict.active }}">
+                        <a class="nav-link " data-toggle="tab" href="#favorite" style='color:inherit;text-decoration: none;'>stuff</a>
+                      </li>
+                    </ul>
+                </div>
+                <div class='card-body text-dark'>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="about" role="tabpanel" >
+                      <p class='card-text'>{{ user.profile.about }}</p>
+                    </div>
+                    <div class="tab-pane" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
+                      <p class='card-text'>
+                          favorite food: {{ user.profile.favorite_food }}</br>
+                          favorite subject: {{ user.profile.favorite_subject }}</br>
+                          hobby: {{ user.profile.hobby }}
+                      </p> 
+                    </div>
+                  </div>
+                </div>
               </div>
           </div>
     </div>

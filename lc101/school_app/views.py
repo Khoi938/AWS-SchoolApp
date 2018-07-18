@@ -147,7 +147,8 @@ def account_management_edit(request,modify=None):
     if modify == 'emergency_contact':
         return render(request,'account_profile/edit_profile/edit_emergency_contact.html')
     if modify == 'about':
-        return render(request,'account_profile/edit_profile/edit_about.html')
+        active_dict ={'active':'active'}
+        return render(request,'account_profile/edit_profile/edit_about.html',{'active_dict':active_dict})
 
 def account_management_save(request):
     if is_login(request) == False: 
