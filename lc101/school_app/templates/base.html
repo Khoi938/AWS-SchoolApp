@@ -13,17 +13,16 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon" />
         <style>
-            /*body{padding-top:0px}*/
-            /*button{background-color: rgb(139, 253, 183)}*/
             form,h1,ul{padding-left: 30px; padding-right:20px;}
-            .color{color: red}
             textarea, input {background-color: rgb(243, 245, 247)}
-            /*.form-group .required .control-label:after {*/
-            /*content:"*";color:red;}*/
         </style>
-        <title>{{top}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% if title == none %}  
+          <title>LC High School</title>
+        {% else %}
+          <title>{{ title }}</title>
+        {% endif %} 
     </head>
 {% if request.user.profile.is_teacher %}
   <body class='body-teacher'>
@@ -63,8 +62,8 @@
       <!--</form>-->
       <a href='/account_management/' class='btn btn-outline-light shadow'>
          <i class="fas fa-user-cog"></i> My Account
-      {% if user.profile.home_address == '' or user.profile.phone_number == '' or user.profile.emergency_contact == '' or user.email == '' %}
-        <i class="fas fa-exclamation-circle text-danger small"></i> 
+      {% if user.profile.home_address == '' or user.profile.phone_number == '' or user.profile.emergency_contact == '' or user.email == '' or user.profile.birth_date  %}
+        <i class="fas fa-exclamation-circle small" style='color:tomato'></i> 
       {% endif %}
       </a>
     </div>

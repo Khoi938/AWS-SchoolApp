@@ -39,7 +39,7 @@ def index(request):
             messages.warning(request, 'Incorrect password')
             return render(request,'homepage/index.html') 
             
-    return render(request,'homepage/index.html')
+    return render(request,'homepage/index.html',{'title':'Welcome LC High'})
 # render(request, template_name, context=None, content_type=None, status=None, using=None)
 # Combines a given template with a given context dictionary and returns an 
 # HttpResponse object with that rendered text.
@@ -147,13 +147,13 @@ def account_management_edit(request,modify=None):
     if modify == 'emergency_contact':
         return render(request,'account_profile/edit_profile/edit_emergency_contact.html')
     if modify == 'about':
-        active_dict ={'active':'active'}
-        return render(request,'account_profile/edit_profile/edit_about.html',{'active_dict':active_dict})
+        return render(request,'account_profile/edit_profile/edit_about.html',{'about':'active'})
 
 def account_management_save(request):
     if is_login(request) == False: 
         return redirect('/login')
     if request.method == 'POST':
+        
         if 'street_address' in request.POST:
             if request.POST['street_address'] and request.POST['city'] and request.POST['state'] and request.POST['zip_code']:
                 profile = Profile.objects.filter(user=request.user).first()
@@ -190,7 +190,8 @@ def account_management_save(request):
             else:
                 messages.success(request,'Invalid phone number, update unsucessful')
                 return redirect('/account_management/')
-                # need to add Emr name as well
+                # need to add Emergency name as well
+        
         if 'emergency_contact' in request.POST:
             emergency_contact = request.POST['emergency_contact'] + request.POST['emergency_contact_2'] + request.POST['emergency_contact_3']
             if emergency_contact.isnumeric() and len(emergency_contact)==10 and request.POST['relationship']:
@@ -202,6 +203,17 @@ def account_management_save(request):
                 return redirect('/account_management/')
             else:
                 messages.success(request,'Invalid contact information, update unsucessful')
+                return redirect('/account_management/')
+        
+        if 'birth_date' in request.POST:
+            if request.POST['birth_date']:
+                profile = Profile.objects.filter(user=request.user).first()
+                profile.birth_date = request.POST['birth_date']
+                profile.save()
+                messages.success(request,'Birth date sucessfully added')
+                return redirect('/account_management/')
+            else:
+                messages.success(request,'Invalid date, update unsucessful')
                 return redirect('/account_management/')
         
         if 'about' in request.POST:
@@ -220,9 +232,12 @@ def account_management_save(request):
             if favorite_subject:
                 profile.favorite_subject = favorite_subject
             profile.save()
-            
             messages.success(request,'update successful')
-            return redirect('/account_management/about')
+            
+            if about:
+                return redirect('/account_management/about')
+            else:
+                return render(request,'account_profile/edit_profile/edit_about.html',{'stuff':'active'})
         else:
             messages.success(request,'Invalid contact information, update unsucessful')
             return redirect('/account_management/')

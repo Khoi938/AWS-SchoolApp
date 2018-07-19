@@ -106,9 +106,23 @@
                 {% endif %}
                 </tr>
                 <tr>
+                {% if user.profile.birth_date %}
                   <td scope="row" colspan="3" class='bp-2'><strong>Day of Birth</strong><br>
-                  {{ user.profile.birthday }}
+                  {{ user.profile.birth_date }}
                   </td>
+                {% else %}
+                  <td scope="row" colspan="3" class='bp-2'><strong>Day of Birth </strong><i class="fas fa-exclamation-circle red-font"></i> <br>
+                  <form action='/account_management_save/' method='post'style='border:0;padding-left:0px'> {% csrf_token %}
+                    <div class='form-row'>
+                      <div class='mt-2 ml-1'> 
+                        <input type="date" class='form-control shadow-sm' name="birth_date" id='' required/>
+                    </div>
+                      <div class='col-md-3 mt-2'>
+                        <button class='btn btn-success shadow-sm text-center'>Submit</button></br>
+                      </div>
+                    </div>
+                  </form>
+                {% endif %}
                 </tr>
                 </tbody>
             </table>

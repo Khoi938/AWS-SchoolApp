@@ -12,16 +12,16 @@
       <div class='form-row'>
           <div class='col-md-7'>
             <label for="address">something about you</label>
-            <textarea class='form-control shadow-sm' name="about" row='2' placeholder='I have a turtle, because i like turtle'/></textarea>
+            <textarea class='form-control shadow-sm' name="about" row='2' placeholder='I have a turtle, because i like turtle' maxlength="300"/></textarea>
              
             <label>your favorite food</label>
-            <input type="text" class='form-control shadow-sm' name="favorite_food"/>
+            <input type="text" class='form-control shadow-sm' name="favorite_food" maxlength="100"/>
             
             <label>your favorite subject</label>
-            <input type="text" class='form-control shadow-sm' name="favorite_subject"/>
+            <input type="text" class='form-control shadow-sm' name="favorite_subject" maxlength="100"/>
            
             <label>your hobby</label>
-            <input type="text" class='form-control shadow-sm' name="hobby"/>
+            <input type="text" class='form-control shadow-sm' name="hobby" maxlength="100"/>
             <div class=''>
           	  <button class='btn btn-success shadow-sm text-center mt-2'>Save Changes</button>
           </div>
@@ -31,20 +31,20 @@
                 <div class='card-header bg-light'>
                   <h5>{{ user.get_full_name }}</h5>
                     <ul class="nav nav-tabs card-header-tabs ">
-                      <li class="nav-item {{ active_dict.active_2 }}">
-                        <a class="nav-link " data-toggle="tab"href="#about">about</a>
+                      <li class="nav-item">
+                        <a class="nav-link {{ about }}" data-toggle="tab"href="#about">about</a>
                       </li>
-                      <li class="nav-item {{ active_dict.active }}">
-                        <a class="nav-link " data-toggle="tab" href="#favorite" style='color:inherit;text-decoration: none;'>stuff</a>
+                      <li class="nav-item">
+                        <a class="nav-link {{ stuff }}" data-toggle="tab" href="#favorite" style='color:inherit;text-decoration: none;'>stuff</a>
                       </li>
                     </ul>
                 </div>
                 <div class='card-body text-dark'>
                   <div class="tab-content">
-                    <div class="tab-pane active" id="about" role="tabpanel" >
+                    <div class="tab-pane {{ about }}" id="about" role="tabpanel" >
                       <p class='card-text'>{{ user.profile.about }}</p>
                     </div>
-                    <div class="tab-pane" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
+                    <div class="tab-pane {{ stuff }}" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
                       <p class='card-text'>
                           favorite food: {{ user.profile.favorite_food }}</br>
                           favorite subject: {{ user.profile.favorite_subject }}</br>

@@ -17,7 +17,7 @@ class Profile(models.Model):
     emergency_contact = models.CharField(max_length=20, blank=True)
     relationship = models.CharField(max_length=100, blank=True)
     
-    middle_name = models.CharField(max_length=20, blank=True)
+    middle_name = models.CharField(max_length=50, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     school_id = models.CharField(max_length=15,null=True, blank = True, default=0)
     
