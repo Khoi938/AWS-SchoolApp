@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 #------- Profile, Student, Teacher Model -------
+
+## TODO Refactor CharField To Text Field Modify HTMl maxlength. WRONG USAGE!!! ALLL WRONG
 class Profile(models.Model):
     #username,first,last,email,password is extened from Django Auth User
     user = models.OneToOneField(User, null=True, on_delete = models.SET_NULL)
@@ -86,12 +88,12 @@ class Lesson_plan(models.Model):
     thursday_date = models.DateField(blank=True, null=True)
     friday_date= models.DateField(blank=True, null=True)
     
-    monday_plan = models.CharField(max_length=400,default='a')
-    tuesday_plan= models.CharField(max_length=400,default='s')
-    wednesday_plan= models.CharField(max_length=400,default='d')
-    thursday_plan= models.CharField(max_length=400,default='f')
-    friday_plan= models.CharField(max_length=400,default='g')
-    weekend_plan = models.CharField(max_length=300,default='h')
+    monday_assignment = models.CharField(max_length=400,default='a')
+    tuesday_assignment= models.CharField(max_length=400,default='s')
+    wednesday_assignment= models.CharField(max_length=400,default='d')
+    thursday_assignment= models.CharField(max_length=400,default='f')
+    friday_assignment= models.CharField(max_length=400,default='g')
+    weekend_assignment = models.CharField(max_length=300,default='h')
     
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL)
     course = models.ForeignKey('Course',blank=True, null=True, on_delete = models.SET_NULL)

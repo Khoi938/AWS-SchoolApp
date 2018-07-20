@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+        $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
 <div class='content '>
         <h2 style='padding-left: 0px'>Teacher Console</h2>
         <hr style="text-align:left;margin-left:0;width:315px;height:0px;padding: 0px"/>
@@ -31,6 +36,7 @@
               </th>
               <th scope="col" style="width: 13%">View Classes</th>
               <th scope="col" style="width: 13%">Lesson Plan</th>
+              <th scope="col" style="width: 10%">Drop</th>
             </tr>
             </thead>
             <tbody>
@@ -45,6 +51,21 @@
               </td>
               <td>
                 <a href='{% url "view_lesson_plan" course_id=course.id %}'><i class="fas fa-list-ol" style='font-size:19px'></i></a>
+              </td>
+              <td>
+              {% if course.course_in_classroom.count == 0 %}
+                <form action='/teacher/classroom/detached_classroom/' method='post'>{% csrf_token %}
+                  <input type='hidden' name='classroom_id'value='{{ class.id }}'/>
+                  <button type='submit' style='border:none;background:none;cursor: pointer;cursor: hand;'>
+                  <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"></i>
+                  </button>
+                </form>
+              {% else %}
+              <div style='text-align:center'>
+                <i class="fas fa-ban text-warning" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Drop all Classroom firts"></i>
+              </div>
+
+              {% endif %}
               </td>
             </tr>
         {% endfor %}

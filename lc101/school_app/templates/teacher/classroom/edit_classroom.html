@@ -43,7 +43,7 @@
         <div class="input-group-prepend">
           <label class="btn btn-info" for='' >Title / Alias &nbsp</label>
         </div>
-          <textarea class="form-control" style='width:365px' name='course_title' id="" rows="1" cols='40' data-toggle="popover" title="" data-content="For your reference only"required>{{classroom.course_title}}</textarea>
+          <textarea class="form-control" style='width:365px' name='course_title' maxlength='100' id="" rows="1" cols='40' data-toggle="popover" title="" data-content="For your reference only"required>{{classroom.course_title}}</textarea>
           
           <hr/>
           <button class="btn btn-info" >Time Slot &nbsp&nbsp&nbsp</button>
@@ -82,7 +82,7 @@
             <label class="form-check-label" for="">Other:</label>
           </div>
           <div style = 'width:140px;right-align:10px'class="form-check form-check-inline">
-            <input type='text'class="form-control" name="custom_time" id="" value='{{ classroom.time }}' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
+            <input type='text'class="form-control" name="custom_time" maxlength='8'id="" value='{{ classroom.time }}' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
           </div><br><br>
         <div class="input-group mb-3" style='width:365px' >
           <div class="input-group-prepend">
@@ -92,7 +92,8 @@
         </div>
         <div>
           <label class="btn btn-info" for='description' >Course Description</label>
-          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' data-toggle="popover" title="" data-content="Briefly describe your Course"required>{{ classroom.description }}</textarea>
+          <textarea class="form-control" style='width:365px' name='description' 
+          maxlength='200' id="" rows="3" cols='40' data-toggle="popover" title="" data-content="Briefly describe your Course"required>{{ classroom.description }}</textarea>
           <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
           <button style='width:175px' class="btn btn-md btn-success btn-block text-center shadow-sm"><i class="fas fa-cloud-upload-alt"></i> Submit Changes</button>
         </div>

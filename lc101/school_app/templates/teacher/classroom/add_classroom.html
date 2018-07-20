@@ -43,7 +43,8 @@
         <div class="input-group-prepend">
           <label class="btn btn-info" for='' >Title / Alias &nbsp</label>
         </div>
-          <textarea class="form-control" style='width:365px' name='course_title' id="" rows="1" cols='40' placeholder="ex. {{course.course_title}} Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
+          <textarea class="form-control" style='width:365px' name='course_title' id="" rows="1" cols='40' 
+          maxlength='100'placeholder="ex. {{course.course_title}} Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
           
           <hr/>
           <button class="btn btn-info" >Time Slot &nbsp&nbsp&nbsp</button>
@@ -82,7 +83,7 @@
             <label class="form-check-label" for="">Other:</label>
           </div>
           <div style = 'width:140px;right-align:10px'class="form-check form-check-inline">
-            <input type='text'class="form-control" name="custom_time" id="" placeholder='ex. 9:30 AM' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
+            <input type='text'class="form-control" name="custom_time" maxlength='8' id="" placeholder='ex. 9:30 AM' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
           </div><br><br>
         <div class="input-group mb-3" style='width:365px' >
           <div class="input-group-prepend">
@@ -92,7 +93,8 @@
         </div>
         <div>
           <label class="btn btn-info" for='description' >Course Description</label>
-          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria Mendez" data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
+          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria Mendez" 
+          maxlength='200' data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
           <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
           <button style='width:150px' class="btn btn-md btn-success btn-block text-center shadow-sm"><i class="fas fa-chalkboard"></i> Add Class</button>
         </div>

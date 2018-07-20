@@ -80,11 +80,11 @@ def edit_course(request,course_id=None):
             return redirect('/')
         if request.method == 'POST':# and class_id==None:
             monday_date = request.POST['monday_date']
-            monday_plan = request.POST['monday_plan']
+            monday_assignment = request.POST['monday_assignment']
             course_id = request.POST['course_id']
             course = Course.objects.filter(id=course_id).first()
             course.monday_date = monday_date
-            course.monday_plan = monday_plan
+            course.monday_assignment = monday_assignment
             course.save()
             messages.success(request, course.course_title + ' have been updated.')
             return redirect('/teacher')
@@ -228,7 +228,7 @@ def add_lesson_plan(request,course_id=None):
             course_id = request.POST['course_id']
             agenda = request.POST['agenda']
             week_number = request.POST['week_number']
-            weekend_plan = request.POST['weekend_plan']
+            weekend_assignment = request.POST['weekend_assignment']
         
             monday_date = request.POST['monday_date']
             tuesday_date = request.POST['tuesday_date']
@@ -236,18 +236,18 @@ def add_lesson_plan(request,course_id=None):
             thursday_date = request.POST['thursday_date']
             friday_date = request.POST['friday_date']
         
-            monday_plan = request.POST['monday_plan']
-            tuesday_plan = request.POST['tuesday_plan']
-            wednesday_plan = request.POST['wednesday_plan']
-            thursday_plan = request.POST['thursday_plan']
-            friday_plan = request.POST['friday_plan']
+            monday_assignment = request.POST['monday_assignment']
+            tuesday_assignment = request.POST['tuesday_assignment']
+            wednesday_assignment = request.POST['wednesday_assignment']
+            thursday_assignment = request.POST['thursday_assignment']
+            friday_assignment = request.POST['friday_assignment']
         
             course = Course.objects.filter(id=course_id).first()
             new_lesson = Lesson_plan.objects.create(course_title=course.course_title, teacher_idx=request.user.teacher.id,
             week_number=week_number, agenda=agenda, teacher=request.user.teacher, course=course, monday_date=monday_date,
             tuesday_date=tuesday_date, wednesday_date=wednesday_date, thursday_date=thursday_date, friday_date=friday_date,
-            monday_plan=monday_plan, tuesday_plan=tuesday_plan, wednesday_plan=wednesday_plan, thursday_plan=thursday_plan, friday_plan=friday_plan,
-            weekend_plan=wednesday_plan)
+            monday_assignment=monday_assignment, tuesday_assignment=tuesday_assignment, wednesday_assignment=wednesday_assignment, thursday_assignment=thursday_assignment, friday_assignment=friday_assignment,
+            weekend_assignment=wednesday_assignment)
             messages.success(request, 'Lesson for week ' + new_lesson.week_number + ' sucessfully added.')
             return redirect('/teacher/lesson_plan/'+course_id)
         
@@ -266,7 +266,7 @@ def edit_lesson_plan(request,lesson_plan_id=None):
             course_id = request.POST['course_id']
             lesson_plan_id = request.POST['lesson_plan_id']
             agenda = request.POST['agenda']
-            weekend_plan = request.POST['weekend_plan']
+            weekend_assignment = request.POST['weekend_assignment']
         
             monday_date = request.POST['monday_date']
             tuesday_date = request.POST['tuesday_date']
@@ -274,17 +274,17 @@ def edit_lesson_plan(request,lesson_plan_id=None):
             thursday_date = request.POST['thursday_date']
             friday_date = request.POST['friday_date']
         
-            monday_plan = request.POST['monday_plan']
-            tuesday_plan = request.POST['tuesday_plan']
-            wednesday_plan = request.POST['wednesday_plan']
-            thursday_plan = request.POST['thursday_plan']
-            friday_plan = request.POST['friday_plan']
+            monday_assignment = request.POST['monday_assignment']
+            tuesday_assignment = request.POST['tuesday_assignment']
+            wednesday_assignment = request.POST['wednesday_assignment']
+            thursday_assignment = request.POST['thursday_assignment']
+            friday_assignment = request.POST['friday_assignment']
         
             # course = Course.objects.filter(id=course_id).first()
             Lesson_plan.objects.filter(id=lesson_plan_id).update(agenda=agenda, monday_date=monday_date, 
             tuesday_date=tuesday_date, wednesday_date=wednesday_date, thursday_date=thursday_date, 
-            friday_date=friday_date, monday_plan=monday_plan, tuesday_plan=tuesday_plan, wednesday_plan=wednesday_plan, 
-            thursday_plan=thursday_plan, friday_plan=friday_plan, weekend_plan=weekend_plan)
+            friday_date=friday_date, monday_assignment=monday_assignment, tuesday_assignment=tuesday_assignment, wednesday_assignment=wednesday_assignment, 
+            thursday_assignment=thursday_assignment, friday_assignment=friday_assignment, weekend_assignment=weekend_assignment)
             messages.success(request, 'Schedule sucessfully updated.')
             return redirect('/teacher/lesson_plan/weekly_lesson_plan/'+lesson_plan_id)
         
