@@ -8,18 +8,24 @@
 <div class='content '>
         <h2 style='padding-left: 0px'>Teacher Console</h2>
         <hr style="text-align:left;margin-left:0;width:315px;height:0px;padding: 0px"/>
-        {% if messages %}
-          <ul class="messages">
-        {% for message in messages %}
-             <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
-        {% endfor %}
-          </ul> 
-        {% endif %}
-        <ul>
-            <li>View All Class</li>
-            <li><a href='/teacher/add_course'>Add Course</a></li>
-            <li><a href='/teacher/student_list'>Student List</a></li>
-        </ul>
+        <div class='row mr-2'>
+          <div class='col-md-6'>
+            <ul>
+              <li>View All Class</li>
+              <li><a href='/teacher/add_course'>Add Course</a></li>
+              <li><a href='/teacher/student_list'>Student List</a></li>
+            </ul>
+          </div>
+          <div class='col-md-6'>
+            {% if messages %}
+               <ul class="messages" style='list-style-type: none;'>
+            {% for message in messages %}
+               <li><div class="alert-inherit alert-success shadow-sm" role="alert">{{ message }}</div></li>
+            {% endfor %}
+               </ul> 
+            {% endif %}
+          </div>
+        </div>
         {% if request.user.teacher.course_by_teacher.all.count > 0 %}
           <h4>Your Courses:</h4>
           <div class="mr-2">
@@ -45,7 +51,7 @@
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ course.course_number }}</td>
               <td>{{ course.course_title }}</td>
-              <td>{{ course.semester }}, {{ course.year }}</td>
+              <td>{{ course.year }}, {{ course.semester }}</td>
               <td>
                 <a href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-chalkboard-teacher"style='font-size:18px'></i></a></a>
               </td>
@@ -54,15 +60,15 @@
               </td>
               <td>
               {% if course.course_in_classroom.count == 0 %}
-                <form action='/teacher/classroom/detached_classroom/' method='post'>{% csrf_token %}
-                  <input type='hidden' name='classroom_id'value='{{ class.id }}'/>
+                <form action='{% url "drop_course" %}' method='post'>{% csrf_token %}
+                  <input type='hidden' name='course_id'value='{{ course.id }}'/>
                   <button type='submit' style='border:none;background:none;cursor: pointer;cursor: hand;'>
                   <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"></i>
                   </button>
                 </form>
               {% else %}
               <div style='text-align:center'>
-                <i class="fas fa-ban text-warning" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Drop all Classroom firts"></i>
+                <i class="fas fa-ban text-warning" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Drop All Classes first"></i>
               </div>
 
               {% endif %}

@@ -230,3 +230,44 @@ losing the post data in the process
 <td><a href='{% url "delete_classroom" classroom_id=class.id %}'>
                 <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="ALERT!"></i></a></td>
             </tr>
+            
+There is 2 way to sort, one is in teh view with sorted function from operator import itemgetter attrgetter
+def teacher(request,sort=None):
+    if is_login(request) == False: # Check for login/ add message 'please login'
+        return redirect('/login')
+    if is_teacher(request) == False:
+        return redirect('/')
+    if sort ==1:# Below return a sorted list
+        course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('year','semester'))
+        return render(request,'teacher/sort.html',{'course_sorted':course_sorted})
+    return render(request,'teacher/teacher_homepage.html')
+or use dicsort in template like below
+{% for course in request.user.teacher.course_by_teacher.all|dictsort:'course_title' %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ course.course_number }}</td>
+              <td>{{ course.course_title }}</td>
+              <td>{{ course.year }}, {{ course.semester }}</td>
+              <td>
+                <a href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-chalkboard-teacher"style='font-size:18px'></i></a></a>
+              </td>
+              <td>
+                <a href='{% url "view_lesson_plan" course_id=course.id %}'><i class="fas fa-list-ol" style='font-size:19px'></i></a>
+              </td>
+              <td>
+              {% if course.course_in_classroom.count == 0 %}
+                <form action='/teacher/classroom/detached_classroom/' method='post'>{% csrf_token %}
+                  <input type='hidden' name='classroom_id'value='{{ class.id }}'/>
+                  <button type='submit' style='border:none;background:none;cursor: pointer;cursor: hand;'>
+                  <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"></i>
+                  </button>
+                </form>
+              {% else %}
+              <div style='text-align:center'>
+                <i class="fas fa-ban text-warning" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Drop All Classes first"></i>
+              </div>
+
+              {% endif %}
+              </td>
+            </tr>
+        {% endfor %}

@@ -9,6 +9,8 @@ from django.views.decorators.http import require_http_methods
 from school_app.models import *
 from school_app.views_functions import is_teacher, is_login, sort_order, other_check
 
+from operator import itemgetter, attrgetter
+
 #Logic for logged in User/ Specfic Non-Generic
 
 #------ Generic View/Edit profile-------
@@ -20,8 +22,9 @@ def teacher(request,sort=None):
         return redirect('/login')
     if is_teacher(request) == False:
         return redirect('/')
-    if sort ==1:
-        return render(request,'teacher/sort.html')
+    if sort ==1:# Below return a sorted list
+        course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('year','semester'))
+        return render(request,'teacher/sort.html',{'course_sorted':course_sorted})
     return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
     # Course = teacher.course_by_teacher.all()
@@ -92,6 +95,21 @@ def edit_course(request,course_id=None):
             edit_course=Course.objects.filter(id=class_id)
             return render(request,'teacher/course/edit_course.html',{'edit_course':edit_course})
             
+# Not yet built Moved to Lesson Plan
+@require_http_methods(['POST'])
+def drop_course(request):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        course_id = request.POST['course_id']
+        course = Course.objects.filter(id=course_id).first()
+        course.delete()
+        messages.success(request, course.course_title+'. ' + course.semester + ', ' + course.year+ ' sucessfully droped.')
+        return redirect('/teacher')
+          
 # ------ Classroom Views, Add Classroom, Edit Classroom-----
 def classroom(request,course_id=None):
     if is_login(request) == False: 
@@ -102,7 +120,7 @@ def classroom(request,course_id=None):
             return redirect('/')
         course = Course.objects.filter(id=course_id).first()
         classes = Classroom.objects.filter(course=course)
-        
+        # Need to work on notification when 2 classroom is on the same time slot
         time_list = []
         for cla in classes:
             time_list.append(cla.time)

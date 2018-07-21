@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class='content'>
-        <h2 style='padding-left: 10px'>Teacher Console</h2>
+<script>
+        $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
+<div class='content '>
+        <h2 style='padding-left: 0px'>Teacher Console</h2>
         <hr style="text-align:left;margin-left:0;width:315px;height:0px;padding: 0px"/>
         {% if messages %}
           <ul class="messages">
@@ -17,38 +22,58 @@
         </ul>
         {% if request.user.teacher.course_by_teacher.all.count > 0 %}
           <h4>Your Courses:</h4>
-          <table class="table table-hover table-bordered pad-right-table">
+          <div class="mr-2">
+          <table class="table table-hover table-bordered shadow">
             <thead class='table-primary'>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Course Number</th>
+              <th scope="col" style="width: 8%">#</th>
+              <th scope="col" style="width: 15%">Course Number</th>
               <th scope="col">Course Title
                 <a href='{% url "teacher" %}'><i class="fas fa-sort-alpha-down"></i></a></a>
               </th>
-              <th scope="col">Academic Year
+              <th scope="col" style="width: 20%">Academic Year
                 <a href='{% url "teacher_sort" sort=1 %}'><i class="fas fa-sort-numeric-down"></i></a></a>
               </th>
-              <th scope="col">View Classes</th>
-              <th scope="col">Lesson Plan</th>
+              <th scope="col" style="width: 13%">View Classes</th>
+              <th scope="col" style="width: 13%">Lesson Plan</th>
+              <th scope="col" style="width: 10%">Drop</th>
             </tr>
             </thead>
             <tbody>
-        {% for course in request.user.teacher.course_by_teacher.all|dictsort:'year' %}
+        {% for course in course_sorted %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ course.course_number }}</td>
               <td>{{ course.course_title }}</td>
-              <td>{{ course.semester }}, {{ course.year }}</td>
-              <th style="width: 15%">
-                <a href='{% url "classroom_list" course_id=course.id %}'><i class="fas fa-th-list"></i></a></a>
-              </th>
-              <th style="width: 15%">
-                <a href='{% url "edit_course" course_id=course.id %}'><i class="fas fa-edit"></i></a>
-              </th>
+              <td>{{ course.year }}, {{ course.semester }}</td>
+              <td>
+                <a href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-chalkboard-teacher"style='font-size:18px'></i></a></a>
+              </td>
+              <td>
+                <a href='{% url "view_lesson_plan" course_id=course.id %}'><i class="fas fa-list-ol" style='font-size:19px'></i></a>
+              </td>
+              <td>
+              {% if course.course_in_classroom.count == 0 %}
+                <form action='/teacher/classroom/detached_classroom/' method='post'>{% csrf_token %}
+                  <input type='hidden' name='classroom_id'value='{{ class.id }}'/>
+                  <button type='submit' style='border:none;background:none;cursor: pointer;cursor: hand;'>
+                  <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"></i>
+                  </button>
+                </form>
+              {% else %}
+              <div style='text-align:center'>
+                <i class="fas fa-ban text-warning" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Drop All Classes first"></i>
+              </div>
+
+              {% endif %}
+              </td>
             </tr>
         {% endfor %}
+            
             </tbody>
           </table>
+          </div>
         {% endif %}
+<br>
 </div>
 {% endblock %}
