@@ -1,61 +1,72 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+        $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
 <div class='content'>
-        <h1 style='padding-left: 10px'>Teacher Console</h1>
-        <br>
-        {% if edit_course %}
-          <h4>Edit Class:</h4>
-        {% for class in edit_course %}
-          <form action="/teacher/edit_course" method="post"> {% csrf_token %}
-            <input name="course_id" type="hidden" value="{{class.id}}">
-          <!--</form> style='background: linear-gradient(to right, #e0eafc, #cfdef3)' class='form-control-inherit'>-->
-          <table class="table table-hover table-bordered text-dark table-nonfluid">
+  <div class="container-fuild form-row" style='width:100%'>
+    <div class="col-md-6">
+        <div style="width: 280px">
+        <h4 style='padding-left: 1px'>{{ edit_course.semester }}, {{ edit_course.year }}</h4>
+        <hr class='hr-line'/>
+        <h4 style='padding-left: 1px'>{{ edit_course.course_title }} </h4>
+        <hr class='hr-line'/>
+        <h4 style='padding-left: 1px'>Id: {{edit_course.course_number}}</h4>
+        <hr class='hr-line'/>
+        <hr class='hr-button-gap'/>
+          <a href='{% url "classroom_view" course_id=edit_course.id %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Cancel &nbsp</a></a>
+          <a href='{% url "add_classroom" course_id=edit_course.id %}' class="btn btn-info btn-sm shadow-sm" role="button"><i class="fas fa-plus"></i> New Classroom</a>
+        <hr/></div></div>
+        <div class="col-md-5">
+        
+        </div></div>
+        
+        {% if classes %}
+          <h5><big>Classes assigned to {{ course.course_title }} :</big></h5>
+          <div class='mr-2'>
+          <table class="table table-hover table-bordered pad-right-table shadow ">
             <thead class='table-primary'>
             <tr>
-              <th style="width: 20%" scope="col">Day</th>
-              <th scope="col">Date</th>
-              <th scope="col">Lesson Plan</th>
+              <th scope="col" style="width: 5%">#</th>
+              <th scope="col">Course Title / Alias</th>
+              <th scope="col">Room Number</th>
+              <th scope="col">Time</th>
+              <th scope="col">Description</th>
+              <th scope="col">Student Enrolled</th>
+              <th scope="col">Edit Info</th>
+              <th scope="col">Drop Class</th>
             </tr>
             </thead>
             <tbody>
+        {% for class in classes %}
             <tr>
-              <th scope="row">Monday:</th>
-              <td style="width: 20%"><input class="form-control black-font" type="date" name='monday_date'></td>
-              <td><textarea class="form-control" style='color:black' name='monday_assignment' maxlength='100'rows="3" required>{{class.monday_assignment}}</textarea></td>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ class.course_title }}</td>
+              <td>{{ class.room_number }}</td>
+              <td>{{ class.time }}</td>
+              <td>{{ class.description }}</td>
+              <td>
+                <a href='{% url "edit_course" course_id=course.id %}'><i class="fas fa-users"></i></a>
+              </td>
+              <td>
+                <a href='{% url "edit_classroom" classroom_id=class.id %}'><i class="fas fa-edit"></i></a>
+              </td>
+              <td>
+                <form action='/teacher/classroom/detached_classroom/' method='post'>{% csrf_token %}
+                  <input type='hidden' name='classroom_id'value='{{ class.id }}'/>
+                  <button type='submit' style='border:none;background:none;cursor: pointer;cursor: hand;'>
+                  <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"></i>
+                  </button>
+                </form>
+              </td>
             </tr>
-            <tr>
-              <th scope="row">Tuesday:</th>
-              <td style="width: 20%"><input class="form-control black-font" type="date" name='tuesday_date'></td>
-              <td><textarea class="form-control" style='color:black' name='tuesday_assignment' rows="3" >{{class.tuesday_assignment}}</textarea></td>
-            </tr>
-            <tr>
-              <th scope="row">Wednesday:</th>
-              <td style="width: 20%"><input class="form-control black-font" type="date" name='wednesday_date'></td>
-              <td><textarea class="form-control" style='color:black' name='wednesday_assignment' rows="3" >{{class.wednesday_assignment}}</textarea></td>
-            </tr>
-            <tr>
-              <th scope="row">Thursday:</th>
-              <td style="width: 20%"><input class="form-control black-font" type="date" name='thursday_date' ></td>
-              <td><textarea class="form-control" style='color:black' name='thursday_assignment' rows="3" >{{class.thursday_assignment}}</textarea></td>
-            </tr>
-            <tr>
-              <th scope="row">Friday:</th>
-              <td style="width: 20%"><input class="form-control black-font" type="date" name='friday_date' ></td>
-              <td><textarea class="form-control" style='color:black' name='friday_assignment' rows="3" >{{class.friday_assignment}}</textarea></td>
-            </tr>
+        {% endfor %}
             </tbody>
           </table>
-          <table class="table-hover text-dark">
-            <tr>
-              <th style="width:200px"scope="row">&ensp;Weekly Agenda:</th>
-              <td style="width:300px"><textarea class="form-control" style='color:black' name='weekly_agenda' rows="3" >{{class.weekly_agenda}}</textarea></td>
-            </tr>
-          </table>
-          <div class="col-xs-6 form-group">
-            <button class="btn btn-md btn-primary "><i class="fas fa-pencil-alt"></i> Submit Change</button>
-          </div>
-          </form>
-        {% endfor %}
+        {% else %}
+        <h5><div class="alert-inherit alert-info shadow-sm" role="alert"><i class="fas fa-exclamation"></i> No Classes assigned to this course.</div></h5>
         {% endif %}
-</div>
+</div></div><br>
 {% endblock %}

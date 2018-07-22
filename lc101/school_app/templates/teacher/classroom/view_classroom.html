@@ -11,7 +11,9 @@
         <div style="width: 280px">
         <h4 style='padding-left: 1px'>{{ course.semester }}, {{ course.year }}</h4>
         <hr class='hr-line'/>
-        <h4 style='padding-left: 1px'>{{ course.course_title }}</h4>
+        <h4 style='padding-left: 1px'>{{ course.course_title }}
+        <a href='{% url "edit_course" course_id=course.id  %}'><h6 style='display:inline'><small><i class="far fa-edit"></i>edit</small></h6></a>
+        </h4>
         <hr class='hr-line'/>
         <h4 style='padding-left: 1px'>Id: {{course.course_number}}</h4>
         <hr class='hr-line'/>
@@ -74,7 +76,7 @@
             </tbody>
           </table>
         {% else %}
-        <h4><div class="alert-inherit alert-info" role="alert"><i class="fas fa-exclamation"></i> No Classes assigned to this course.</div></h4>
+        <h5><div class="alert-inherit alert-info shadow-sm" role="alert"><i class="fas fa-exclamation"></i> No Classes assigned to this course.</div></h5>
         {% endif %}
 </div></div><br>
 {% endblock %}

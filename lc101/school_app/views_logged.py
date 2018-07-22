@@ -24,13 +24,16 @@ def teacher(request,sort=None):
         return redirect('/')
     if sort ==1:# Below return a sorted list
         course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('year','semester'))
-        return render(request,'teacher/sort.html',{'course_sorted':course_sorted})
-    return render(request,'teacher/teacher_homepage.html')
+        return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
+        
+    course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('course_title','semester','year'))
+    return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
+    # return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
     # Course = teacher.course_by_teacher.all()
     # return render(request,'teacher/teacher_homepage.html',{'teacher':teacher,'Course':Course})
 
-# ------ Add Course, Edit Course ---------- 
+# ------ add course, edit course, drop course ---------- 
 def add_course(request):
     if is_login(request) == False: 
         return redirect('/login')
@@ -38,11 +41,12 @@ def add_course(request):
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
+        
         elif request.method == 'POST':
-    
             if request.POST['year'].isnumeric(): # Check year for integer
                 year = request.POST['year']
             else:
+                messages.warning(request,'Invalid year')
                 return redirect('/teacher/add_course')
             
             semester = request.POST['semester']
@@ -92,7 +96,7 @@ def edit_course(request,course_id=None):
             messages.success(request, course.course_title + ' have been updated.')
             return redirect('/teacher')
         else:
-            edit_course=Course.objects.filter(id=class_id)
+            edit_course=Course.objects.filter(id=course_id).first()
             return render(request,'teacher/course/edit_course.html',{'edit_course':edit_course})
             
 # Not yet built Moved to Lesson Plan

@@ -46,12 +46,12 @@
             </tr>
             </thead>
             <tbody>
-        {% for course in request.user.teacher.course_by_teacher.all|dictsort:'course_title' %}
+        {% for course in course_sorted %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ course.course_number }}</td>
               <td>{{ course.course_title }}</td>
-              <td>{{ course.year }}, {{ course.semester }}</td>
+              <td>{{ course.semester }}, {{ course.year }}</td>
               <td>
                 <a href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-chalkboard-teacher"style='font-size:18px'></i></a></a>
               </td>
