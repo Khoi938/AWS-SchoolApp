@@ -64,7 +64,7 @@
                   <i class="fas fa-cogs" style='font-size:19px'></i>
                 </button>
                 <div class="dropdown-menu body-teacher"  aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item pl-3" href=""> &nbsp&nbsp edit course <i class="fas fa-edit"></i></a>
+                <a class="dropdown-item pl-3" href="{% url 'edit_course' course_id=course.id %}"> &nbsp&nbsp edit course <i class="fas fa-edit text-primary"></i></a>
                 <a class="dropdown-item">
               {% if course.course_in_classroom.count == 0 %}
                   <form action='{% url "drop_course" %}' method='post' style='padding-left:0px'>{% csrf_token %}
