@@ -111,7 +111,7 @@ def drop_course(request):
         course_id = request.POST['course_id']
         course = Course.objects.filter(id=course_id).first()
         course.delete()
-        messages.success(request, course.course_title+'. ' + course.semester + ', ' + course.year+ ' sucessfully droped.')
+        messages.success(request, course.course_title+'. ' + course.semester + ', ' + course.year+ ' sucessfully dropped.')
         return redirect('/teacher')
           
 # ------ Classroom Views, Add Classroom, Edit Classroom-----

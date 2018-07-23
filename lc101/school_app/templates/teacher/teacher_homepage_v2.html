@@ -42,7 +42,7 @@
               </th>
               <th scope="col" style="width: 13%">View Classes</th>
               <th scope="col" style="width: 13%">Lesson Plan</th>
-              <th scope="col" style="width: 10%">Drop/Edit</th>
+              <th scope="col" style="width: 10%">Drop</th>
             </tr>
             </thead>
             <tbody>
@@ -59,35 +59,19 @@
                 <a href='{% url "view_lesson_plan" course_id=course.id %}'><i class="fas fa-list-ol" style='font-size:19px'></i></a>
               </td>
               <td>
-                <div class="dropleft">
-                <button  style='border:none; background:none;cursor:pointer; cursor:hand;outline:none' type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-cogs" style='font-size:19px'></i>
-                </button>
-                <div class="dropdown-menu body-teacher"  aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item pl-3" href=""> &nbsp&nbsp edit course <i class="fas fa-edit"></i></a>
-                <a class="dropdown-item">
               {% if course.course_in_classroom.count == 0 %}
-                  <form action='{% url "drop_course" %}' method='post' style='padding-left:0px'>{% csrf_token %}
-                    <input type='hidden' name='course_id'value='{{ course.id }}'/>
-                    <button type='submit' data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"
-                    style='text-align:left;border:none;background:none;cursor: pointer;cursor: hand;'>
-                    drop course <i style='color:red' class="fas fa-trash test"></i>
-                    </button>
-                  </form>
-                
+                <form action='{% url "drop_course" %}' method='post'>{% csrf_token %}
+                  <input type='hidden' name='course_id'value='{{ course.id }}'/>
+                  <button type='submit' style='border:none;background:none;cursor: pointer;cursor: hand;'>
+                  <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"></i>
+                  </button>
+                </form>
               {% else %}
-                  <form action='/' method='post' style='padding-left:0px'>{% csrf_token %}
-                    <input type='hidden' name='none'value='none'/>
-                    <button type='submit' style='text-align:left;border:none;background:none;cursor: pointer;cursor: hand;' disabled>
-                    <span data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Drop All Classes first"> 
-                    drop course <i class="fas fa-ban text-warning" style='font-size:17px'></i>
-                    </span>
-                    </button>
-                  </form>
+              <div style='text-align:center'>
+                <i class="fas fa-ban text-warning" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Drop All Classes first"></i>
+              </div>
+
               {% endif %}
-              </a>
-              </div>
-              </div>
               </td>
             </tr>
         {% endfor %}
