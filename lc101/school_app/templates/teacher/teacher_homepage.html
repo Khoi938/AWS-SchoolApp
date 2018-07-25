@@ -60,10 +60,10 @@
               </td>
               <td>
                 <div class="dropleft">
-                <button  style='border:none; background:none;cursor:pointer; cursor:hand;outline:none' type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-cogs" style='font-size:19px'></i>
+                <button class='dropdown-toggle' style='border:none; background:none;cursor:pointer; cursor:hand;outline:none' type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-cogs " style='font-size:19px'></i>
                 </button>
-                <div class="dropdown-menu body-teacher"  aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu body-teacher shadow"  aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item pl-3" href="{% url 'edit_course' course_id=course.id %}"> &nbsp&nbsp edit course <i class="fas fa-edit text-primary"></i></a>
                 <a class="dropdown-item">
               {% if course.course_in_classroom.count == 0 %}
