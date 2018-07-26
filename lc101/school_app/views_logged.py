@@ -85,19 +85,34 @@ def edit_course(request,course_id=None):
         if request.user.profile.is_teacher == False:
             messages.warning(request, "You don't have Instructor's Privilege!")
             return redirect('/')
-        if request.method == 'POST':# and class_id==None:
-            monday_date = request.POST['monday_date']
-            monday_assignment = request.POST['monday_assignment']
+        if request.method == 'POST':
             course_id = request.POST['course_id']
             course = Course.objects.filter(id=course_id).first()
-            course.monday_date = monday_date
-            course.monday_assignment = monday_assignment
+            course.course_title = request.POST['title']
+            course.year = request.POST['year']
+            course.semester = request.POST['semester']
             course.save()
-            messages.success(request, course.course_title + ' have been updated.')
-            return redirect('/teacher')
+            messages.success(request, 'update successful')
+            return redirect('edit_course',course_id=course_id)
+        
         else:
             edit_course=Course.objects.filter(id=course_id).first()
-            return render(request,'teacher/course/edit_course.html',{'edit_course':edit_course})
+            if edit_course.semester == 'Spring':
+                semester = 'spring'
+            elif edit_course.semester == 'Summer':
+                semester = 'summer'
+            else:
+                semester = 'fall'
+            
+            if edit_course.year == '2018':
+                year = '2018'
+            elif edit_course.year == '2019':
+                year = '2019'
+            else:
+                year = '2020'
+                
+            return render(request,'teacher/course/edit_course.html', 
+            {'edit_course':edit_course, 'semester':semester,'year':year})
             
 # Not yet built Moved to Lesson Plan
 @require_http_methods(['POST'])
