@@ -15,9 +15,12 @@
         <hr class='hr-line'/>
         <h4 style='padding-left: 1px'>Id: {{edit_course.course_number}}</h4>
         <hr class='hr-line'/>
+        
         <hr class='hr-button-gap'/>
-          <a href='{% url "classroom_view" course_id=edit_course.id %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Cancel &nbsp</a></a>
-          <a href='{% url "add_classroom" course_id=edit_course.id %}' class="btn btn-info btn-sm shadow-sm" role="button"><i class="fas fa-plus"></i> New Classroom</a>
+          <a href='{% url "teacher" %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Console</a>
+          <a href='{% url "classroom_view" course_id=edit_course.id %}' class="btn btn-info btn-sm shadow-sm" role="button"> Classroom</a>
+          <a href='{% url "view_lesson_plan" course_id=edit_course.id %}' class="btn btn-info btn-sm shadow-sm"> Schedule</a>
+              
         <hr/></div>
         {% if messages %}
           <ul class="messages" style='list-style-type: none;'>
@@ -63,7 +66,7 @@
         </div>
         
         <br>
-        <label><big>description</big></label>
+        <label><big>description / note</big></label>
         <textarea class='form-control' rows='3' name='description' required>{{ edit_course.description }}</textarea>
         <button style='width:175px' class="btn btn-md btn-success btn-block mt-2 text-center shadow-sm">
           <i class="fas fa-cloud-upload-alt"></i> Submit Changes

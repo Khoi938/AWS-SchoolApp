@@ -91,6 +91,7 @@ def edit_course(request,course_id=None):
             course.course_title = request.POST['title']
             course.year = request.POST['year']
             course.semester = request.POST['semester']
+            course.description = request.POST['description']
             course.save()
             messages.success(request, 'update successful')
             return redirect('edit_course',course_id=course_id)

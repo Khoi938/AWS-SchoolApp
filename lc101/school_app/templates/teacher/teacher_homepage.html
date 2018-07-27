@@ -50,7 +50,14 @@
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ course.course_number }}</td>
-              <td>{{ course.course_title }}</td>
+              <td>
+                <div class="dropright">
+                <button style='border:none; background:none;cursor:pointer; cursor:hand;outline:none' type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ course.course_title }}
+                </button>
+                <div class="dropdown-menu shadow-sm"  aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item">{{ course.description}}</a>
+              </td>
               <td>{{ course.semester }}, {{ course.year }}</td>
               <td>
                 <a href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-chalkboard-teacher"style='font-size:18px'></i></a></a>
