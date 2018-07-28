@@ -18,11 +18,11 @@
           </div>
           <div class='col-md-6'>
             {% if messages %}
-               <ul class="messages" style='list-style-type: none;'>
+               <span class="messages" style='list-style-type: none;'>
             {% for message in messages %}
-               <li><div class="alert-inherit alert-success shadow-sm" role="alert">{{ message }}</div></li>
+               <div class="alert alert-{{ message.tags }} shadow-sm" style='display:inline-block' role="alert">{{ message }}</div>
             {% endfor %}
-               </ul> 
+               </span> 
             {% endif %}
           </div>
         </div>

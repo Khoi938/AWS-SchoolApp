@@ -1,54 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
-<br>
-
 <script>
         $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
     });
 </script>
-<div class="container" style='padding-top:25px; padding-left:20px'>
-         <div class="panel panel-login">
-        <div class="panel-body">
-          <div class="row">
-            <!--<div class="col-lg-12">-->
-        <h3 style='padding-left: 5px'></h3>
-        <div style="width: 400px">
-          <div style='width:300px'>
-        <h4 style='padding-left: 5px'>{{ course.course_title }}</h4>
-        <hr class='hr-line'/>
-        <h4 style='padding-left: 5px'>{{ course.semester }}, {{ course.year }}</h4>
-        <hr class='hr-line'/>
-        <h4 style='padding-left: 5px'>Dept: {{ course.department.name }}</h4>
-        <hr class='hr-line'/>
-        <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        <div style='padding-left: 5px'>
-          <a class="btn btn-sm btn-primary shadow-sm" href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-ban"></i> Cancel Add </a></a>
+<div class='content'>
+  <div class="container-fuild form-row pb-4" style='width:100%'>
+    <div class="col-md-5">
+        <div class='col-md-9'>
+          <h4>{{ course.semester }}, {{ course.year }}</h4>
+          <hr class='hr-line'/>
+          <h4>{{ course.course_title }}</h4>
+          <hr class='hr-line'/>
+          <h4>Dept: {{ course.department.name }}</h4>
+          <hr class='hr-line'/>
+          <a class="btn btn-sm btn-primary shadow-sm mt-2" href='{% url "classroom_view" course_id=course.id %}'><i class="fas fa-ban"></i> Cancel Add </a>
+          <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
         </div>
-        <hr style="text-align:left;margin-left:0;height:0px;padding: 0px"/>
-        </div>
-        </div>
-        {% if messages %}
-          <ul class="messages">
-        {% for message in messages %}
-             <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
-        {% endfor %}
-          </ul> 
-        {% endif %}
-    <form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
-      <input type="hidden" name="course_id" value='{{course.id}}'/>
-      
-        <div class="input-group mb-3" style='width:400px' >
+      {% if messages %}
+        <span class="messages">
+      {% for message in messages %}
+           <div class="alert-inherit alert-{{ message.tags }}" role="alert">{{ message }}</div>
+      {% endfor %}
+        </span> 
+      {% endif %}
+    </div>  
+    <div class='col-md-5'>
+    <div class='form border border-info rounded pb-3 shadow'>
+      <form action="/teacher/classroom/add_classroom", method="post", id=''> {% csrf_token %}
+        <input type="hidden" name="course_id" value='{{course.id}}'/>
+        <div class="input-group mt-3" >
         <div>
-        <div class="input-group-prepend">
-          <label class="btn btn-info" for='' >Title / Alias &nbsp</label>
-        </div>
-          <textarea class="form-control" style='width:365px' name='course_title' id="" rows="1" cols='40' 
-          maxlength='100'placeholder="ex. {{course.course_title}} Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
-          
-          <hr/>
-          <button class="btn btn-info" >Time Slot &nbsp&nbsp&nbsp</button>
+          <div class="input-group-prepend">
+            <label class="btn btn-info shadow-sm" for='' >Title / Alias &nbsp</label>
           </div>
+            <textarea class="form-control shadow-sm" name='course_title' id="" rows="1" cols='39' 
+            maxlength='100'placeholder="ex. {{course.course_title}} Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
+          <label class="btn btn-info mt-2 shadow-sm" >Time Slot &nbsp&nbsp&nbsp</label>
+        </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="time" id="" value="8:00 AM" Checked>
             <label class="form-check-label" for="">8:00 AM</label>
@@ -83,22 +73,24 @@
             <label class="form-check-label" for="">Other:</label>
           </div>
           <div style = 'width:140px;right-align:10px'class="form-check form-check-inline">
-            <input type='text'class="form-control" name="custom_time" maxlength='8' id="" placeholder='ex. 9:30 AM' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
+            <input type='text'class="form-control shadow-sm" name="custom_time" maxlength='8' id="" placeholder='ex. 9:30 AM' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
           </div><br><br>
-        <div class="input-group mb-3" style='width:365px' >
+        <div class="input-group mb-2" >
           <div class="input-group-prepend">
-            <button class="btn btn-info" >Room Number &nbsp&nbsp</button>
+            <button class="btn btn-info shadow-sm" >Room Number &nbsp</button>
           </div>
-            <input type="text" class="form-control" name='room_number'id="" maxlength="10" placeholder="Room #" data-toggle="popover" title="" data-content='Where you do your lecture' required>
+            <input type="text" class="form-control mr-5 shadow-sm" name='room_number'id="" maxlength="10" placeholder="Room #" data-toggle="popover" title="" data-content='Where you do your lecture' required>
         </div>
         <div>
-          <label class="btn btn-info" for='description' >Course Description</label>
-          <textarea class="form-control" style='width:365px' name='description' id="" rows="3" cols='40' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria Mendez" 
+          <label class="btn btn-info shadow-sm" for='description' >Course Description</label>
+          <textarea class="form-control shadow-sm" name='description' id="" rows="3" cols='39' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria Mendez" 
           maxlength='200' data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
-          <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
-          <button style='width:150px' class="btn btn-md btn-success btn-block text-center shadow-sm"><i class="fas fa-chalkboard"></i> Add Class</button>
+          <button class="btn btn-md btn-success text-center mt-2 shadow-sm"><i class="fas fa-chalkboard"></i> Add Class</button>
         </div>
-        </div>
+      </div>
     </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
