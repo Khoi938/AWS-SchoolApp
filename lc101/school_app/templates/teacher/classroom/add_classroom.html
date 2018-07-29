@@ -33,11 +33,11 @@
         <div class="input-group mt-3" >
         <div>
           <div class="input-group-prepend">
-            <label class="btn btn-info shadow-sm" for='' >Title / Alias &nbsp</label>
+            <label class="btn btn-info shadow-sm arrow" style='cursor:default' for='' >Title / Alias &nbsp</label>
           </div>
             <textarea class="form-control shadow-sm" name='course_title' id="" rows="1" cols='39' 
-            maxlength='100'placeholder="ex. {{course.course_title}} Class A" data-toggle="popover" title="" data-content="For your reference only"required></textarea>
-          <label class="btn btn-info mt-2 shadow-sm" >Time Slot &nbsp&nbsp&nbsp</label>
+            maxlength='100'placeholder="" data-toggle="popover" title="" data-content="For your reference only"required>{{course.course_title}}</textarea>
+          <label class="btn btn-info mt-2 shadow-sm arrow" >Time Slot &nbsp&nbsp&nbsp</label>
         </div>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="time" id="" value="8:00 AM" Checked>
@@ -70,19 +70,20 @@
           </div>
             <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="time" id="" value="other">
-            <label class="form-check-label" for="">Other:</label>
+            <label class="form-check-label" for="">Other</label>
           </div>
           <div style = 'width:140px;right-align:10px'class="form-check form-check-inline">
-            <input type='text'class="form-control shadow-sm" name="custom_time" maxlength='8' id="" placeholder='ex. 9:30 AM' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
+            <input type='time'class="form-control shadow-sm" name="custom_time"  id="" placeholder='ex. 9:30 AM' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
+          <!--maxlength='8'-->
           </div><br><br>
         <div class="input-group mb-2" >
           <div class="input-group-prepend">
-            <button class="btn btn-info shadow-sm" >Room Number &nbsp</button>
+            <button class="btn btn-info shadow-sm arrow" >Room Number &nbsp</button>
           </div>
             <input type="text" class="form-control mr-5 shadow-sm" name='room_number'id="" maxlength="10" placeholder="Room #" data-toggle="popover" title="" data-content='Where you do your lecture' required>
         </div>
         <div>
-          <label class="btn btn-info shadow-sm" for='description' >Course Description</label>
+          <label class="btn btn-info shadow-sm arrow" for='description' >Course Description</label>
           <textarea class="form-control shadow-sm" name='description' id="" rows="3" cols='39' placeholder="ex. Summer A 2018 {{course.course_title}} Gloria Mendez" 
           maxlength='200' data-toggle="popover" title="" data-content="Briefly describe your Course"required></textarea>
           <button class="btn btn-md btn-success text-center mt-2 shadow-sm"><i class="fas fa-chalkboard"></i> Add Class</button>

@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<br>
 
 <script>
         $(document).ready(function(){
@@ -8,110 +7,91 @@
     });
 </script>
 <div class="container-fuild" style='padding-top:25px; padding-left:40px;padding-right:40px'>
-         <div class="panel panel-login">
-        <div class="panel-body">
-          <div class="row">
-            <!--<div class="col-lg-12">-->
-        
-      <div class="form-row" style=''>
-          <div class="col-md-7 mb-3">
-        <h3 style='padding-left: 5px'></h3>
-        <div style="width: 400px;padding-left: 10px">
-          <div style='width:300px'>
-        <h4 style='padding-left: 5px'>{{ course.semester }}, {{ course.year }}</h4>
-        <hr class='hr-line'/>
-        <h4 style='padding-left: 5px'>{{course.course_title}}</h4>
-        <hr class='hr-line'/>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-5">
-          <!--<br><br>-->
-           <a class="btn btn-sm btn-primary" href='{% url "teacher" %}'><i class="fas fa-step-backward"></i> Cancel Add</a></a>
-        <br>
-        <hr/>
-        <h6 style='padding-left: 5px'>Add Lesson Below:</h6>
-        <!--<hr/>-->
-                <!--<hr class='hr-line'/>-->
-        </div>
+  <div class="form-row" style=''>
+        <div class="col-md-4">
+          <h4>{{ course.semester }}, {{ course.year }}</h4>
+          <hr/>
+          <h4>{{course.course_title}}</h4>
+          <hr/>
+           <a class="btn btn-sm btn-primary" href='{% url "teacher" %}'><i class="fas fa-step-backward"></i> Cancel Add</a>
+        <hr>
         {% if messages %}
-          <ul class="messages">
+          <span class="messages">
         {% for message in messages %}
-             <li><div class="alert-inherit alert-success" role="alert">{{ message }}</div></li>
+             <div class="alert-inherit alert-{{ message.tags }}" role="alert">{{ message }}</div>
         {% endfor %}
-          </ul> 
-        {% endif %}</div><hr/></div>
+          </span> 
+        {% endif %}
+        </div>
+  <div class='col-md-7 form border border-info rounded pb-3 ml-2 mr-2 mb-3 shadow'>
     <form action="/teacher/lesson_plan/add/" method="post" id=''> {% csrf_token %}
       <input type="hidden" name="course_id" value='{{course.id}}'/>
-    <hr/></div>
-      <div class="form-row" style=''>
-          <div class="col-md-2 mb-3">
-            <label class="btn btn-info" for='' >Week #</label>
+  
+      <div class="form-row mt-3" style=''>
+          <div class="col-md-4">
+            <label class="btn btn-info" for='' >Week Number</label>
             <input type="text" name='week_number' maxlength="2" placeholder='ex. Week 1' data-toggle="popover" title="" data-content="Digit only" data-placement="bottom" class="form-control"required>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Agenda of the week</label>
             <textarea class="form-control" name='agenda' id="" rows="2" cols='30' placeholder="Agenda"required></textarea>
           </div>
-          <div class="col-md-4 mb-3">
-          </div></div><hr/>
-      <div class="form-row" style=''>
-          <div class="col-md-2 mb-3">
+          <div class='col-md-12'>
+            <hr>
+          </div>
+      
+          <div class="col-md-4">
             <label class="btn btn-info" for='' >Monday Date</label>
             <input type="date" name='monday_date' class="form-control"required>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Monday Assignment</label>
             <textarea class="form-control" name='monday_assignment' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
-          <div class="col-md-4 mb-3"></div>
-          <div class="col-md-2 mb-3">
+          <div class="col-md-4">
             <label class="btn btn-info" for='' >Tuesday Date</label>
             <input type="date" name='tuesday_date' class="form-control"required>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Tuesday Assignment</label>
             <textarea class="form-control" name='tuesday_assignment' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
-          <div class="col-md-4 mb-3"></div>
-          <div class="col-md-2 mb-3">
+          <div class="col-md-4">
             <label class="btn btn-info" for='' >Wednesday Date</label>
             <input type="date" name='wednesday_date' class="form-control"required>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Wednesday Assignment</label>
             <textarea class="form-control" name='wednesday_assignment' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
-          <div class="col-md-4 mb-3"></div>
-          <div class="col-md-2 mb-3">
+          <div class="col-md-4">
             <label class="btn btn-info" for='' >Thursday Date</label>
             <input type="date" name='thursday_date' class="form-control"required>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Thursday Assignment</label>
             <textarea class="form-control" name='thursday_assignment' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
-          <div class="col-md-4 mb-3"></div>
-          <div class="col-md-2 mb-3">
+          <div class="col-md-4">
             <label class="btn btn-info" for='' >Friday Date</label>
             <input type="date" name='friday_date' class="form-control"required>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Friday Assignment</label>
             <textarea class="form-control" name='friday_assignment' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
-          <div class="col-md-4 mb-3"></div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Weekend Assignment</label>
             <textarea class="form-control" name='weekend_assignment' id="" rows="2" cols='30' placeholder="Weekend HW"required></textarea>
           </div>
+          <div class='col-md-12'>
+            <button class="btn btn-md btn-success text-center"><i class="fas fa-chalkboard"></i> Add Class</button>
           </div>
-        <hr style='height:0px; visibility:hidden; margin-bottom:-10px;' />
-          <button style='width:150px' class="btn btn-md btn-success btn-block text-center"><i class="fas fa-chalkboard"></i> Add Class</button>
-        </div>
-        </div>
-        
-        <br><br>
-    </form>
+      </form>
+      </div>
+    </div>
+ </div>
+ <br><br>
+</div>
 
 {% endblock %}
