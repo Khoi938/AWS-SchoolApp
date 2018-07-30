@@ -29,7 +29,8 @@
         {% if request.user.teacher.course_by_teacher.all.count > 0 %}
           <h4>Your Courses:</h4>
           <div class="mr-2">
-          <table class="table table-hover table-bordered shadow">
+          <table class=" table  table-hover table-bordered shadow">
+            
             <thead class='table-primary'>
             <tr>
               <th scope="col" style="width: 8%">#</th>
@@ -55,8 +56,10 @@
                 <button style='border:none; background:none;cursor:pointer; cursor:hand;outline:none' type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ course.course_title }}
                 </button>
+                </div>
                 <div class="dropdown-menu shadow-sm"  aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item">{{ course.description}}</a>
+                  <a class="dropdown-item">{{ course.description}}</a>
+                </div>
               </td>
               <td>{{ course.semester }}, {{ course.year }}</td>
               <td>
@@ -100,7 +103,9 @@
         {% endfor %}
             
             </tbody>
+            
           </table>
+          
           </div>
         {% endif %}
 <br>
