@@ -15,22 +15,6 @@
           <hr/>
            <a class="btn btn-sm btn-primary" href='{% url "teacher" %}'><i class="fas fa-step-backward"></i> Cancel Add</a>
         <hr>
-        <div class='form border border-info rounded  shadow'>
-    <form action="/teacher/lesson_plan/add/" method="post" id='lesson_plan'> {% csrf_token %}
-      <div class="form-row mb-3" style=''>
-          <div class="col-md-4 mt-2">
-            <label class="btn btn-info" for='' >Week #</label>
-            <input type="text" name='week_number' maxlength="2" placeholder='ex. Week 1' data-toggle="popover" title="" data-content="Digit only" data-placement="bottom" class="form-control"required>
-          </div>
-          <div class="col-md-8 mt-2">
-            <label class="btn btn-info" for='' >Agenda of the week</label>
-            <textarea class="form-control" name='agenda' id="" rows="2" cols='30' placeholder="Agenda"required></textarea>
-          </div>
-        </div>
-      </form>
-      </div>
-       
-        
         {% if messages %}
           <span class="messages">
         {% for message in messages %}
@@ -39,18 +23,28 @@
           </span> 
         {% endif %}
         </div>
-        <br>
-<div class='col-md-8 mt-2 pl-1 pr-1'>
-  <div class='form border border-info rounded pb-3 mb-3 shadow'>
-    <form action="/teacher/lesson_plan/add/" method="post" id='lesson_plan'> {% csrf_token %}
+  <div class='col-md-7 form border border-info rounded pb-3 ml-2 mr-2 mb-3 shadow'>
+    <form action="/teacher/lesson_plan/add/" method="post" id=''> {% csrf_token %}
       <input type="hidden" name="course_id" value='{{course.id}}'/>
   
-      <div class="form-row mt-2" style=''>
-          <div class="col-md-4 mt-2">
+      <div class="form-row mt-3" style=''>
+          <div class="col-md-4">
+            <label class="btn btn-info" for='' >Week Number</label>
+            <input type="text" name='week_number' maxlength="2" placeholder='ex. Week 1' data-toggle="popover" title="" data-content="Digit only" data-placement="bottom" class="form-control"required>
+          </div>
+          <div class="col-md-8">
+            <label class="btn btn-info" for='' >Agenda of the week</label>
+            <textarea class="form-control" name='agenda' id="" rows="2" cols='30' placeholder="Agenda"required></textarea>
+          </div>
+          <div class='col-md-12'>
+            <hr>
+          </div>
+      
+          <div class="col-md-4">
             <label class="btn btn-info" for='' >Monday Date</label>
             <input type="date" name='monday_date' class="form-control"required>
           </div>
-          <div class="col-md-8 mt-2">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Monday Assignment</label>
             <textarea class="form-control" name='monday_assignment' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
@@ -62,7 +56,7 @@
             <label class="btn btn-info" for='' >Tuesday Assignment</label>
             <textarea class="form-control" name='tuesday_assignment' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
-          <div class="col-md-4 mt-2">
+          <div class="col-md-4">
             <label class="btn btn-info" for='' >Wednesday Date</label>
             <input type="date" name='wednesday_date' class="form-control"required>
           </div>
@@ -74,7 +68,7 @@
             <label class="btn btn-info" for='' >Thursday Date</label>
             <input type="date" name='thursday_date' class="form-control"required>
           </div>
-          <div class="col-md-8 mt-2">
+          <div class="col-md-8">
             <label class="btn btn-info" for='' >Thursday Assignment</label>
             <textarea class="form-control" name='thursday_assignment' id="" rows="2" cols='30' placeholder="Homework"required></textarea>
           </div>
