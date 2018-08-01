@@ -8,7 +8,7 @@
 <div class='content'>
   <div class="container-fuild form-row" style='width:100%'>
     <div class="col-md-5">
-        <div style="width: 280px">
+       <div class='col-md-10'>
         <h4 style='padding-left: 1px'>{{ edit_course.semester }}, {{ edit_course.year }}</h4>
         <hr class='hr-line'/>
         <h4 style='padding-left: 1px'>{{ edit_course.course_title }} </h4>
@@ -19,8 +19,7 @@
         <hr class='hr-button-gap'/>
           <a href='{% url "teacher" %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Console</a>
           <a href='{% url "classroom_view" course_id=edit_course.id %}' class="btn btn-info btn-sm shadow-sm" role="button"> Classroom</a>
-          <a href='{% url "view_lesson_plan" course_id=edit_course.id %}' class="btn btn-info btn-sm shadow-sm"> Schedule</a>
-              
+          <a href='{% url "view_lesson_plan" course_id=edit_course.id %}' class="btn btn-info btn-sm shadow-sm"> Lesson Plans</a>
         <hr/></div>
         {% if messages %}
           <ul class="messages" style='list-style-type: none;'>
@@ -45,9 +44,8 @@
 	            <option value="2019" {% if year == '2019' %} selected{% endif %}>2019</option>
 	            <option value="2020" {% if year == '2020' %} selected{% endif %}>2020</option>
 	          </select>
-	          <label class='mt-2 mr-2'><big>semester:</big></label>
-	          
-	       <div class="form-check form-check-inline" >
+	     <label class='mt-2 mr-2'><big>semester:</big></label>
+	      <div class="form-check form-check-inline" >
           <input class="form-check-input" type="radio" name="semester" id="" value="Spring" 
           {% if semester == 'spring' %} checked{% endif %}>
           <label class="form-check-label" for="" >Spring</label>
@@ -64,17 +62,16 @@
           {% if semester == 'fall' %} checked{% endif %}>
           <label class="form-check-label" for="">Fall</label>
         </div>
-        
-        <br>
+      
         <label><big>description / note</big></label>
         <textarea class='form-control' rows='3' name='description' required>{{ edit_course.description }}</textarea>
-        <button style='width:175px' class="btn btn-md btn-success btn-block mt-2 text-center shadow-sm">
+        <button class="btn btn-md btn-success  mt-2 text-center shadow-sm">
           <i class="fas fa-cloud-upload-alt"></i> Submit Changes
         </button>
        </div>
-        </form>
+      </form>
       </div>
-        
-        </div></div>
-</div></div><br>
+    </div>
+  </div>
+</div><br>
 {% endblock %}
