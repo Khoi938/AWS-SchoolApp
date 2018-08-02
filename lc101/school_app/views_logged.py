@@ -26,7 +26,7 @@ def teacher(request,sort=None):
         course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('year','semester'))
         return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
         
-    course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('course_title','semester','year'))
+    course_sorted = sorted(request.user.teacher.course_by_teacher.filter(is_archive=False),key=attrgetter('course_title','semester','year'))
     return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
     # return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
@@ -115,7 +115,25 @@ def edit_course(request,course_id=None):
             return render(request,'teacher/course/edit_course.html', 
             {'edit_course':edit_course, 'semester':semester,'year':year})
             
-# Not yet built Moved to Lesson Plan
+@require_http_methods(['POST'])
+def archive_course(request):
+    if is_login(request) == False: 
+        return redirect('/login')
+    if is_login(request) == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request, "You don't have Instructor's Privilege!")
+            return redirect('/')
+        course_id = request.POST['course_id']
+        course = Course.objects.filter(id=course_id).first()
+        if course.teacher == request.user.teacher:
+            course.is_archive=True
+            course.save()
+            messages.success(request, course.semester + ', ' + course.year +' '+ course.course_title +  ' sucessfully archived!')
+        else:
+            messages.warning(request, "Unauthorize Request!")
+            return redirect('/logout')
+        return redirect('/teacher')
+          
 @require_http_methods(['POST'])
 def drop_course(request):
     if is_login(request) == False: 
@@ -126,8 +144,12 @@ def drop_course(request):
             return redirect('/')
         course_id = request.POST['course_id']
         course = Course.objects.filter(id=course_id).first()
-        course.delete()
-        messages.success(request, course.semester + ', ' + course.year +' '+ course.course_title +  ' sucessfully dropped.')
+        if course.teacher == request.user.teacher:
+            course.delete()
+            messages.success(request, course.semester + ', ' + course.year +' '+ course.course_title +  ' sucessfully dropped.')
+        else:
+            messages.warning(request, "Unauthorize Request!")
+            return redirect('/logout')
         return redirect('/teacher')
           
 # ------ Classroom Views, Add Classroom, Edit Classroom-----
@@ -209,7 +231,8 @@ def edit_classroom(request,classroom_id=None):
         {'classroom':classroom,'course_id':course_id})
     
 @require_http_methods(['POST'])
-def detached_classroom(request): #Saving Data for Analytical Purpose
+def detached_classroom(request): #Saving Data for Analytical Purpose 
+#Only when there is a student enroleddd with a grade else delete class room
     if is_login(request) == False: 
         return redirect('/login')
     if is_login(request) == True:

@@ -16,15 +16,15 @@
             <h4>{{course.course_title}}</h4>
             <hr class='hr-line'/>
           </div>
-          <div class='form border border-info rounded  shadow mt-2 ml-2'>
+          <div class='form border border-info rounded  shadow-sm mt-2 ml-2'>
 <form action="/teacher/lesson_plan/add/" method="post" id='lesson_plan'> {% csrf_token %}      <div class="form-row mb-3" style=''>
           <div class="col-md-4 mt-3">
-            <label class="btn btn-info" for='' >Week #</label>
+            <label class="btn btn-info " for='' >Week #</label>
             <input type="text" name='week_number' maxlength="2" placeholder='ex. Week 1' data-toggle="popover" title="" data-content="Digit only" data-placement="bottom" class="form-control"required>
           </div>
           <div class="col-md-8 mt-3">
-            <label class="btn btn-info" for='' >Agenda of the week</label>
-            <textarea class="form-control" name='agenda' id="" rows="2" cols='30' placeholder="Agenda"required></textarea>
+            <label class="btn btn-info " for='' >Agenda of the week</label>
+            <textarea class="form-control " name='agenda' id="" rows="2" cols='30' placeholder="Agenda"required></textarea>
           </div>
         </div>
       </div>
@@ -45,10 +45,10 @@
   <div class='form border border-info rounded pb-3 mb-3 shadow'>
       <input type="hidden" name="course_id" value='{{course.id}}'/>
   
-      <div class="form-row mt-2 ml-3 mr-3" style=''>
+      <div class="form-row mt-3 ml-3 mr-4" style=''>
           <div class="col-md-4 mt-2">
-            <label class="btn btn-info" for='' >Monday Date</label>
-            <input type="date" name='monday_date' class="form-control"required>
+            <label class="btn btn-info " for='' >Monday Date</label>
+            <input type="date" name='monday_date' class="form-control "required>
           </div>
           <div class="col-md-8 mt-2">
             <label class="btn btn-info" for='' >Monday Assignment</label>
@@ -91,8 +91,8 @@
             <textarea class="form-control" name='weekend_assignment' id="" rows="2" cols='30' placeholder="Weekend HW"required></textarea>
           </div>
           <div class='col-md-12 mt-2'>
-            <button class="btn btn-md btn-success text-center "><i class="fas fa-chalkboard"></i> Add Class</button>
-          </div>      </div>
+            <button class="btn btn-md btn-success text-center shadow-sm "><i class="fas fa-cloud-upload-alt"></i> Submit </button>
+          </div></div>
 </form>
 
     </div>

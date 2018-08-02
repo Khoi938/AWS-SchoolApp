@@ -231,6 +231,9 @@ losing the post data in the process
                 <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="ALERT!"></i></a></td>
             </tr>
             
+For message tags only use INFO, Warning and Sucess because the tags is use inplace of 
+BOOTstrap color scheme
+            
 There is 2 way to sort, one is in teh view with sorted function from operator import itemgetter attrgetter
 def teacher(request,sort=None):
     if is_login(request) == False: # Check for login/ add message 'please login'

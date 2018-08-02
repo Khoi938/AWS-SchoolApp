@@ -19,9 +19,11 @@ urlpatterns=[
     
     path('teacher/add_course',views_logged.add_course, name='add_course'),
     path('teacher/edit_course', views_logged.edit_course, name='edit_course'),
-    path('teacher/drop_course', views_logged.drop_course, name='drop_course'),
     path('teacher/edit_course/<int:course_id>/', views_logged.edit_course, name='edit_course'),
-   
+    path('teacher/drop_course', views_logged.drop_course, name='drop_course'),
+    path('teacher/archive_course', views_logged.archive_course, name='archive_course'),
+    
+    
     # path('teacher/lesson_plan',views_logged.lesson_plan, name='lesson_plan'),
     path('teacher/lesson_plan/<int:course_id>/',views_logged.lesson_plan, name='view_lesson_plan'),
     path('teacher/lesson_plan/weekly_lesson_plan/<int:lesson_plan_id>',views_logged.weekly_lesson_plan, name='weekly_lesson_plan'),

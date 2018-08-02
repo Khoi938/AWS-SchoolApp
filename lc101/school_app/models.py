@@ -53,7 +53,7 @@ class Student(models.Model):
         
 class Teacher(models.Model):
     profile = models.OneToOneField(Profile,null=True, on_delete = models.SET_NULL)
-    user = models.OneToOneField(User, null=True, on_delete = models.SET_NULL)
+    user = models.OneToOneField(User, null=True, on_delete = models.SET_NULL, related_name='teacher')
     def __str__(self):
         return 'Teacher: ' + str(self.user.get_full_name()) #change to string
         
@@ -70,6 +70,7 @@ class Course(models.Model):
     description = models.CharField(max_length=450,default='')
     #Alert If  related name is use in ForeignKey, _set cannot be use!
     
+    is_archive = models.BooleanField(default=False)
     department = models.ForeignKey('Department',blank=True, null=True, on_delete = models.SET_NULL, related_name='belong_in_department')
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='course_by_teacher')
     create_date = models.DateField(auto_now_add=True , blank=True,null=True,)
