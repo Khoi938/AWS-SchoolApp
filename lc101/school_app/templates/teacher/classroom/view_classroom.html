@@ -55,7 +55,7 @@
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ class.course_title }}</td>
               <td>{{ class.room_number }}</td>
-              <td>{{ class.time }}</td>
+              <td>{{ class.time|time:"g:i A" }}</td>
               <td>{{ class.description }}</td>
               <td>
                 <a href='{% url "edit_course" course_id=course.id %}'><i class="fas fa-users"></i></a>

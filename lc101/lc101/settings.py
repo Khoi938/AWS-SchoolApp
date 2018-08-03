@@ -58,7 +58,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'
 # LOGOUT_REDIRECT_URL = ''
 AUTHENTICATION_BACKENDS =['django.contrib.auth.backends.AllowAllUsersModelBackend']
 #This thing passed in ModelBackend and over write the Usercan auth to allow Is_active = false to pass through
-
+TIME_INPUT_FORMATS = ('%I:%M %p',) 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

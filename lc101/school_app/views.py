@@ -67,11 +67,11 @@ def register(request):
             return render(request,'registration/register.html',{'input_dict':input_dict})
         
         if school_id.isdigit() == False: # Check to see if passed in str can be integer
-            messages.warning(request, 'School id is an 10 digit number.')
+            messages.warning(request, 'Invalid School ID: 10 digit number required')
             return render(request,'registration/register.html',{'input_dict':input_dict})
             
         if len(school_id) < 10 or len(school_id) > 10:
-            messages.warning(request, 'School id is an 10 digit number.')
+            messages.warning(request, 'Invalid School ID: 10 digit number required')
             return render(request,'registration/register.html',{'input_dict':input_dict})
             
         if Profile.objects.filter(school_id=school_id):
@@ -93,7 +93,7 @@ def register(request):
             profile.is_teacher = True
             Teacher.objects.create(profile=profile,user=user)
         profile.save()
-        messages.success(request, 'Registration is Sucessful. Please login.')
+        messages.success(request, 'Registration is Sucessful. Please login ' + str(user.username))
         return redirect('homepage')
     return render(request,'registration/register.html')
     

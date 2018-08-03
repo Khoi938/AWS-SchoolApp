@@ -27,6 +27,8 @@ def teacher(request,sort=None):
         return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
         
     course_sorted = sorted(request.user.teacher.course_by_teacher.filter(is_archive=False),key=attrgetter('course_title','semester','year'))
+    
+    
     return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
     # return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
@@ -245,7 +247,7 @@ def detached_classroom(request): #Saving Data for Analytical Purpose
         detached_classroom.course = None
         detached_classroom.teacher = None
         detached_classroom.save()
-        messages.success(request, detached_classroom.course_title + " @" + detached_classroom.time + ' sucessfully removed.')
+        messages.success(request, detached_classroom.course_title + " @ " + str(detached_classroom.time.strftime('%-I:%M %p')) + ' sucessfully removed.')
         return redirect('/teacher/classroom/'+str(course_id))
                 
 # ------ Lesson Plan View, Add, Edit, delete ------
@@ -408,14 +410,9 @@ def student_views(request,student_id=None):
           
 
 #------ Not in Use ------    
-@login_required
 def student(request):
-    
-    if 'username' not in request.session:
-        return HttpResponse('<h1>Not logged in</h1>')
-    else:
-        return HttpResponse('<h1>Hello '+request.user.username+'<h1>')
-        
+    return render(request,'student/student_homepage.html')
+     
 #----- Logout -----
 def logout(request):
     if is_login(request) == False: 

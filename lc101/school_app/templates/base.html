@@ -19,7 +19,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {% if title == none %}  
-          <title>LC High School</title>
+          <title>TB High School</title>
         {% else %}
           <title>{{ title }}</title>
         {% endif %} 
@@ -62,7 +62,7 @@
       <!--</form>-->
       <a href='/account_management/' class='btn btn-outline-light shadow'>
          <i class="fas fa-user-cog"></i> My Account
-      {% if user.profile.home_address == '' or user.profile.phone_number == '' or user.profile.emergency_contact == '' or user.email == '' or user.profile.birth_date  %}
+      {% if user.profile.home_address == '' or user.profile.phone_number == '' or user.profile.emergency_contact == '' or user.email == '' or user.profile.birth_date == '' %}
         <i class="fas fa-exclamation-circle small" style='color:tomato'></i> 
       {% endif %}
       </a>
