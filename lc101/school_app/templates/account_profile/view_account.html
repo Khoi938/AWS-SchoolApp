@@ -10,7 +10,7 @@
     <div class='content'>
     <div class='row mr-2'>
         <div class='col-md-4 nav navigation'>
-          <div style='height:auto ;overflow: hidden;position:fixed;'>
+          <div style='height:auto ;overflow: hidden;position:fixed;width:360px'>
             <h2>Account Services</h2>
             <hr align='left'  style='width:360px;'>
             <table class='table table-bordered border table-hover shadow-sm' style='background:white'>
@@ -27,11 +27,11 @@
               </tbody>
             </table>
             {% if messages %}
-              <ul class="messages" style='list-style-type: none;margin-top:0'>
+              <span class="messages" style='margin-top:0'>
             {% for message in messages %}
-              <li><div class="alert-inherit alert-success shadow-sm" role="alert">{{ message }}</div></li>
+              <div class="alert-inherit alert-{{ message.tags }} shadow-sm" role="alert">{{ message }}</div>
             {% endfor %}
-              </ul> 
+              </span>
             {% endif %}
         </div>
         </div>
@@ -132,26 +132,29 @@
                 <tr>
                   <td scope="row" colspan="3" id='profiles'><big>
                     <!--<i class="far fa-address-card" style='font-size:24px'></i> -->
-                  User Profiles</big></td>
+                  User Profiles</big>
+                   <a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
+                  </td>
                 </tr>
                 <tr>
-                  <td scope="row" colspan="3"><strong>Something About You</strong><br>
-                  {{ user.profile.about }}  &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
+                  <td scope="row" colspan="3"><strong>Something About You</strong>
+                  <br>
+                  {{ user.profile.about }}  &nbsp 
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="fas fa-utensils"></i> <strong>Favorite Food</strong><br>
-                  {{ user.profile.favorite_food }} &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
+                  {{ user.profile.favorite_food }} &nbsp
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><i class="fas fa-flask"></i> <strong>Favorite Subject</strong><br>
-                  {{ user.profile.favorite_subject}} &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>edit</small></a>
+                  {{ user.profile.favorite_subject}} &nbsp
                   </td>
                 </tr>
                 <tr>
                   <td scope="row" colspan="3" class='bp-2'><i class="fas fa-gamepad"></i><i class="fas fa-football-ball"></i><strong> Hobby</strong><br>
-                  {{ user.profile.hobby }} &nbsp<a href='{% url "account_management_edit" modify="about" %}'><small><i class="far fa-edit"></i>add</small></a>
+                  {{ user.profile.hobby }} &nbsp
                   </td>
                 </tr>
                 </tbody>
@@ -169,7 +172,7 @@
                 </tr>
                 <tr>
                   <td scope="row" colspan="3"><strong>Password</strong><br>
-                  ******** &nbsp<a href='/'><small>reset pasword (not yet)</small></a>
+                  ******** &nbsp<a href='{% url "account_management_edit" modify="password" %}'><small>change pasword (bugged)</small></a>
                   </td>
                 </tr>
                 <tr>

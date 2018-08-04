@@ -5,6 +5,7 @@ from school_app.models import *
 from school_app.views_functions import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.hashers import PBKDF2PasswordHasher as hasher
 from django.contrib.auth.models import User
 from django.template import Context, Template
 
@@ -138,6 +139,8 @@ def account_management(request):
 def account_management_edit(request,modify=None):
     if is_login(request) == False: 
         return redirect('/login')
+    if modify == 'password':
+        return render(request,'account_profile/edit_profile/change_password.html')
     if modify == 'address':
         return render(request,'account_profile/edit_profile/edit_address.html')
     if modify == 'email':
@@ -153,6 +156,29 @@ def account_management_save(request):
     if is_login(request) == False: 
         return redirect('/login')
     if request.method == 'POST':
+        if 'stuff' in request.POST:
+            if request.POST['password']:
+                user = User.objects.filter(id=request.user.id).first()
+                if user.password == request.POST['old_password'] and request.POST['confirm_password'] == request.POST['password']:
+                    user.set_password(request.POST['password'])
+                    user.save()
+                    messages.success(request,'Password sucessfully updated, please login.')
+                    return redirect('/account_management/')
+            else:
+                messages.success(request,'Invalid password, update unsucessful')
+                return redirect('/account_management/')
+       
+        if 'email' in request.POST:
+            if request.POST['email']:
+                user = User.objects.filter(id=request.user.id).first()
+                user.email = request.POST['email']
+                user.save()
+                messages.success(request,'Email address sucessfully updated')
+                return redirect('/account_management/')
+            else:
+                messages.success(request,'Invalid email address, update unsucessful')
+                return redirect('/account_management/')
+        
         
         if 'street_address' in request.POST:
             if request.POST['street_address'] and request.POST['city'] and request.POST['state'] and request.POST['zip_code']:
@@ -166,17 +192,6 @@ def account_management_save(request):
                 return redirect('/account_management/')
             else:
                 messages.success(request,'Missing value, update unsucessful')
-                return redirect('/account_management/')
-        
-        if 'email' in request.POST:
-            if request.POST['email']:
-                user = User.objects.filter(id=request.user.id).first()
-                user.email = request.POST['email']
-                user.save()
-                messages.success(request,'Email address sucessfully updated')
-                return redirect('/account_management/')
-            else:
-                messages.success(request,'Invalid email address, update unsucessful')
                 return redirect('/account_management/')
         
         if 'phone_number' in request.POST:
@@ -239,6 +254,6 @@ def account_management_save(request):
             else:
                 return render(request,'account_profile/edit_profile/edit_about.html',{'stuff':'active'})
         else:
-            messages.success(request,'Invalid contact information, update unsucessful')
+            messages.success(request,'Invalid contact information')
             return redirect('/account_management/')
                        
