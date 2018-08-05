@@ -156,14 +156,18 @@ def account_management_save(request):
     if is_login(request) == False: 
         return redirect('/login')
     if request.method == 'POST':
-        if 'stuff' in request.POST:
+        if 'password' in request.POST:
             if request.POST['password']:
                 user = User.objects.filter(id=request.user.id).first()
-                if user.password == request.POST['old_password'] and request.POST['confirm_password'] == request.POST['password']:
+                if user.check_password(request.POST['old_password']) and request.POST['confirm_password'] == request.POST['password']:
                     user.set_password(request.POST['password'])
                     user.save()
                     messages.success(request,'Password sucessfully updated, please login.')
+                    return redirect('/')
+                else:
+                    messages.success(request,"Update unsucessful, invalid old password")
                     return redirect('/account_management/')
+       
             else:
                 messages.success(request,'Invalid password, update unsucessful')
                 return redirect('/account_management/')
