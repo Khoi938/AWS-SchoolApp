@@ -110,7 +110,7 @@ class Classroom(models.Model):
     teacher_name = models.CharField(max_length=50,default='')
     teacher_idx = models.CharField(max_length=10,default='')
     room_number = models.CharField(max_length=10,default='TBA')
-    time = models.TimeField(default='00:00')
+    time = models.TimeField(default='00:00',blank=True,null=True)
     description = models.CharField(max_length=300,default='TBA')
     # Use for statement to get value
     # Course = models.ManyToManyField(Course, blank=True)

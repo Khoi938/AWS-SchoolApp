@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+<script>
+        $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+</script>
+<div class='content'>
+  <div class="container-fuild form-row" style='width:100%'>
+    <div class="col-md-6">
+        <div style="width: 280px">
+        <h4 style='padding-left: 1px'></h4></h4>
+        <hr class='hr-line'/>
+        <h4 style='padding-left: 1px'>
+        </h4>
+        <hr class='hr-line'/>
+        <h4 style='padding-left: 1px'></h4>
+        <hr class='hr-line'/>
+        <hr class='hr-button-gap'/>
+          <a href='{% url "teacher" %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Console</a></a>
+          <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm shadow-sm" role="button"><i class="fas fa-plus"></i> New Classroom</a>
+        <hr/></div></div>
+        <div class="col-md-5">
+        {% if messages %}
+          <ul class="messages" style='list-style-type: none;'>
+        {% for message in messages %}
+             <li><div class="alert-inherit alert-success shadow-sm" role="alert">{{ message }}</div></li>
+        {% endfor %}
+          </ul> 
+        {% endif %}
+        </div></div>
+        {% if conflict_index %}
+          <h6 style='color:red'>POssible conflict</h6>
+        {% endif %}
+        {% if classes %}
+          <h5><big>Class with Timing conflict :</big></h5>
+          <div class='mr-2'>
+          <table class="table table-hover table-bordered pad-right-table shadow ">
+            <thead class='table-primary'>
+            <tr>
+              <th scope="col" style="width: 5%">#</th>
+              <th scope="col">Course Title / Alias</th>
+              <th scope="col">Room Number</th>
+              <th scope="col">Time</th>
+              <th scope="col">Description</th>
+              <th scope="col">Student Enrolled</th>
+              <th scope="col">Edit Info</th>
+              <th scope="col">Drop Class</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for class in conflict %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ class.course_title }}</td>
+              <td>{{ class.room_number }}</td>
+              <td>{{ class.time|time:"g:i A" }}</td>
+              <td>{{ class.description }}</td>
+              <td>
+                <a href=''><i class="fas fa-users"></i></a>
+              </td>
+              <td>
+                <a href='{% url "edit_classroom" classroom_id=class.id %}'><i class="fas fa-edit"></i></a>
+              </td>
+              <td>
+                <form action='/teacher/classroom/detached_classroom/' method='post'>{% csrf_token %}
+                  <input type='hidden' name='classroom_id'value='{{ class.id }}'/>
+                  <button type='submit' style='border:none;background:none;cursor: pointer;cursor: hand;'>
+                  <i style='color:red' class="fas fa-trash test" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Alert!"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+        {% endfor %}
+            </tbody>
+          </table>
+        {% else %}
+        <h5><div class="alert-inherit alert-info shadow-sm" role="alert"><i class="fas fa-exclamation"></i> No Classes assigned to this course.</div></h5>
+        {% endif %}
+</div></div><br>
+{% endblock %}
+
+<!-- Need to learn JS how to pass Data into Modal for confirmation -->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">-->
+<!--  Launch demo modal-->
+<!--</button>-->
+
+<!-- Modal -->
+<!--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">-->
+<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body" style='background:red'>-->
+<!--        ...-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--        <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

@@ -27,7 +27,17 @@ def teacher(request,sort=None):
         return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
         
     course_sorted = sorted(request.user.teacher.course_by_teacher.filter(is_archive=False),key=attrgetter('course_title','semester','year'))
-    
+    #----Schedule Conflict----
+    time=[]
+    conflict=[]
+    for course in course_sorted:
+        for classroom in course:
+            if classroom.time not in time:
+                time.append(classroom.time)
+            else:
+                conflict.append(classroom)
+    if conflict:
+        return render(request,'teacher/classroom/conflict_classroom.html',{'conflict':conflict})
     
     return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
     # return render(request,'teacher/teacher_homepage.html')
