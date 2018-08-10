@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+# from django_pandas import pandas as pd
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout as auth_logout
 from django.contrib.auth.models import User
@@ -28,18 +28,29 @@ def teacher(request,sort=None):
         
     course_sorted = sorted(request.user.teacher.course_by_teacher.filter(is_archive=False),key=attrgetter('course_title','semester','year'))
     #----Schedule Conflict----
+    classroom = Classroom.objects.filter(course__in=course_sorted)
     time=[]
-    conflict=[]
-    for course in course_sorted:
-        for classroom in course:
-            if classroom.time not in time:
-                time.append(classroom.time)
-            else:
-                conflict.append(classroom)
-    if conflict:
-        return render(request,'teacher/classroom/conflict_classroom.html',{'conflict':conflict})
+    conflict_time=[]
+    conflict_schedule=[]
     
-    return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
+    for room in classroom:
+        if room.time not in time:
+            time.append(room.time)
+        else:
+            conflict_time.append(room)
+    
+    for room in conflict_time:
+        count = 0
+        for room2 in conflict_time:
+            if room.time == room2.time and room.semester == room2.semester and room.year == room2.year:
+                count += 1
+        if count >=1:
+            conflict_schedule.append(room)
+                
+    # if conflict_schedule:
+    #     return render(request,'teacher/classroom/conflict_classroom.html',{'conflict':conflict})
+    
+    return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted,'conflict_schedule':conflict_schedule})
     # return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
     # Course = teacher.course_by_teacher.all()
@@ -164,7 +175,7 @@ def drop_course(request):
             return redirect('/logout')
         return redirect('/teacher')
           
-# ------ Classroom Views, Add Classroom, Edit Classroom-----
+# ------ Classroom Views, Add Classroom, Edit Classroom, Conflict schedule-----
 def classroom(request,course_id=None):
     if is_login(request) == False: 
         return redirect('/login')
@@ -206,10 +217,14 @@ def add_classroom(request,course_id=None):
             description = request.POST['description']
             
             course = Course.objects.filter(id=course_id).first()
+            
             classroom = Classroom.objects.create(course_title=course_title, course_id=course_id, teacher_name=request.user.get_full_name,
-            room_number=room_number, time=time, teacher=request.user.teacher, course=course,description=description)
+            room_number=room_number, time=time, teacher=request.user.teacher, course=course,semester = course.semester,year=course.year,
+            description=description)
+            
             messages.success(request, 'New class @' + classroom.time + 'succesfully added.')
             return redirect('/teacher/classroom/'+course_id)
+        
         course = Course.objects.filter(id=course_id).first()
         return render(request,'teacher/classroom/add_classroom.html',
         {'course':course})
@@ -241,6 +256,41 @@ def edit_classroom(request,classroom_id=None):
         course_id = classroom.course.id
         return render(request,'teacher/classroom/edit_classroom.html',
         {'classroom':classroom,'course_id':course_id})
+
+def schedule_conflict(request):
+    if is_login(request) == False:
+        return redirect('/login')
+    if is_teacher(request) == False:
+        return redirect('/')
+    # query all activate course, then query all classroom with active course
+    course_sorted = sorted(request.user.teacher.course_by_teacher.filter(is_archive=False),key=attrgetter('year','semester','course_title',))
+    classroom = Classroom.objects.filter(course__in=course_sorted)
+    
+    time=[]
+    time_conflict=[]
+    schedule_conflict=[]
+    first_room=[]
+    for room in classroom:
+        if room.time not in time:
+            time.append(room.time)
+            first_room.append(room)
+        else:
+            time_conflict.append(room)
+    for room in first_room:
+        for room2 in time_conflict:
+            if room.time == room2.time:
+                time_conflict.insert(0,room)
+                break
+    for room in time_conflict:
+        count = 0
+        for room2 in time_conflict:
+            if room.time == room2.time and room.semester == room2.semester and room.year == room2.year:
+                count += 1
+        if count >=2:
+            schedule_conflict.append(room)
+    
+    return render(request,'teacher/classroom/schedule_conflict.html',{'schedule_conflict':time_conflict})
+    
     
 @require_http_methods(['POST'])
 def detached_classroom(request): #Saving Data for Analytical Purpose 

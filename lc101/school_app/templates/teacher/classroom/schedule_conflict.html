@@ -18,8 +18,7 @@
         <hr class='hr-line'/>
         <hr class='hr-button-gap'/>
           <a href='{% url "teacher" %}' class="btn btn-sm btn-primary shadow-sm" ><i class="fas fa-step-backward"></i> Console</a></a>
-          <a href='{% url "add_classroom" course_id=course.id %}' class="btn btn-info btn-sm shadow-sm" role="button"><i class="fas fa-plus"></i> New Classroom</a>
-        <hr/></div></div>
+          <hr/></div></div>
         <div class="col-md-5">
         {% if messages %}
           <ul class="messages" style='list-style-type: none;'>
@@ -29,10 +28,10 @@
           </ul> 
         {% endif %}
         </div></div>
-        {% if conflict_index %}
-          <h6 style='color:red'>POssible conflict</h6>
+        {% if conflict %}
+          <h6 style='color:red'>Possible conflict</h6>
         {% endif %}
-        {% if classes %}
+        {% if schedule_conflict %}
           <h5><big>Class with Timing conflict :</big></h5>
           <div class='mr-2'>
           <table class="table table-hover table-bordered pad-right-table shadow ">
@@ -49,12 +48,12 @@
             </tr>
             </thead>
             <tbody>
-        {% for class in conflict %}
+        {% for class in schedule_conflict|dictsort:'time' %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ class.course_title }}</td>
               <td>{{ class.room_number }}</td>
-              <td>{{ class.time|time:"g:i A" }}</td>
+              <td class='text-danger'>{{ class.time|time:"g:i A" }}</td>
               <td>{{ class.description }}</td>
               <td>
                 <a href=''><i class="fas fa-users"></i></a>

@@ -110,10 +110,12 @@ class Classroom(models.Model):
     teacher_name = models.CharField(max_length=50,default='')
     teacher_idx = models.CharField(max_length=10,default='')
     room_number = models.CharField(max_length=10,default='TBA')
-    time = models.TimeField(default='00:00',blank=True,null=True)
+    time = models.TimeField(blank=True,null=True)
     description = models.CharField(max_length=300,default='TBA')
     # Use for statement to get value
     # Course = models.ManyToManyField(Course, blank=True)
+    semester = models.CharField(max_length=50,default='')
+    year = models.CharField(max_length=4,default='')
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='classroom_by_teacher')
     course = models.ForeignKey('Course',blank=True, null=True, on_delete = models.SET_NULL, related_name='course_in_classroom')
     student = models.ManyToManyField(Student, blank=True)
@@ -123,7 +125,7 @@ class Classroom(models.Model):
 def create_classroom_object(sender, instance, created, **kwargs):
     if created:
         classroom = Classroom.objects.create(course_title=instance.course_title,course_id=instance.id, teacher_name=instance.teacher_name,
-        course=instance,teacher=instance.teacher)
+        course=instance,teacher=instance.teacher,semester=instance.semester,year=instance.year)
 # To Find the Classroom:
 # teacher = Teacher.objects.filter(user=request.user)
 # Course = Course.objects.filter(teacher_set=teacher, name ='Course_name')

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+# import django_pandas as pd
 from school_app.models import *
 from school_app.views_functions import *
 from django.contrib import messages
