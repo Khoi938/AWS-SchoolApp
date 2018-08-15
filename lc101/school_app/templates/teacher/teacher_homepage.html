@@ -14,7 +14,7 @@
               <li>View All Class</li>
               <li><a href='/teacher/add_course'>Add Course</a></li>
             {% if conflict_schedule %}
-              <li><a href='{% url "schedule_conflict" %}'>Schedule Conflict <i class="fas fa-exclamation text-red"></i></a></li>
+              <li><a href='{% url "schedule_conflict" %}'>Schedule Conflict (not finish) <i class="fas fa-exclamation text-red"></i></a></li>
             {% endif %}
               <!--<li><a href='/teacher/student_list'>Student List</a></li>-->
             </ul>
