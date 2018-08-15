@@ -13,9 +13,7 @@
 </head>
 <body class='body-registration'>
   <script>
-        $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-    });
+        $(function () {$('[data-toggle="popover"]').popover()})
 </script>
 <div class="container-fuild">
    <div class="row mr-3">
@@ -59,7 +57,7 @@
                     <input type="date" id="" name="birth_date" class="form-control" placeholder="" value='{{ input_dict.birth_date }}'required>
 
                     <label for="school_id" class='col-form-label'>School ID<span style="color:red">*</span></label>
-                    <input data-toggle="popover" title="" data-content="Enter numbers only" type="text" id="school_id" name="school_id" class="form-control" placeholder='10 Digit, Even numbered = Teacher' maxlength='10' required>
+                    <input data-toggle="popover" title="" data-content="Enter numbers only" type="text" id="school_id" name="school_id" class="form-control" placeholder='10 Digit, enter even numbered for testing.' maxlength='10' required>
                     
                     <label for="email" class='col-form-label' >Email Address</label>
                     <input type="text" id="stuff" name="email" class="form-control"  placeholder="Gloria_Doe@gmail.com Optional"value='{{input_dict.email}}'>

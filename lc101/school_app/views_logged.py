@@ -307,7 +307,10 @@ def detached_classroom(request): #Saving Data for Analytical Purpose
         detached_classroom.course = None
         detached_classroom.teacher = None
         detached_classroom.save()
-        messages.success(request, detached_classroom.course_title + " @ " + str(detached_classroom.time.strftime('%-I:%M %p')) + ' sucessfully removed.')
+        if detached_classroom.time:
+            messages.success(request, detached_classroom.course_title + " @ " + str(detached_classroom.time.strftime('%-I:%M %p')) + ' sucessfully removed.')
+        else:
+            messages.success(request, detached_classroom.course_title + " initial class template sucessfully removed.")
         return redirect('/teacher/classroom/'+str(course_id))
                 
 # ------ Lesson Plan View, Add, Edit, delete ------

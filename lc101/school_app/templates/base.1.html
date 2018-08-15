@@ -17,7 +17,6 @@
             textarea, input {background-color: rgb(243, 245, 247)}
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         {% if title == none %}  
           <title>TB High School</title>
         {% else %}
@@ -28,16 +27,16 @@
   <body class='body-teacher'>
 {% else %}
   <body>
-{% endif %}
-<header>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow fixed-top">
+{% endif %}<header>
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary shadow-sm fixed-top ">
     <a class="navbar-brand" href="/teacher">Teacher Console</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+
+    <div class="navbar-collapse collapse show" id="navbarColor02" style="">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="/teacher">Add Class<span class="sr-only">(current)</span></a>
         </li>
@@ -57,15 +56,18 @@
       {% if request.user.profile.is_teacher %}
           Educator: {{request.user.first_name}} &ensp;
       {% endif %}
-    
-    <a href='/account_management/' class='btn btn-outline-light shadow'>
+      <!--<form class="form-inline">-->
+      <!--  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+        <!--<button class="btn btn-outline-light my-2 my-sm-0" type="submit"> <i class="fas fa-user-cog"></i> My Account</button>-->
+      <!--</form>-->
+      <a href='/account_management/' class='btn btn-outline-light shadow'>
          <i class="fas fa-user-cog"></i> My Account
       {% if user.profile.home_address == '' or user.profile.phone_number == '' or user.profile.emergency_contact == '' or user.email == '' or user.profile.birth_date == '' %}
         <i class="fas fa-exclamation-circle small" style='color:tomato'></i> 
       {% endif %}
       </a>
-  </div>
-</nav>
+    </div>
+  </nav>
     </header>
     <div class='' style='padding-top:45px'>
     {% block content %}
