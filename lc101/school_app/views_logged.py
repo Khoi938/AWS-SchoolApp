@@ -271,6 +271,8 @@ def schedule_conflict(request):
     schedule_conflict=[]
     first_room=[]
     for room in classroom:
+        if not room.time:
+            break
         if room.time not in time:
             time.append(room.time)
             first_room.append(room)
@@ -289,8 +291,8 @@ def schedule_conflict(request):
         if count >=2:
             schedule_conflict.append(room)
     
-    return render(request,'teacher/classroom/schedule_conflict.html',{'schedule_conflict':time_conflict})
-    
+    return render(request,'teacher/classroom/schedule_conflict1.html',{'schedule_conflict':time_conflict})
+      
     
 @require_http_methods(['POST'])
 def detached_classroom(request): #Saving Data for Analytical Purpose 
@@ -310,7 +312,7 @@ def detached_classroom(request): #Saving Data for Analytical Purpose
         if detached_classroom.time:
             messages.success(request, detached_classroom.course_title + " @ " + str(detached_classroom.time.strftime('%-I:%M %p')) + ' sucessfully removed.')
         else:
-            messages.success(request, detached_classroom.course_title + " initial class template sucessfully removed.")
+            messages.success(request, detached_classroom.course_title + "initial class template sucessfully removed.")
         return redirect('/teacher/classroom/'+str(course_id))
                 
 # ------ Lesson Plan View, Add, Edit, delete ------
