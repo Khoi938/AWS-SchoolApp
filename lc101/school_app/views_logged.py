@@ -116,23 +116,24 @@ def edit_course(request,course_id=None):
             course.semester = request.POST['semester']
             course.description = request.POST['description']
             course.save()
+            classroom_update = Classroom.objects.filter(course=course).update(semester=course.semester,year=course.year)
             messages.success(request, 'update successful')
             return redirect('edit_course',course_id=course_id)
         
         else:
             edit_course=Course.objects.filter(id=course_id).first()
             if edit_course.semester == 'Spring':
-                semester = 'spring'
+                semester = 'Spring'
             elif edit_course.semester == 'Summer':
-                semester = 'summer'
-            else:
-                semester = 'fall'
+                semester = 'Summer'
+            elif edit_course.semester =='Fall':
+                semester = 'Fall'
             
             if edit_course.year == '2018':
                 year = '2018'
             elif edit_course.year == '2019':
                 year = '2019'
-            else:
+            elif edit_course.year == '2020':
                 year = '2020'
                 
             return render(request,'teacher/course/edit_course.html', 
@@ -264,24 +265,23 @@ def schedule_conflict(request):
         return redirect('/')
     # query all activate course, then query all classroom with active course
     course_sorted = sorted(request.user.teacher.course_by_teacher.filter(is_archive=False),key=attrgetter('year','semester','course_title',))
-    classroom = Classroom.objects.filter(course__in=course_sorted)
-    
+    classroom = Classroom.objects.filter(course__in=course_sorted).exclude(time__isnull=True)
+    # can chain multiple exclude and filter, if multiple arg mean have all, if chain meaning need only one.
     time=[]
     time_conflict=[]
     schedule_conflict=[]
-    first_room=[]
+    first_room_added=[]
     for room in classroom:
-        if not room.time:
-            break
         if room.time not in time:
             time.append(room.time)
-            first_room.append(room)
+            first_room_added.append(room)
         else:
             time_conflict.append(room)
-    for room in first_room:
+    for room in first_room_added:
         for room2 in time_conflict:
-            if room.time == room2.time:
-                time_conflict.insert(0,room)
+            if room.time == room2.time and room.semester == room2.semester and room.year==room2.year:
+                time_conflict.append(room)
+                # insert(0,room)
                 break
     for room in time_conflict:
         count = 0
@@ -290,13 +290,13 @@ def schedule_conflict(request):
                 count += 1
         if count >=2:
             schedule_conflict.append(room)
-    
-    return render(request,'teacher/classroom/schedule_conflict1.html',{'schedule_conflict':time_conflict})
+    sorted_schedule_conflict = sorted(schedule_conflict,key=attrgetter('year','semester','course_title',))
+    return render(request,'teacher/classroom/schedule_conflict1.html',{'schedule_conflict':sorted_schedule_conflict})
       
     
 @require_http_methods(['POST'])
 def detached_classroom(request): #Saving Data for Analytical Purpose 
-#Only when there is a student enroleddd with a grade else delete class room
+#Only when there is a student enroledd with a grade else delete class room
     if is_login(request) == False: 
         return redirect('/login')
     if is_login(request) == True:
