@@ -59,9 +59,10 @@
                 <button style='border:none; background:none;cursor:pointer; cursor:hand;outline:none' type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ course.course_title }}
                 </button>
-                </div>
+              
                 <div class="dropdown-menu shadow-sm"  aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item">{{ course.description}}</a>
+                </div>
                 </div>
               </td>
               <td>{{ course.semester }}, {{ course.year }}</td>
@@ -78,6 +79,7 @@
                 </button>
                 <div class="dropdown-menu body-teacher shadow"  aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item pl-3" href="{% url 'edit_course' course_id=course.id %}"> &nbsp&nbsp edit course <i class="fas fa-edit text-primary"></i></a>
+            
               {% if course.course_in_classroom.count == 0 %}
                 <a class="dropdown-item">
                   <form action='{% url "drop_course" %}' method='post' style='padding-left:0px'>{% csrf_token %}

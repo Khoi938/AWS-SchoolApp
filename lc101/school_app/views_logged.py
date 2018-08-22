@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.views.decorators.http import require_http_methods
 from school_app.models import *
-from school_app.views_functions import is_teacher, is_login, sort_order, other_check
+from school_app.views_functions import is_teacher, is_login, sort_order, other_check, schedule_conflict
 
 from operator import itemgetter, attrgetter
 
@@ -22,35 +22,42 @@ def teacher(request,sort=None):
         return redirect('/login')
     if is_teacher(request) == False:
         return redirect('/')
-    if sort ==1:# Below return a sorted list
-        course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('year','semester'))
-        return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted})
         
-    course_sorted = sorted(request.user.teacher.course_by_teacher.filter(is_archive=False),key=attrgetter('course_title','semester','year'))
     #----Schedule Conflict----
-    classroom = Classroom.objects.filter(course__in=course_sorted)
+    # query all activate course
+    course_sorted = sorted(request.user.teacher.course_by_teacher.filter(is_archive=False),key=attrgetter('year','semester','course_title',))
+    classroom = Classroom.objects.filter(course__in=course_sorted).exclude(time__isnull=True)
     time=[]
-    conflict_time=[]
-    conflict_schedule=[]
-    
+    time_conflict=[]
+    schedule_conflict=[]
+    first_room_added=[]
     for room in classroom:
         if room.time not in time:
             time.append(room.time)
+            first_room_added.append(room)
         else:
-            conflict_time.append(room)
-    
-    for room in conflict_time:
+            time_conflict.append(room)
+    for room in first_room_added:
+        for room2 in time_conflict:
+            if room.time == room2.time and room.semester == room2.semester and room.year==room2.year:
+                time_conflict.append(room)
+                # insert(0,room)
+                break
+    for room in time_conflict:
         count = 0
-        for room2 in conflict_time:
+        for room2 in time_conflict:
             if room.time == room2.time and room.semester == room2.semester and room.year == room2.year:
                 count += 1
-        if count >=1:
-            conflict_schedule.append(room)
-                
-    # if conflict_schedule:
-    #     return render(request,'teacher/classroom/conflict_classroom.html',{'conflict':conflict})
+        if count >=2:
+            schedule_conflict.append(room)
+    sorted_schedule_conflict = sorted(schedule_conflict,key=attrgetter('year','semester','course_title',))
+    conflict =2
     
-    return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted,'conflict_schedule':conflict_schedule})
+    if sort ==1:# Below return a sorted list
+        course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('year','semester'))
+        return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted,'conflict_schedule':conflict})
+      
+    return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted,'conflict_schedule':conflict})
     # return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
     # Course = teacher.course_by_teacher.all()
