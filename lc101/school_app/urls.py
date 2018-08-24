@@ -44,6 +44,8 @@ urlpatterns=[
     
     path('teacher/classroom/edit_classroom/', views_logged.edit_classroom, name='save_edit_classroom'),
     path('teacher/classroom/edit_classroom/<int:classroom_id>', views_logged.edit_classroom, name='edit_classroom'),
+    path('teacher/classroom/edit_classroom/<int:classroom_id>/<str:rout_from>', views_logged.edit_classroom, name='edit_classroom'),
+    
     path('teacher/classroom/detached_classroom/', views_logged.detached_classroom, name='detached_classroom'),
     path('teacher/classroom/schedule_conflict/', views_logged.schedule_conflict, name='schedule_conflict'),
     

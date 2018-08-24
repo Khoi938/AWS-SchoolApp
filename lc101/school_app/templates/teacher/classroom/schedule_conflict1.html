@@ -55,7 +55,7 @@
               <td class='text-danger'>{{ class.time|time:"g:i A" }}</td>
               <td>{{ class.semester }}, {{class.year}}</td>
               <td>
-                <a href='{% url "edit_classroom" classroom_id=class.id %}'><i class="fas fa-edit"></i></a>
+                <a href='{% url "edit_classroom" classroom_id=class.id rout_from=schedule_conflict %}'><i class="fas fa-edit"></i></a>
               </td>
               <td>
                 <form action='/teacher/classroom/detached_classroom/' method='post'>{% csrf_token %}

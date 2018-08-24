@@ -37,6 +37,7 @@
         </div>
     <form action="/teacher/classroom/edit_classroom/", method="post", id=''> {% csrf_token %}
       <input type="hidden" name="classroom_id" value='{{classroom.id}}'/>
+      <input type="hidden" name="rout_from" value='{{ rout_from }}'/>
       
         <div class="input-group mb-3" style='width:400px' >
         <div>

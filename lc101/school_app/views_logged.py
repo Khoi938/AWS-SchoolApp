@@ -51,13 +51,12 @@ def teacher(request,sort=None):
         if count >=2:
             schedule_conflict.append(room)
     sorted_schedule_conflict = sorted(schedule_conflict,key=attrgetter('year','semester','course_title',))
-    conflict =2
     
     if sort ==1:# Below return a sorted list
         course_sorted = sorted(request.user.teacher.course_by_teacher.all(),key=attrgetter('year','semester'))
-        return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted,'conflict_schedule':conflict})
+        return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted,'schedule_conflict':schedule_conflict})
       
-    return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted,'conflict_schedule':conflict})
+    return render(request,'teacher/teacher_homepage.html',{'course_sorted':course_sorted,'schedule_conflict':schedule_conflict})
     # return render(request,'teacher/teacher_homepage.html')
     # teacher = Teacher.objects.get(user=request.user)
     # Course = teacher.course_by_teacher.all()
@@ -237,7 +236,7 @@ def add_classroom(request,course_id=None):
         return render(request,'teacher/classroom/add_classroom.html',
         {'course':course})
 
-def edit_classroom(request,classroom_id=None):
+def edit_classroom(request,classroom_id=None,rout_from=None):
     if is_login(request) == False: 
         return redirect('/login')
     if is_login(request) == True:
@@ -257,13 +256,15 @@ def edit_classroom(request,classroom_id=None):
             classroom.room_number = room_number
             classroom.description = description
             classroom.save()
+            if request.POST['rout_from']=='schedule_conflict':
+                return redirect('schedule_conflict')
             messages.success(request, classroom.course_title + ' sucessfully edited.' )
             return redirect('/teacher/classroom/'+str(classroom.course_id))
             
         classroom = Classroom.objects.filter(id=classroom_id).first()
         course_id = classroom.course.id
         return render(request,'teacher/classroom/edit_classroom.html',
-        {'classroom':classroom,'course_id':course_id})
+        {'classroom':classroom,'course_id':course_id,'rout_from':rout_from})
 
 def schedule_conflict(request):
     if is_login(request) == False:
