@@ -208,6 +208,14 @@ def classroom(request,course_id=None):
             
         return render(request,'teacher/classroom/view_classroom.html',
         {'classes':classes,'course':course,'conflict_index':conflict_index})
+def current_classroom(request):
+    if is_login == False:
+        return redirect('/login')
+    if is_login == True:
+        if request.user.profile.is_teacher == False:
+            messages.warning(request,"You dont have Instructor's priviledges!")
+            return redirect('/logout')
+    current_classroom = Classroom.objects.filter(is_active=True,teacher=request.user.teacher)
         
 def add_classroom(request,course_id=None):
     if is_login(request) == False: 
@@ -256,7 +264,7 @@ def edit_classroom(request,classroom_id=None,rout_from=None):
             classroom.room_number = room_number
             classroom.description = description
             classroom.save()
-            if request.POST['rout_from']=='schedule_conflict':
+            if request.POST['rout_from']=='conflict':
                 return redirect('schedule_conflict')
             messages.success(request, classroom.course_title + ' sucessfully edited.' )
             return redirect('/teacher/classroom/'+str(classroom.course_id))

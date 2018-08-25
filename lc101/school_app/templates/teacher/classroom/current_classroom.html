@@ -28,9 +28,7 @@
           </ul> 
         {% endif %}
         </div></div>
-        {% if schedule_conflict %}
-          <h6 style='color:red'>Possible conflict {{ schedule_conflict|length }}</h6>
-        {% endif %}
+        
         {% if schedule_conflict %}
           <h5><big>Class with Timing conflict :</big></h5>
           <div class='mr-2'>
@@ -42,18 +40,20 @@
               <th scope="col">Room Number</th>
               <th scope="col">Time</th>
               <th scope="col">Academic Year</th>
+              <th scope="col">Student Enrolled</th>
               <th scope="col">Edit Info</th>
-              <th scope="col">Drop Class</th>
+              
             </tr>
             </thead>
             <tbody>
-        {% for class in schedule_conflict %}
+        {% for class in current_classroom %}
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ class.course_title }}</td>
               <td>{{ class.room_number }}</td>
-              <td class='text-danger'>{{ class.time|time:"g:i A" }}</td>
+              <td>{{ class.time|time:"g:i A" }}</td>
               <td>{{ class.semester }}, {{class.year}}</td>
+              <td>Something</td>
               <td>
                 <a href='{% url "edit_classroom" classroom_id=class.id rout_from="conflict" %}'><i class="fas fa-edit"></i></a>
               </td>

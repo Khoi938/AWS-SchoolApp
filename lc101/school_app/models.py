@@ -114,6 +114,7 @@ class Classroom(models.Model):
     description = models.CharField(max_length=300,default='TBA')
     # Use for statement to get value
     # Course = models.ManyToManyField(Course, blank=True)
+    is_archive = models.BooleanField(default=False)
     semester = models.CharField(max_length=50,default='')
     year = models.CharField(max_length=4,default='')
     teacher = models.ForeignKey('Teacher',blank=True, null=True, on_delete = models.SET_NULL, related_name='classroom_by_teacher')

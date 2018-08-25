@@ -83,7 +83,7 @@
             <label class="form-check-label" for="">Other:</label>
           </div>
           <div style = 'width:140px;right-align:10px'class="form-check form-check-inline">
-            <input type='text'class="form-control" name="custom_time" maxlength='8'id="" value='{{ classroom.time }}' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
+            <input type='text'class="form-control" name="custom_time" maxlength='8'id="" value='{{ classroom.time|time:"g:i A" }}' data-toggle="popover" title="" data-content='Format hh:mm AM/PM'>
           </div><br><br>
         <div class="input-group mb-3" style='width:365px' >
           <div class="input-group-prepend">
