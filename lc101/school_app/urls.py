@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_login_test
 
 urlpatterns=[
     path('',views.index, name = 'index'),
+    path('learning_JS',views.learning_JS, name='learning_JS'),
     path('homepage',views.index, name = 'homepage'),
     path('register',views.register, name='register'),
     path('account_management/',views.account_management, name='account_management'),

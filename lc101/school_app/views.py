@@ -14,7 +14,9 @@ from django.views.decorators.http import require_http_methods
 
 # '/' mean base no '/' mean add to current path, Django render function implicit locate 'templates/'
 
-
+#---- practicing JS learning page
+def learning_JS(request):
+    return render(request,'homepage/learning_JS.html')
 
 # -------Homepage with Login---------
 def index(request):
