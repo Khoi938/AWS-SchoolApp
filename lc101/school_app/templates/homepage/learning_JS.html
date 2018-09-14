@@ -2,6 +2,15 @@
 <html>
     <head>
         <title>Learning JS</title>
+        <script>//Function can go inside head
+            function say_hello(a,b,c){//JS do not have overload, only one name, you can use any parameter
+            // they are loosely type, and non argument is loosely typed
+                document.write('<br>Hello Everyone! Hello ' + a)
+                var age = b + c
+                document.write('<br>I see you turn ' + age + ' today')
+                
+            }
+        </script>
     </head>
     <body>
         <script>
@@ -32,6 +41,29 @@
             var string = 'qwerty';
             var input = string.substring(2,4);
             document.write('<br>'+input)
+            var array = new Array(5); // or you can do braket like this
+            var array2 = ['cat','dog','pizza']
+            array[0]= 'cat';
+            array[2] = 'dog';
+            array[5] = 50;
+            document.write('<br>' + array[5]);
+            document.write(array);
+            document.write('<br>' + array2 );
+            say_hello('Diana',3,4);
+            var num = 'bob';
+            if (num > 8){ //alert is a pop up using parameter input as a function
+                alert(num + ' is higher than 8')
+            }
+            else if ((typeof num) == 'string'){
+                document.write('<br> This is a string')
+            } 
+            else {
+                alert( num + ' is lower than 8')
+            };
+            for (i=0;i<5; i++){//for i = value; while this condition hold true; do this
+                document.write('The current value of i is: ' + i + '<br>')
+            };
         </script>
+        <h4 id='#jump' class='text-danger'>This is a link</h4>
     </body>
 </html>

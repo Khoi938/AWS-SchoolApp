@@ -17,6 +17,8 @@ from django.views.decorators.http import require_http_methods
 #---- practicing JS learning page
 def learning_JS(request):
     return render(request,'homepage/learning_JS.html')
+def test_page_2(request):
+    return render(request,'homepage/test_page_2.html')
 
 # -------Homepage with Login---------
 def index(request):
