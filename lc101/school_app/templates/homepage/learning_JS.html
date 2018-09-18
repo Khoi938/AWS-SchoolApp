@@ -66,5 +66,37 @@
         </script>
         <h4 id='#jump' class='text-danger'>Jump here</h4>
         <a href='/test_page_2'>To test page 2</a>
+        <p>
+            Hello my name is: 
+            <script>
+                var name = 'Khoi';
+                console.log(name);
+            </script>
+            <br>
+            I'm 
+            <script>
+                var age = 32;
+                document.write(age);
+            </script>
+            year old!
+            <br>
+            <script>
+                var firstName = 'Khoi';
+                var lastName = 'Le';
+                var fullName = firstName.concat(' ',lastName);
+                document.write(fullName);
+                document.write('<br>');
+                var fullName2 = firstName+' '+lastName;
+                document.write('My name is: '+fullName2);
+                //script is stopped if crashed in error
+                document.write(fullName.toUpperCase())
+                var value = null;
+                if (null){
+                    document.write('<br>Null != False');
+                };
+                //if null == False is flase howver null is false
+                document.write(null);
+            </script>
+        </p>
     </body>
 </html>
