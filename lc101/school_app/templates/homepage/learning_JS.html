@@ -127,6 +127,42 @@
                 document.write('<br>'+newNumArray);
                 // map take each element of the array, run it through the input function
                 // and then return the input function's return as a new array;
+                var test = 6;
+                var test2 = 'Hello';
+                var test3 = {
+                    age: 10,
+                    location: 'Tampa',
+                    stuff: function(){
+                            if (this.age <= 21){ 
+                                document.write('<br>'+21-this.age + ' more year till you are 21!');
+                                // return null;
+                            }
+                            else{ return 8};
+                        }
+                }
+                function changeValue(change){
+                    change = 10;
+                }
+                changeValue(test);
+                document.write('<br>'+test);
+                // Primitive argument are passed by value, the hence the function cannot change 
+                // them, however object argument are passed by reference.thus the function can
+                // change them.
+                var changeLocation = function (x){
+                    if (x.location !='New York'){
+                        var location = x.location;
+                        x.location = 'New York';
+                        document.write('You previously live in ' + location);
+                        document.write('<br> We have now move you to ' + x.location);
+                    };
+                };
+                changeLocation(test3);
+                // function hoisting is when all function is move to the top of the page by 
+                // default in JS so function is can be called before they are declared.
+                // declaration are all move to the top.Further function declartion is not 
+                // an executable statement no semicolon is needed. You can also declare a 
+                // function within a object's property.
+                document.write(test3.stuff());
             </script>
         </p>
     </body>
