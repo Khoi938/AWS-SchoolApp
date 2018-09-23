@@ -96,6 +96,37 @@
                 };
                 //if null == False is flase howver null is false
                 document.write(null);
+                var arr = ['cat','dog','mouse',13];
+                // document.write(arr.join(' || '));
+                arr[-5]='negative 5';
+                arr.push('push');
+                arr.unshift('New Added 1st')
+                // If you use negatve index, the array have a map of that index to the value. Hidden.
+                document.write('<br>'+arr.join(', '));
+                // console.log return no value it simply print to the console the output. 
+                // as a side effect. it will alway be undefinded.
+                var arr2 = ['hello ','My ','Name ','is ', 35];
+                function printToPage(arg){
+                    document.write(arg);
+                }
+                arr2.forEach(printToPage);
+                // forEach will put every element in he array through your function;
+                function tru(x){
+                    if (x.typeof == 'string'){
+                        return true;
+                    }
+                }
+                document.write('<br>'+arr2.every(tru));
+                // every will test every element of your array through your function and 
+                // return true if they all ppreturn true
+                var numArray = [1,2,3,4];
+                function square(num){
+                    return num * num;
+                }
+                var newNumArray = numArray.map(square);
+                document.write('<br>'+newNumArray);
+                // map take each element of the array, run it through the input function
+                // and then return the input function's return as a new array;
             </script>
         </p>
     </body>
