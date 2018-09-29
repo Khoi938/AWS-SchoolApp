@@ -6,7 +6,32 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     
         <title>Test 2</title>
-        <script></script>
+        <script>
+        document.write(`<div class="container border border-success pt-4 pb-4">
+            
+             `)
+            document.write('<h4 class="text-primary"> learning Javascript page 2  </h4>');
+            var name = 'toucan';
+            document.write(name.length);
+            document.write('<br> var name have the above length and have '+name[3]+' at name[3]');
+            document.write('<br> or you can use name.charAt(3) to get ' + name.charAt(3));
+            // string in js are immutable, function actually create a new string and return that.
+            document.write(`<br> function/method do not modify origina string rather they create new 
+            string and return that \r for example \n var bird = "Chicken";\n 
+            document.write(bird.toUpperCase()) = `);
+            var bird = 'Chicken';
+            document.write(bird.toUpperCase());
+            document.write('<br> but if you do document.write(bird); then it  = '+ bird)
+            document.write(`string.trim()<p> remove white space from begining to end \n 
+            string.concat('string'); concatenate and return the two added string together
+            this will work with both variable string and literal string </p>`);
+            document.write("duck".toUpperCase());
+            document.write(`You can also use \n string.startWith();\n string.endsWith();
+            \n string.includes(); These will return true/false value </br> string.search('string')
+            return the starting index where it was found`)
+            document.write()
+        document.write('</div>')
+        </script>
     </head>
     <body>
       <div class='container border border-primary pt-4'>
