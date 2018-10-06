@@ -163,7 +163,42 @@
                 // an executable statement no semicolon is needed. You can also declare a 
                 // function within a object's property.
                 document.write(test3.stuff());
+                
             </script>
         </p>
+        <h4>You have visited this page <span id='timeVisited'></span></h4>
+        <h4>Today's Date is <span id='date'></span></h4>
+        <button id='button' onclick='myAddition()' style=''>
+            +5
+        </button>
+        <span id='addition'></span>
+        <script>
+            var number = 0;
+            function myAddition() {
+                number += 5;
+                document.getElementById('addition').innerHTML = number;
+                if (number >10){
+                    document.getElementById('button').style.backgroundColor='green';
+                };
+                if (number > 100){
+                    document.getElementById('button').style.backgroundColor='red';
+                };
+                if (number >200){
+                    document.getElementById('addition').innerHTML = 'You must be really bored';
+                    document.getElementById('addition').style.backgroundColor = 'lime';
+                }
+            };
+            
+            var date = new Date();
+            document.getElementById('date').innerHTML = date;
+            var timeVisited = 0;
+            if (localStorage.timeVisited){
+                timeVisited = parseInt(localStorage.timeVisited)
+            }
+            timeVisited += 1;
+            localStorage.setItem('timeVisited',timeVisited);
+            document.getElementById('timeVisited').innerHTML = timeVisited;
+            
+        </script>
     </body>
 </html>

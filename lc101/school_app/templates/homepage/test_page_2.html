@@ -29,7 +29,25 @@
             document.write(`You can also use \n string.startWith();\n string.endsWith();
             \n string.includes(); These will return true/false value </br> string.search('string')
             return the starting index where it was found`)
-            document.write()
+            document.write(`<br> for Regex in bracket mean range, you can combine range <br>
+            a caret within the bracket mean not ^ outside mean ex: 
+            <br> var regularExpresstion = "my_2_cent";
+            <br> regularExpresstion.search(/[a-z]/); // return 0 because m is at index 0
+            <br> regularExpresstion.search(/[\d]/); // return 3 below is proof: <br> `)
+            var regularExpresstion = "my_2_cent";
+            document.write(regularExpresstion.search(/[\d]/));
+            document.write(regularExpresstion.search(/[a-z]/));
+            document.write(`<br> when the range have it own bracket it mean anypattern that match 
+            the range ex: <br>
+            var greeting = "omg, h3y how are y04?"; <br>
+            greeting.search(/[a-z][\\d][0-9]/); // <br>
+            var greeting = "h3y how are y04";greeting <br>
+            greeting.search(/[a-z][\\d][0-9]/);12 <br> greeting.search(/[a-z][\\d][a-z]/); 0<br>
+            greeting.search(/[a-z][\\d][a-z][\\d]/);-1 <br>
+            a question mark ? in bettween two range []?[] mean the range is optional for a single 
+            occurrance <br>
+            and asterisk * mean multiple occurrence is optional until the next range<br>
+            if the caret ^ is outside the bracket, it mean start with. ie`)
         document.write('</div>')
         </script>
     </head>
