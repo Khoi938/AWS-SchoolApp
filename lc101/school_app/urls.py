@@ -8,6 +8,7 @@ urlpatterns=[
     path('calendar',views.calendar,name='calendar'),
     path('test_page_2',views.test_page_2,name='test_page_2'),
     path('learning_JS',views.learning_JS, name='learning_JS'),
+    path('learning_JS2',views.learning_JS2, name='learning_JS2'),
     path('homepage',views.index, name = 'homepage'),
     path('register',views.register, name='register'),
     path('account_management/',views.account_management, name='account_management'),

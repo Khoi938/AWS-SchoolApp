@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script type="text/javascript" src=""></script>
+    </head>
+    <body>
+        <!-- Margin is for when to start the element, padding is the spacing-->
+        <div class='container container-fluid pt-4 border border-primary ml-5 mt-3'>
+            <h4>Something</h4>
+            <h5> Hello <span id='username'></span></h5>
+            <h5> The last visit you made is on <span id='lastVisit'></span></h5>
+            <h5> Current time stamp: <span id='currentTimeStamp'></span></h5>
+            <input type="text" id='nameInput'/>
+            <button id='saveName' onclick='saveName()'>Save Name</button>
+            <script>
+                // var saveNameButton = document.getElementById('saveName');
+                // saveNameButton.addEventListener('click',saveName);
+                function saveName(){
+                    var username = document.getElementById('nameInput').value;
+                    document.getElementById('username').innerHTML=username;
+                }
+                var currentTimeStamp = new Date();
+                document.getElementById('currentTimeStamp').innerHTML = currentTimeStamp;
+                if (localStorage.profile){
+                    var lastProfile = JSON.parse(localStorage.profile);
+                    var lastVisit = lastProfile.currentTimeStamp;
+                } else {
+                    document.getElementById('lastVisit').innerHTML = 'else';
+                }
+                document.getElementById('lastVisit').innerHTML = lastVisit;
+                function myTime(date){
+                    this.currentTimeStamp = 6;
+                    this.name = 'Khoi';
+                };
+                var profile = Object.create(myTime);
+                // var profile = {};
+                profile.currentTimeStamp = currentTimeStamp;
+                localStorage.profile = JSON.stringify(profile);
+            </script>
+        </div>
+        
+    </body>
+</html>

@@ -19,6 +19,8 @@ def learning_JS(request):
     return render(request,'homepage/learning_JS.html')
 def test_page_2(request):
     return render(request,'homepage/test_page_2.html')
+def learning_JS2(request):
+    return render(request,'homepage/learning_JS2.html')
 def calendar(request):
     return render(request,'homepage/calendar.html')
 
