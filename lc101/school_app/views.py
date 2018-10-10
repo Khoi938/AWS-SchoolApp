@@ -23,7 +23,8 @@ def learning_JS2(request):
     return render(request,'homepage/learning_JS2.html')
 def calendar(request):
     return render(request,'homepage/calendar.html')
-
+def jquery(request):
+    return render(request,'homepage/jquery.html')
 # -------Homepage with Login---------
 def index(request):
     if request.method == 'POST':

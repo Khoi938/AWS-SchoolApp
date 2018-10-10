@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <title></title>
+        <meta charset='utf-8'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        </head>
+    <body>
+        <div class='container container-fuild pt-3 pl-3 pr-3 pb-3 border border-primary'>
+            <div class='row pb-3'>
+                <div class='col-md-6 border border-primary'>
+                    <p>Lala</p>
+                </div>
+                <div class='col-md-6 border border-dark'>
+                    <ul id='list'>
+                        <li>Go to the mall</li>
+                        <li>Pick up the laundry</li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" name="todo" id='todo'/>
+            <button id='button'>Add Todo</button>
+            <h4 class='text-primary' id='h'> Nothing here</h4>
+        </div>
+        <script>
+        var button = document.getElementById('button');
+        button.addEventListener('click',addItem);
+        function addItem(){
+            var textInput = document.getElementById('todo');
+            var elList = document.createElement('LI');
+            var elListText = document.createTextNode('lala');
+            elList.appendChild(elListText);
+            document.getElementById('list').appendChild(elList);
+            // document.getElementById('list').insertAdjacentHTML('<li>Grocery Shoping</li>')
+        };
+        $(document).ready(function(){
+            $('#h').html('SOmething');
+        });
+        
+            
+        </script>
+    </body>
+</html>
