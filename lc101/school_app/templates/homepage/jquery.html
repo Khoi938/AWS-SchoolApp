@@ -27,13 +27,21 @@
         <script>
         var button = document.getElementById('button');
         button.addEventListener('click',addItem);
+        $('#todo').keyup(add);
+        function add(b){
+            if (b.keyCode==13){
+                $('#list').append('<li>'+$('#todo').val() +'</li>');
+                $('#todo').val('');
+            }
+        };
         function addItem(){
+            // value is for form element, innHTML is for span/div/li etc
             var textInput = document.getElementById('todo');
             var elList = document.createElement('LI');
-            var elListText = document.createTextNode('lala');
+            var elListText = document.createTextNode(textInput.value);
             elList.appendChild(elListText);
             document.getElementById('list').appendChild(elList);
-            // document.getElementById('list').insertAdjacentHTML('<li>Grocery Shoping</li>')
+            document.getElementById('todo').value='';
         };
         $(document).ready(function(){
             $('#h').html('SOmething');
