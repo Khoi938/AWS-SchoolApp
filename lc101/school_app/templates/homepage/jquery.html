@@ -27,13 +27,22 @@
         <script>
         var button = document.getElementById('button');
         button.addEventListener('click',addItem);
-        $('#todo').keyup(add);
-        function add(b){
-            if (b.keyCode==13){
-                $('#list').append('<li>'+$('#todo').val() +'</li>');
-                $('#todo').val('');
+        $('#todo').keyup(function (e){
+            if (e.keyCode==13){
+                var x = parseFloat($('#todo').val());
+                if (isNaN(x)==false)
+                {
+                // $(this).val(); If you use Jquery within Jqury you create an object.
+                $('#list').append('<li>'+ x +'</li>');
             }
-        };
+            }
+        });
+        // function add(b){
+        //     if (b.keyCode==13){
+        //         $('#list').append('<li>'+$('#todo').val() +'</li>');
+        //         $('#todo').val('');
+        //     }
+        // };
         function addItem(){
             // value is for form element, innHTML is for span/div/li etc
             var textInput = document.getElementById('todo');
