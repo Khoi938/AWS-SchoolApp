@@ -25,16 +25,41 @@
             <h4 class='text-primary' id='h'> Nothing here</h4>
         </div>
         <script>
+        $('ul').on('mouseenter','li',function(){
+            $(this).css('color','red');
+            $(this).addClass('text-danger');
+            $(this).css('font-size','120%');
+        });
+        // var liList = $('ul').find('li');
+        // for (var i=0; i<liList.length; i++){
+        //     var newLi = liList[i];
+        //     newLi.on('mouseenter',function(){
+        //     // $(this).css('color','red');
+        //     $(this).addClass('text-danger');
+        //     $(this).css('font-size','120%');
+        // });
+        // };
+        // $('ul').mouseenter(function(){
+        //     // $(this).css('color','red');
+        //     $(this).addClass('text-danger');
+        //     $(this).css('font-size','120%');
+        // });
+        // $('li').mouseleave(function(){
+        //     $(this).removeClass('text-danger');
+        //     $(this).addClass('text-primary');
+        //     // $(this).css('color','black');
+        //     $(this).css('font-size','100%')
+        // })
         var button = document.getElementById('button');
         button.addEventListener('click',addItem);
         $('#todo').keyup(function (e){
             if (e.keyCode==13){
-                var x = parseFloat($('#todo').val());
-                if (isNaN(x)==false)
+                var x = parseInt($('#todo').val());
+                if (isNaN(x)==false & x.toString().length == $('#todo').val().length)
                 {
                 // $(this).val(); If you use Jquery within Jqury you create an object.
                 $('#list').append('<li>'+ x +'</li>');
-            }
+                }
             }
         });
         // function add(b){
