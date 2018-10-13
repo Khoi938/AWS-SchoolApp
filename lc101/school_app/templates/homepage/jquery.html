@@ -23,8 +23,34 @@
             <input type="text" name="todo" id='todo'/>
             <button id='button'>Add Todo</button>
             <h4 class='text-primary' id='h'> Nothing here</h4>
+            <div class='row border border-primary'>
+                <form>
+                    <div class='form-group'>
+                        <label for="selectValue">Label</label>
+                        <select class='form-control' name='selectValue' id='selectValue'>
+                            <option value='cheese'>Burger</option>
+                            <option value='egg'>Fried egg</option>
+                        </select>
+                    </div>
+                    <h4>What Fruit do you like?</h4>
+                    <div class='form-check'>
+                        <input class='form-check-input' value='Apple' type="checkbox" name="fruit" id='fruit1'/>
+                        <label class='form-check-label' for="fruit">Apple</label>
+                    </div>
+                    <h7>I like <span id='fruitLike'></span></h7>
+                </form>
+                
+            </div>
         </div>
         <script>
+        $('input:checkbox').change(function(){
+            var value = $(this).val();
+            if (!$(this).prop('checked')){
+                $('#fruitLike').html('');
+            }else {
+            $('#fruitLike').html(value);
+            }
+        });
         $('ul').on('mouseenter','li',function(){
             $(this).css('color','red');
             $(this).addClass('text-danger');
