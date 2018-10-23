@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>react</title>
+        <meta charset='utf-8'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class='container container-fluid border border-primary'>
+            <div class='row'>
+                <div class='col-md-4 border '>
+                    something
+                </div>
+                <div  class='col-md-4 border border-success rounded mt-2 mb-2 ml-2 pr-2 shadow'>
+                    <div class=''>
+                        <input class='form-control mt-2 mb-2 shadow-sm' id='input' type="text" name=""/>
+                    </div>
+                    <div class='row mb-3 ml-1'>
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <span class='btn btn-primary btn-block btn-lg sd-sm' id='b1' type=''>1</span>
+                        </div>
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-primary btn-block btn-lg' id='b2' type='button'>2</button>
+                        </div> 
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-primary btn-block btn-lg' id='b3' type='button'>3</button>
+                        </div>                                                
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-info btn-block btn-lg' id='b4' type='button'><i class="fas fa-plus"></i></button>
+                        </div> 
+                    </div>
+                    <div class='row mb-3 mt-2 ml-1 '>
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-primary btn-block btn-lg' id='b4' type='button'>4</button>
+                        </div>
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-primary btn-block btn-lg' id='b5' type='button'>5</button>
+                        </div> 
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-primary btn-block btn-lg' id='b6' type='button'>6</button>
+                        </div>                                                
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-info btn-block btn-lg' id='b-' type='button'><i class="fas fa-minus"></i></button>
+                        </div>                       
+                    </div>
+                    <div class='row mb-3 mt-2 ml-1 '>
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-primary btn-block btn-lg' id='b4' type='button'>7</button>
+                        </div>
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-primary btn-block btn-lg' id='b5' type='button'>8</button>
+                        </div> 
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-primary btn-block btn-lg' id='b6' type='button'>9</button>
+                        </div>                                                
+                        <div class='col-xs-3 pr-2 pl-3'>
+                            <button class='btn btn-info btn-block btn-lg' id='b-' type='button'><i style='font-size:32px'class="fas fa-times"></i></button>
+                        </div>                       
+                    </div>                    
+                <script>
+                    /* global $ */
+                    var num1='';
+                    var num2='';
+                    var total='';
+                    var num2Ready=false;
+                    $(document).ready(function(){
+                        
+                        $('#b1').click(function(){
+                            if (num2Ready){
+                                num2 = num2 + '1';
+                                $('#input').val(num2)
+                                return;
+                            }
+                            num1 = num1+'1';
+                            $('#test').html('num1 is Set');
+                            $('#input').val(num1);
+                        })
+                        
+                        $('#b+').click(function(){
+                            if (num1 && num2){
+                                total = num1 + num2;
+                                $('#input').val(total);
+                                num1=total;
+                                num2='';
+                            };
+                            $('#input').val();
+                            num2Ready = true;
+                            
+                        });
+                        
+                        $('#b1').hover(
+                            function(){
+                                $(this).addClass('shadow-lg');
+                                $('#test').html('ok!');
+                            },
+                            function(){
+                                $(this).removeClass('shadow-lg');
+                                $('#test').html('');
+                            }
+                        );
+                    });
+                </script>
+                </div>
+                    
+                <div class='col-md-3'>
+                    <span id='test'>
+                        
+                    </span>
+                </div>
+
+            </div>
+            
+        </div>
+
+        
+         
+         
+         <!-- Load React. -->
+      <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+      <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+      <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+      <!-- Load our React component. -->
+      
+    </body>
+</html>

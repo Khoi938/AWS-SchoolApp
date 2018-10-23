@@ -16,15 +16,17 @@ from django.views.decorators.http import require_http_methods
 
 #---- practicing JS learning page
 def learning_JS(request):
-    return render(request,'homepage/learning_JS.html')
+    return render(request,'homepage/learning_JS/learning_JS.html')
 def test_page_2(request):
-    return render(request,'homepage/test_page_2.html')
+    return render(request,'homepage/learning_JS/test_page_2.html')
 def learning_JS2(request):
-    return render(request,'homepage/learning_JS2.html')
+    return render(request,'homepage/learning_JS/learning_JS2.html')
 def calendar(request):
-    return render(request,'homepage/calendar.html')
+    return render(request,'homepage/learning_JS/calendar.html')
 def jquery(request):
-    return render(request,'homepage/jquery.html')
+    return render(request,'homepage/learning_JS/jquery.html')
+def react (request):
+    return render(request,'homepage/learning_JS/react.html')
 # -------Homepage with Login---------
 def index(request):
     if request.method == 'POST':

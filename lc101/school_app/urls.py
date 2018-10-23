@@ -10,6 +10,7 @@ urlpatterns=[
     path('learning_JS',views.learning_JS, name='learning_JS'),
     path('learning_JS2',views.learning_JS2, name='learning_JS2'),
     path('jquery',views.jquery, name='jquery'),
+    path('react',views.react,name='react'),
     path('homepage',views.index, name = 'homepage'),
     path('register',views.register, name='register'),
     path('account_management/',views.account_management, name='account_management'),
