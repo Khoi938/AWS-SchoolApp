@@ -11,6 +11,9 @@ urlpatterns=[
     path('learning_JS2',views.learning_JS2, name='learning_JS2'),
     path('jquery',views.jquery, name='jquery'),
     path('react',views.react,name='react'),
+    path('react2', views.youtube_react ,name='youtube_react'),
+    path('react3', views.youtube_react2 ,name='youtube_react2'),
+    
     path('homepage',views.index, name = 'homepage'),
     path('register',views.register, name='register'),
     path('account_management/',views.account_management, name='account_management'),

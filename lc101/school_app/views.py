@@ -27,6 +27,10 @@ def jquery(request):
     return render(request,'homepage/learning_JS/jquery.html')
 def react (request):
     return render(request,'homepage/learning_JS/react.html')
+def youtube_react(request):
+    return render(request,'homepage/learning_JS/youtube_react.html')
+def youtube_react2(request):
+    return render(request,'homepage/learning_JS/youtube_react2.html')
 # -------Homepage with Login---------
 def index(request):
     if request.method == 'POST':

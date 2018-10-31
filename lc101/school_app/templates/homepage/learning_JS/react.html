@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <title>react</title>
         <meta charset='utf-8'>
@@ -8,6 +9,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
+        
+         <div id='test2'></div>
         <div class='container container-fluid border border-primary'>
             <div class='row'>
                 <div class='col-md-2 border '>
@@ -17,39 +20,11 @@
                     This hhh
                     <span id='react'>kl</span>
                 </div>
-                <script type='text/jsx'>
-                /* global React*/
-                // This function take in an opject with specification
-                    var helloComponent = React.createClass({
-                        render:function(){
-                            return (<div> Hello React </div> );
-                        }
-                    });
-                    ReactDOM.render(<helloComponent/>,document.getElementById('react'));
-                    
-                    class counter extends React.component{
-                        constructor(props){
-                            super(props);
-                            this.state = {count:0};
-                        }
-                        plusCount(){ //call back function
-                            this.setState({count: this.state.count + 1});
-                        }
-                        render(){// invoked when setState is called
-                            return (
-                                <div> Count: { this.state.count }
-                                    <button type='button' class='btn btn-primary' onClick={ this.plusCount.bind(this) }>Plus
-                                    </button>
-                                </div>
-                                );
-                        }
-                    }
-                </script>
-                    
                 <div class='col-md-2'>
                     <span id='test'>
-                        something
+                        something This is the right page
                     </span>
+                    
                 </div>
             </div>
         </div>
@@ -57,8 +32,109 @@
       <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
       <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
       <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.0/react-dom.min.js"></script>
 
       <!-- Load our React component. -->
-      
+                      <script type='text/JSX'>
+$(document).ready(function(){
+    
+
+                      
+class HelloWorld extends React.Component {
+    render() {
+        return (<div>Hello World!</div>)
+    }
+}
+var app = document.getElementById("test2");
+ReactDOM.render(<HelloWorld />, app);    
+});
+                    //   class Hello extends React.Component{
+                    //       constructor(props){
+                    //       super(props);
+                    //       this.state = {value:1};
+                    //       }
+                    //       render(){
+                    //           return (<div>Hello { this.props.name } </div>);
+                    //       }
+                    //   };
+                      
+                    //   ReactDOM.render(<Hello name="Khoi"/>,document.getElementById("test"));
+                      
+                    /* @jsx React.DOM */
+                /* global React*/
+                // This function take in an opject with specification
+                    // var HelloComponent = React.createClass({
+                    //     render:function(){
+                    //         return (<div> Hello React </div> );
+                    //     }
+                    // });
+                    // ReactDOM.render(<div><HelloComponent/></div>,document.getElementById('react'));
+                    
+                    // class counter extends React.component{
+                    //     constructor(props){
+                    //         super(props);
+                    //         this.state = {count:0};
+                    //     }
+                    //     plusCount(){ //call back function
+                    //         this.setState({count: this.state.count + 1});
+                    //     }
+                    //     render(){// invoked when setState is called
+                    //         return (
+                    //             <div> Count: { this.state.count }
+                    //                 <button type='button' class='btn btn-primary' onClick={ this.plusCount.bind(this) }>Plus
+                    //                 </button>
+                    //             </div>
+                    //             );
+                    //     }
+                    // };
+                    // ReactDOM.render(<counter/>,document.getElementById('react'));
+                    
+                    
+// import React, { Component } from 'react';
+
+
+// class ButtonGroup extends Component{
+//   render(){
+//     return (<button onClick={this.countClick}>Count it up</button>);
+//   }
+// }
+
+// class App extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       message:"state from constructor",
+//       counter: 1
+//     };
+//     this.handleClick = this.handleClick.bind(this);
+//     this.countClick = this.countClick.bind(this);
+//   }
+
+//   handleClick(e) {
+//     this.setState( () => ({message:"state from click handler"}) )
+//   }
+
+//   countClick(e) {
+//     this.setState( (prev, props) => ({counter: (prev.counter + 1)}))  
+//   }
+
+//   render() {
+//     return (
+//       <div>
+//         <div>
+//           <h1>{this.state.message}</h1>
+//           <h1>{this.state.counter}</h1>
+//         </div>
+//         <button onClick={this.handleClick}>Change it up</button>
+//         <ButtonGroup /> 
+//       </div>
+//     );
+//   }
+// }
+
+
+                </script>
+                    
     </body>
 </html>
